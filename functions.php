@@ -24,4 +24,131 @@
  * @since 1.0.0
  */
 
-//...
+
+include( dirname( __FILE__ ) . '/inc/class-md_products.php' );
+
+
+if( !function_exists( 'martindemko_after_setup_theme' ) ) :
+    /**
+     * Setup theme.
+     * @return void
+     * @since 1.0.0
+     */
+    function martindemko_setup_theme() {
+        load_theme_textdomain( 'martindemko', get_stylesheet_directory() . '/languages' );
+        add_theme_support( 'automatic-feed-links' );
+        add_theme_support( 'title-tag' );
+        //add_theme_support( 'starter-content', array() );
+        add_theme_support( 'post-thumbnails' );
+
+    	add_image_size( 'martindemko-featured-image', 2000, 1200, true );
+        add_image_size( 'martindemko-featured-image-small', 400, 200, true );
+        add_image_size( 'martindemko-default-product', 400, 340, true );
+	    add_image_size( 'martindemko-thumbnail-avatar', 100, 100, true );
+
+    	remove_theme_support( 'menus' );
+
+	    add_theme_support(
+		    'html5', array(
+			    'comment-form',
+			    'comment-list',
+			    'gallery',
+			    'caption',
+		    )
+	    );
+
+	    // Post Formats, see: https://codex.wordpress.org/Post_Formats
+	    add_theme_support( 'post-formats', array() );
+
+	    // Add theme support for selective refresh for widgets.
+	    add_theme_support( 'customize-selective-refresh-widgets' );
+
+	    // Define and register starter content to showcase the theme on new sites.
+	    $starter_content = array(
+		    'widgets' => array(),
+		    'posts' => array(),
+		    'attachments' => array(),
+		    'options' => array(
+			    //'show_on_front'  => 'page',
+			    //'page_on_front'  => '{{home}}',
+			    //'page_for_posts' => '{{blog}}',
+		    ),
+		    'theme_mods' => array(),
+		    //'nav_menus' => array(),
+	    );
+
+        add_theme_support( 'customize-selective-refresh-widgets' );
+    }
+endif;
+// Setup up theme
+add_action( 'after_setup_theme', 'martindemko_setup_theme' );
+
+
+if( !function_exists( 'martindemko_create_post_type' ) ) :
+    /**
+     * Register new custom post type.
+     * @return void
+     * @since 1.0.0
+     */
+    function martindemko_create_post_type() {
+        register_post_type( 'martindemko_product', array(
+            'labels' => array(
+                'name' => __( 'Products', 'martindemko' ),
+                'singular_name' => __( 'Product', 'martindemko' )
+            ),
+            'description' => __( 'Products custom post type', 'martindemko' ),
+            'public' => true,
+            'has_archive' => true,
+            'menu_positions' => 21,
+            'menu_icon' => 'dashicons-paperclip',
+            'hierarchical' => false,
+            'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'custom-fields', 'comments', 'revisions', 'page-attributes' ),
+            'delete_with_user' => false,
+            'show_in_rest' => false,
+            'slug' => array( __( 'product', 'martindemko' ) )
+        ) );
+    }
+endif;
+add_action( 'init', 'martindemko_enqueue_styles' );
+
+
+if( !function_exists( 'martindemko_enqueue_styles' ) ) :
+    /**
+     * Register new custom post type.
+     * @return void
+     * @since 1.0.0
+     */
+    function martindemko_enqueue_styles() {
+
+        wp_register_script( 'martindemko-html5', get_stylesheet_directory_uri() . '/assets/js/html5.js' );
+        wp_register_script( 'martindemko-popper', get_stylesheet_directory_uri() . '/assets/js/popper.min.js' );
+        wp_register_script( 'martindemko-bootstrap', get_stylesheet_directory_uri() . '/assets/js/bootstrap.bundle.min.js' );
+        wp_register_script( 'martindemko-fontawesome', get_stylesheet_directory_uri() . '/assets/js/fontawesome/fontawesome-all.min.js' );
+
+        wp_register_script(
+            'martindemko-script', 
+            get_stylesheet_directory_uri() . '/assets/js/theme-script.js',
+            array(
+                'jquery', 'jquery-color', 'jquery-form',
+                'jquery-masonry', 'jquery-ui-core', 'jquery-ui-widget', 'jquery-ui-mouse',
+                'jquery-ui-sortable', 'jquery-ui-draggable', 'jquery-ui-droppable',
+                'jquery-ui-droppable', 'jquery-ui-selectable', 'jquery-ui-position',
+                'jquery-ui-tooltip', 'jquery-ui-dialog', 'jquery-ui-button', 'jquery-ui-datepicker', 
+                'jquery-effects-core', 'jquery-effects-fade', 'jquery-effects-highlight',
+                'jquery-effects-slide', 'jquery-effects-transfer', 'martindemko-html5',
+                'martindemko-popper', 'martindemko-bootstrap', 'martindemko-fontawesome'
+            ),
+            wp_get_theme()->get( 'Version' ),
+            true
+        );
+        wp_enqueue_script( 'martindemko-script' );
+
+        //wp_enqueue_style( 'martindemko-bootstrap_reboot-style', get_stylesheet_directory_uri() . '/assets/css/bootstrap-reboot.min.css' );
+        wp_enqueue_style( 'martindemko-bootstrap_grid-style', get_stylesheet_directory_uri() . '/assets/css/bootstrap-grid.min.css' );
+        wp_enqueue_style( 'martindemko-bootstrap-style', get_stylesheet_directory_uri() . '/assets/css/bootstrap.min.css' );
+
+        //wp_enqueue_style( 'twentyseventeen-style', get_theme_root_uri() . '/twentyseventeen/style.css' );
+        wp_enqueue_style( 'martindemko-style', get_stylesheet_directory_uri() . '/style.css', array( /*'twentyseventeen-style'*/ ), wp_get_theme()->get( 'Version' ) );
+    }
+endif;
+add_action( 'wp_enqueue_scripts', 'martindemko_enqueue_styles' );
