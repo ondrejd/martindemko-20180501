@@ -25,6 +25,7 @@
  */
 
 
+// CPT "Produkty"
 include( dirname( __FILE__ ) . '/inc/class-md_products.php' );
 
 
@@ -152,3 +153,9 @@ if( !function_exists( 'martindemko_enqueue_styles' ) ) :
     }
 endif;
 add_action( 'wp_enqueue_scripts', 'martindemko_enqueue_styles' );
+
+
+// Theme customizer
+include( dirname( __FILE__ ) . '/inc/class-md_customize.php' );
+
+

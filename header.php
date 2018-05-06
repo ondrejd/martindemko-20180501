@@ -43,21 +43,19 @@
 			</div>
 			<div class="col-5 col-lg-4 site-product-order-button-cont">
 				<span class="btn btn-primary site-product-order-button">
-					<?php esc_html_e( 'Objednat PRODUKT', 'martindemko' ) ?>
+					<?php echo esc_html( get_option( 'product_order_btn_text', __( 'Objednat PRODUKT', 'martindemko' ) ) ) ?>
 				</span>
 			</div>
 		</div>
 	</header><!-- #masthead -->
 
+    <?php
+    $default_product_ID = get_option( 'site_product_id', null );
+    $default_product = get_post( $default_product_ID, OBJECT, 'display' );
+
+    if( ( $default_product instanceof \WP_Post ) ) :
+    ?>
     <div class="site-product">
-        <?php
-            /**
-             * @todo Toto zatím nechávám takto, pak buď přes nastavení 
-             *       pluginu nebo meta hodnotu u `md-products`
-             */
-            $default_product_ID = 4;//[4|18]
-            $default_product = get_post( $default_product_ID, OBJECT, 'display' );
-        ?>
         <div class="row justify-content-md-center">
             <div class="col-5 col-sm-6 col-lg-4">
             	<div class="post-thumbnail">
@@ -80,7 +78,7 @@
                 <div class="entry-footer">
                     <p>
                         <span class="btn btn-primary site-product-order-button">
-					        <?php esc_html_e( 'Objednat PRODUKT', 'martindemko' ) ?>
+					        <?php echo esc_html( get_option( 'product_order_btn_text', __( 'Objednat PRODUKT', 'martindemko' ) ) ) ?>
 				        </span>
                     </p>
                 </div>
@@ -106,6 +104,7 @@
             </div>
         </div><!-- .site-product-logos -->
     </div><!-- .site-product -->
+    <?php endif; ?>
 
 	<div class="site-content-contain">
 		<div id="content" class="site-content">

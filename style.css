@@ -18,7 +18,9 @@ Use it to make something cool, have fun, and share what you've learned with othe
 
 .site-header {
     height: 80px;
+    /* Bereme nyni pres `get_option( 'header_foreground', 'ecd9d9' )
     background-color: #ecd9d9;
+    */
     left: 0px;
     position: sticky;
     right: 0px;
@@ -37,7 +39,11 @@ body.admin-bar .site-header {
     font-weight: 400;
     margin: 0;
 }
-.site-header .site-title a { color: #000 !important; }
+.site-header .site-title a {
+    /* Bereme nyni pres `get_option( 'header_foreground', '0000' )
+    color: #000 !important;
+    */
+}
 .site-header .site-product-order-button-cont {
     text-align: right;
 }
