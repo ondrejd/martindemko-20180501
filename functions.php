@@ -37,48 +37,40 @@ if( !function_exists( 'martindemko_after_setup_theme' ) ) :
      */
     function martindemko_setup_theme() {
         load_theme_textdomain( 'martindemko', get_stylesheet_directory() . '/languages' );
+
+        add_option( 'site_product_id', 'yes' );
+        add_option( 'show_product_logos', 'yes' );
+        add_option( 'product_order_btn_text', __( 'Objednat PRODUKT', 'martindemko' ) );
+        add_option( 'product_order_btn_link', __( '#', 'martindemko' ) );
+        add_option( 'header_foreground_color', '#000000' );
+        add_option( 'header_background_color', '#ecd9d9' );
+        add_option( 'ordersteps_show', 'yes' );
+        add_option( 'ordersteps_foreground_color', '#98a0a6' );
+        add_option( 'ordersteps_background_color_1', '#ecd9d9' );
+        add_option( 'ordersteps_background_color_2', '#ffffff' );
+        add_option( 'ordersteps_text_1', __( 'Klikněte na "Objednat PRODUKT"', 'martindemko' ) );
+        add_option( 'ordersteps_text_2', __( 'Vyplňte formulář', 'martindemko' ) );
+        add_option( 'ordersteps_text_3', __( 'Počkejte, až Vám zavoláme', 'martindemko' ) );
+        add_option( 'homepage_post_excerpts_show', 'yes' );
+
         add_theme_support( 'automatic-feed-links' );
         add_theme_support( 'title-tag' );
-        //add_theme_support( 'starter-content', array() );
         add_theme_support( 'post-thumbnails' );
+        add_theme_support(
+            'html5', array(
+                'comment-form',
+                'comment-list',
+                'gallery',
+                'caption',
+            )
+        );
 
-    	add_image_size( 'martindemko-featured-image', 2000, 1200, true );
+        remove_theme_support( 'menus' );
+
+        add_image_size( 'martindemko-featured-image', 2000, 1200, true );
         add_image_size( 'martindemko-featured-image-small', 400, 200, true );
         add_image_size( 'martindemko-default-product', 400, 340, true );
-	    add_image_size( 'martindemko-thumbnail-avatar', 100, 100, true );
-
-    	remove_theme_support( 'menus' );
-
-	    add_theme_support(
-		    'html5', array(
-			    'comment-form',
-			    'comment-list',
-			    'gallery',
-			    'caption',
-		    )
-	    );
-
-	    // Post Formats, see: https://codex.wordpress.org/Post_Formats
-	    add_theme_support( 'post-formats', array() );
-
-	    // Add theme support for selective refresh for widgets.
-	    add_theme_support( 'customize-selective-refresh-widgets' );
-
-	    // Define and register starter content to showcase the theme on new sites.
-	    $starter_content = array(
-		    'widgets' => array(),
-		    'posts' => array(),
-		    'attachments' => array(),
-		    'options' => array(
-			    //'show_on_front'  => 'page',
-			    //'page_on_front'  => '{{home}}',
-			    //'page_for_posts' => '{{blog}}',
-		    ),
-		    'theme_mods' => array(),
-		    //'nav_menus' => array(),
-	    );
-
-        add_theme_support( 'customize-selective-refresh-widgets' );
+        add_image_size( 'martindemko-thumbnail-avatar', 100, 100, true );
     }
 endif;
 // Setup up theme
@@ -148,8 +140,12 @@ if( !function_exists( 'martindemko_enqueue_styles' ) ) :
         wp_enqueue_style( 'martindemko-bootstrap_grid-style', get_stylesheet_directory_uri() . '/assets/css/bootstrap-grid.min.css' );
         wp_enqueue_style( 'martindemko-bootstrap-style', get_stylesheet_directory_uri() . '/assets/css/bootstrap.min.css' );
 
-        //wp_enqueue_style( 'twentyseventeen-style', get_theme_root_uri() . '/twentyseventeen/style.css' );
-        wp_enqueue_style( 'martindemko-style', get_stylesheet_directory_uri() . '/style.css', array( /*'twentyseventeen-style'*/ ), wp_get_theme()->get( 'Version' ) );
+        wp_enqueue_style(
+            'martindemko-style',
+            get_stylesheet_directory_uri() . '/style.css',
+            array(),
+            wp_get_theme()->get( 'Version' )
+        );
     }
 endif;
 add_action( 'wp_enqueue_scripts', 'martindemko_enqueue_styles' );
@@ -157,5 +153,4 @@ add_action( 'wp_enqueue_scripts', 'martindemko_enqueue_styles' );
 
 // Theme customizer
 include( dirname( __FILE__ ) . '/inc/class-md_customize.php' );
-
 

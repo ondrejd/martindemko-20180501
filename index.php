@@ -32,13 +32,13 @@ get_header(); ?>
 		<h1 class="page-title"><?php single_post_title(); ?></h1>
 	</header>
 	<?php else : ?>
-	<header class="page-header">
-        <div class="row justify-content-md-center hp-help-banner">
+	<header class="page-header hp-help-banner">
+        <div class="row justify-content-md-center">
             <div class="col-10 col-lg-8">
                 <ul>
-                    <li><span class="help-banner-num">1</span><span class="help-banner-lbl"><?php esc_html_e( 'Klikněte na "Objednat PRODUKT"', 'martndemko' ) ?></span></li>
-                    <li><span class="help-banner-num">2</span><span class="help-banner-lbl"><?php esc_html_e( 'Vyplňte formulář', 'martndemko' ) ?></span></li>
-                    <li><span class="help-banner-num">3</span><span class="help-banner-lbl"><?php esc_html_e( 'Počkejte, až Vám zavoláme', 'martndemko' ) ?></span></li>
+                    <li><span class="help-banner-num">1</span><p class="help-banner-lbl help-banner-lbl-1"><?php echo esc_html( get_option( 'ordersteps_text_1' ) ) ?></p></li>
+                    <li><span class="help-banner-num">2</span><p class="help-banner-lbl help-banner-lbl-2"><?php echo esc_html( get_option( 'ordersteps_text_2' ) ) ?></p></li>
+                    <li><span class="help-banner-num">3</span><p class="help-banner-lbl help-banner-lbl-3"><?php echo esc_html( get_option( 'ordersteps_text_3' ) ) ?></p></li>
             </div>
         </div>
 	</header>

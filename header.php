@@ -43,7 +43,7 @@
 			</div>
 			<div class="col-5 col-lg-4 site-product-order-button-cont">
 				<span class="btn btn-primary site-product-order-button">
-					<?php echo esc_html( get_option( 'product_order_btn_text', __( 'Objednat PRODUKT', 'martindemko' ) ) ) ?>
+					<?php echo esc_html( get_option( 'product_order_btn_text' ) ) ?>
 				</span>
 			</div>
 		</div>
@@ -78,7 +78,7 @@
                 <div class="entry-footer">
                     <p>
                         <span class="btn btn-primary site-product-order-button">
-					        <?php echo esc_html( get_option( 'product_order_btn_text', __( 'Objednat PRODUKT', 'martindemko' ) ) ) ?>
+					        <?php echo esc_html( get_option( 'product_order_btn_text' ) ) ?>
 				        </span>
                     </p>
                 </div>

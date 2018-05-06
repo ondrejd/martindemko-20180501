@@ -50,22 +50,24 @@
 	<div class="entry-content">
 	<?php
         if ( is_single() ) {
-		    the_content(
-			    sprintf(
-				    __( 'Pokračujte ve čtení<span class="screen-reader-text"> "%s"</span>', 'martindemko' ),
-				    get_the_title()
-			    )
-		    );
-        }
+		    the_content( sprintf(
+			    __( 'Pokračujte ve čtení<span class="screen-reader-text"> "%s"</span>', 'martindemko' ),
+			    get_the_title()
+		    ) );
 
-		wp_link_pages(
-			array(
-				'before'      => '<div class="page-links">' . __( 'Stránky:', 'martindemko' ),
-				'after'       => '</div>',
-				'link_before' => '<span class="page-number">',
-				'link_after'  => '</span>',
-			)
-		);
+		    wp_link_pages( array(
+				    'before'      => '<div class="page-links">' . __( 'Stránky:', 'martindemko' ),
+				    'after'       => '</div>',
+				    'link_before' => '<span class="page-number">',
+				    'link_after'  => '</span>',
+		    ) );
+        }
+        elseif( get_option( 'homepage_post_excerpts_show' ) == 'yes' ) {
+		    the_content( sprintf(
+			    __( 'Pokračujte ve čtení<span class="screen-reader-text"> "%s"</span>', 'martindemko' ),
+			    get_the_title()
+		    ) );
+        }
 	?>
 	</div><!-- .entry-content -->
 

@@ -46,9 +46,11 @@ class MD_Customize {
      */
     public static function register( $wp_customize ) {
         self::register_product_options( $wp_customize );
+        self::register_ordersteps_options( $wp_customize );
         self::register_other_options( $wp_customize );
 
         $wp_customize->remove_section( 'static_front_page' );
+        $wp_customize->remove_panel( 'nav_menus' );
 
         $wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
         $wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
@@ -77,6 +79,12 @@ class MD_Customize {
             'default'    => 0,
             'type'       => 'option',
         ) );
+        $wp_customize->add_setting( 'show_product_logos' , array(
+            'capability' => 'edit_theme_options',
+            'default'    => 'yes',
+            'type'       => 'option',
+            'transport'  => 'postMessage',
+        ) );
         // Controls
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_site_product_id', array(
@@ -84,6 +92,137 @@ class MD_Customize {
 	            'section'  => 'martindemko_product_options',
 	            'settings' => 'site_product_id',
                 'type'     => 'number',
+            )
+        ) );
+        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
+            'cnt_show_product_logos', array(
+	            'label'       => __( 'Zobrazit loga produktu', 'martindemko' ),
+	            'description' => __( 'Zobrazí panel s třemi logy - ty musí být nastaveny v šabloně v souboru <code>header.php</code>', 'martindemko' ),
+	            'section'     => 'martindemko_product_options',
+	            'settings'    => 'show_product_logos',
+                'type'        => 'select',
+                'choices' => array(
+                    'yes' => __( 'Ano', 'martindemko' ),
+                    'no'  => __( 'Ne', 'martindemko' ),
+                )
+            )
+        ) );
+    }
+
+    /**
+     * @param \WP_Customize_Manager $wp_customize
+     * @return void
+     * @since 1.0.0
+     */
+    protected static function register_ordersteps_options( $wp_customize ) {
+        // Section
+        $wp_customize->add_section( 'martindemko_ordersteps_options', 
+            array(
+                'title'       => __( 'Postup objednávky', 'martindemko' ),
+                'description' => __( 'Nastavení pro panel s postupem objednávky.', 'martindemko' ),
+                'priority'    => 35,
+                'capability'  => 'edit_theme_options',
+            )
+        );
+        // Settings
+        $wp_customize->add_setting( 'ordersteps_show' , array(
+            'capability' => 'edit_theme_options',
+            'default'    => 'yes',
+            'type'       => 'option',
+            'transport'  => 'postMessage',
+        ) );
+        $wp_customize->add_setting( 'ordersteps_foreground_color' , array(
+            'capability' => 'edit_theme_options',
+            'default'    => '#98a0a6',
+            'type'       => 'option',
+            'transport'  => 'postMessage',
+        ) );
+        $wp_customize->add_setting( 'ordersteps_background_color_1' , array(
+            'capability' => 'edit_theme_options',
+            'default'    => '#ecd9d9',
+            'type'       => 'option',
+            'transport'  => 'postMessage',
+        ) );
+        $wp_customize->add_setting( 'ordersteps_background_color_2' , array(
+            'capability' => 'edit_theme_options',
+            'default'    => '#ffffff',
+            'type'       => 'option',
+            'transport'  => 'postMessage',
+        ) );
+        $wp_customize->add_setting( 'ordersteps_text_1' , array(
+            'capability' => 'edit_theme_options',
+            'default'    => __( 'Klikněte na "Objednat PRODUKT"', 'martindemko' ),
+            'type'       => 'option',
+            'transport'  => 'postMessage',
+        ) );
+        $wp_customize->add_setting( 'ordersteps_text_2' , array(
+            'capability' => 'edit_theme_options',
+            'default'    => __( 'Vyplňte formulář', 'martindemko' ),
+            'type'       => 'option',
+            'transport'  => 'postMessage',
+        ) );
+        $wp_customize->add_setting( 'ordersteps_text_3' , array(
+            'capability' => 'edit_theme_options',
+            'default'    => __( 'Počkejte, až Vám zavoláme', 'martindemko' ),
+            'type'       => 'option',
+            'transport'  => 'postMessage',
+        ) );
+        // Controls
+        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
+            'cnt_ordersteps_show', array(
+	            'label'       => __( 'Zobrazit postup objednávky', 'martindemko' ),
+	            'section'     => 'martindemko_ordersteps_options',
+	            'settings'    => 'ordersteps_show',
+                'type'        => 'select',
+                'choices' => array(
+                    'yes' => __( 'Ano', 'martindemko' ),
+                    'no'  => __( 'Ne', 'martindemko' ),
+                )
+            )
+        ) );
+        $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
+            'cnt_ordersteps_foreground_color', array(
+	            'label'    => __( 'Barva textu', 'martindemko' ),
+	            'section'  => 'martindemko_ordersteps_options',
+	            'settings' => 'ordersteps_foreground_color',
+            )
+        ) );
+        $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
+            'cnt_ordersteps_background_color_1', array(
+	            'label'    => __( 'Barva hlavního pozadí', 'martindemko' ),
+	            'section'  => 'martindemko_ordersteps_options',
+	            'settings' => 'ordersteps_background_color_1',
+            )
+        ) );
+        $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
+            'cnt_ordersteps_background_color_2', array(
+	            'label'    => __( 'Barva pozadí kruhů', 'martindemko' ),
+	            'section'  => 'martindemko_ordersteps_options',
+	            'settings' => 'ordersteps_background_color_2',
+            )
+        ) );
+        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
+            'cnt_ordersteps_text_1', array(
+	            'label'       => __( 'První krok', 'martindemko' ),
+	            'description' => __( 'Text pro první krok', 'martindemko' ),
+	            'section'     => 'martindemko_ordersteps_options',
+	            'settings'    => 'ordersteps_text_1',
+            )
+        ) );
+        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
+            'cnt_ordersteps_text_2', array(
+	            'label'       => __( 'Druhý krok', 'martindemko' ),
+	            'description' => __( 'Text pro druhý krok', 'martindemko' ),
+	            'section'     => 'martindemko_ordersteps_options',
+	            'settings'    => 'ordersteps_text_2',
+            )
+        ) );
+        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
+            'cnt_ordersteps_text_3', array(
+	            'label'       => __( 'Třetí krok', 'martindemko' ),
+	            'description' => __( 'Text pro třetí krok', 'martindemko' ),
+	            'section'     => 'martindemko_ordersteps_options',
+	            'settings'    => 'ordersteps_text_3',
             )
         ) );
     }
@@ -97,10 +236,10 @@ class MD_Customize {
         // Section
         $wp_customize->add_section( 'martindemko_other_options', 
             array(
-                'title'       => __( 'Volby tématu', 'martindemko' ),
+                'title'       => __( 'Další volby', 'martindemko' ),
                 'priority'    => 35,
                 'capability'  => 'edit_theme_options',
-                'description' => __( 'Nastavení pro téma Martin Demko Produktová šablona.', 'martindemko' ),
+                'description' => __( 'Další nastavení šablony.', 'martindemko' ),
             )
         );
         // Settings
@@ -118,24 +257,29 @@ class MD_Customize {
         ) );
         $wp_customize->add_setting( 'header_foreground_color' , array(
             'capability' => 'edit_theme_options',
-            'default'    => '000000',
+            'default'    => '#000000',
             'type'       => 'option',
             'transport'  => 'postMessage',
         ) );
         $wp_customize->add_setting( 'header_background_color' , array(
             'capability' => 'edit_theme_options',
-            'default'    => 'ecd9d9',
+            'default'    => '#ecd9d9',
             'type'       => 'option',
             'transport'  => 'postMessage',
+        ) );
+        $wp_customize->add_setting( 'homepage_post_excerpts_show' , array(
+            'capability' => 'edit_theme_options',
+            'default'    => 'yes',
+            'type'       => 'option',
         ) );
         // Controls
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_product_order_btn_text', array(
-	            'label'    => __( 'Text tlačítka objednat', 'martindemko' ),
-                'description' => __( 'Tato změna se projeví u obou tlačítek objednat.', 'martindemko' ),
-	            'section'  => 'martindemko_other_options',
-	            'settings' => 'product_order_btn_text',
-                'type'     => 'text',
+	            'label'       => __( 'Text tlačítka objednat', 'martindemko' ),
+                'description' => __( 'Tato změna se projeví u obou tlačítek objednat.   ', 'martindemko' ),
+	            'section'     => 'martindemko_other_options',
+	            'settings'    => 'product_order_btn_text',
+                'type'        => 'text',
             )
         ) );
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
@@ -146,7 +290,6 @@ class MD_Customize {
                 'type'     => 'url',
             )
         ) );
-
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
             'cnt_header_foreground_color', array(
 	            'label'    => __( 'Barva textu hlavního nadpisu', 'martindemko' ),
@@ -161,6 +304,19 @@ class MD_Customize {
 	            'settings' => 'header_background_color',
             )
         ) );
+        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
+            'cnt_homepage_post_excerpts_show', array(
+	            'label'       => __( 'Zobrazit texty příspěvků', 'martindemko' ),
+	            'description' => __( 'Zobrazit texty příspěvků blogu na úvodní stránce?', 'martindemko' ),
+	            'section'     => 'martindemko_other_options',
+	            'settings'    => 'homepage_post_excerpts_show',
+                'type'        => 'select',
+                'choices'     => array(
+                    'yes'     => __( 'Ano', 'martindemko' ),
+                    'no'      => __( 'Ne', 'martindemko' ),
+                )
+            )
+        ) );
     }
 
     /**
@@ -169,12 +325,21 @@ class MD_Customize {
      */
     public static function header_output() {
 ?>
-<!--Customizer CSS--> 
 <style type="text/css">
-    .site-header .site-title a { color: <?php echo get_option( 'header_foreground_color', '#000000' ) ?>; }
-    .site-header { background-color: <?php echo get_option( 'header_background_color', '#ecd9d9' ) ?>; }
+    .site-header .site-title a { color: <?php echo get_option( 'header_foreground_color' ) ?>; }
+    .site-header { background-color: <?php echo get_option( 'header_background_color' ) ?>; }
+    .site-product-logos { display: <?php echo get_option( 'show_product_logos' ) == 'yes' ? 'block' : 'none' ?>; }
+    .hp-help-banner {
+        background-color: <?php echo get_option( 'ordersteps_background_color_1' ) ?>;
+        display: <?php echo get_option( 'ordersteps_show' ) == 'yes' ? 'block' : 'none' ?>;
+    }
+    .hp-help-banner span.help-banner-num {
+        background-color: <?php echo get_option( 'ordersteps_background_color_2' ) ?>;
+        border-color: <?php echo get_option( 'ordersteps_foreground_color' ) ?>;
+        color: <?php echo get_option( 'ordersteps_foreground_color' ) ?>;
+    }
+    .hp-help-banner span.help-banner-lbl { color: <?php echo get_option( 'ordersteps_foreground_color' ) ?>; }
 </style> 
-<!--/Customizer CSS-->
 <?php
     }
    
@@ -196,7 +361,7 @@ class MD_Customize {
 endif;
 
 // Setup the Theme Customizer settings and controls...
-add_action( 'customize_register' , array( 'MD_Customize' , 'register' ) );
-add_action( 'wp_head' , array( 'MD_Customize' , 'header_output' ) );
-add_action( 'customize_preview_init' , array( 'MD_Customize' , 'live_preview' ) );
+add_action( 'customize_register' , array( 'MD_Customize' , 'register' ), 99 );
+add_action( 'wp_head' , array( 'MD_Customize' , 'header_output' ), 99 );
+add_action( 'customize_preview_init' , array( 'MD_Customize' , 'live_preview' ), 99 );
 
