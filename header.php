@@ -55,7 +55,7 @@
              * @todo Toto zatím nechávám takto, pak buď přes nastavení 
              *       pluginu nebo meta hodnotu u `md-products`
              */
-            $default_product_ID = 18;//[4|18]
+            $default_product_ID = 4;//[4|18]
             $default_product = get_post( $default_product_ID, OBJECT, 'display' );
         ?>
         <div class="row justify-content-md-center">

@@ -48,30 +48,24 @@ get_header(); ?>
 		<main id="main" class="site-main" role="main">
             <div class="row justify-content-md-center">
                 <div class="col-10 col-md-10 col-lg-8">
-                    <div class="row">
-			<?php
-			if ( have_posts() ) :
+                    <div class="row"><?php
+			        if ( have_posts() ) :
+				        while ( have_posts() ) :
+					        the_post();
+					        get_template_part( 'content', get_post_format() );
+				        endwhile;
 
-				while ( have_posts() ) :
-					the_post();
-					get_template_part( 'template-parts/post/content', get_post_format() );
-				endwhile;
-
-				the_posts_pagination(
-					array(
-						'prev_text' => '<span class="screen-reader-text">' . __( 'Previous page', 'martindemko' ) . '</span>',
-						'next_text' => '<span class="screen-reader-text">' . __( 'Next page', 'martindemko' ) . '</span>',
-						'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'martindemko' ) . ' </span>',
-					)
-				);
-
-			else :
-
-				get_template_part( 'template-parts/post/content', 'none' );
-
-			endif;
-			?>
-                    </div>
+				        the_posts_pagination(
+					        array(
+						        'prev_text' => '<span class="screen-reader-text">' . __( 'Předchozí', 'martindemko' ) . '</span>',
+						        'next_text' => '<span class="screen-reader-text">' . __( 'Následující', 'martindemko' ) . '</span>',
+						        'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Stránka', 'martindemko' ) . ' </span>',
+					        )
+				        );
+			        else :
+				        get_template_part( 'content', 'none' );
+			        endif;
+?>                    </div>
                 </div><!-- .col-10.col-lg-8 -->
             </div>
 		</main><!-- #main -->
