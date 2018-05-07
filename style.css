@@ -108,6 +108,20 @@ body.admin-bar .site-header {
     font-size: 14px;
     padding-top: 16px;
 }
+.content-area .entry-footer {
+    font-size: 0.95em;
+    padding-top: 16px;
+}
+.content-area .entry-footer .posted-on span:first-child,
+.content-area .entry-footer .posted-by span:first-child,
+.content-area .entry-footer .cat-links span:first-child,
+.content-area .entry-footer .tags-links span:first-child {
+    display: inline-block;
+    font-size: 1em;
+    padding-left: 16px;
+    padding-right: 8px;
+}
+.content-area .entry-footer > span:nth-child(1) > span:nth-child(1) { padding-left: 0px; }
 
 
 /*

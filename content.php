@@ -76,8 +76,7 @@ $additional_class = is_single() || get_post_type() == 'page' ? 'col-xs-12 col-sm
 
 	<?php
 	if ( is_single() ) {
-		//twentyseventeen_entry_footer();
+		martindemko_entry_footer();
 	}
 	?>
-
 </article><!-- #post-## -->
