@@ -255,18 +255,6 @@ class MD_Customize {
             'type'       => 'option',
             'transport'  => 'postMessage',
         ) );
-        $wp_customize->add_setting( 'header_foreground_color' , array(
-            'capability' => 'edit_theme_options',
-            'default'    => '#000000',
-            'type'       => 'option',
-            'transport'  => 'postMessage',
-        ) );
-        $wp_customize->add_setting( 'header_background_color' , array(
-            'capability' => 'edit_theme_options',
-            'default'    => '#ecd9d9',
-            'type'       => 'option',
-            'transport'  => 'postMessage',
-        ) );
         $wp_customize->add_setting( 'homepage_post_excerpts_show' , array(
             'capability' => 'edit_theme_options',
             'default'    => 'yes',
@@ -288,20 +276,6 @@ class MD_Customize {
 	            'section'  => 'martindemko_other_options',
 	            'settings' => 'product_order_btn_link',
                 'type'     => 'url',
-            )
-        ) );
-        $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
-            'cnt_header_foreground_color', array(
-	            'label'    => __( 'Barva textu hlavního nadpisu', 'martindemko' ),
-	            'section'  => 'martindemko_other_options',
-	            'settings' => 'header_foreground_color',
-            )
-        ) );
-        $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
-            'cnt_header_background_color', array(
-	            'label'    => __( 'Barva pozadí hlavičky', 'martindemko' ),
-	            'section'  => 'martindemko_other_options',
-	            'settings' => 'header_background_color',
             )
         ) );
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
@@ -328,13 +302,25 @@ class MD_Customize {
         // Section
         $wp_customize->add_section( 'martindemko_footer_options', 
             array(
-                'title'       => __( 'Patička', 'martindemko' ),
-                'priority'    => 45,
+                'title'       => __( 'Hlavička & Patička', 'martindemko' ),
+                'priority'    => 155,
                 'capability'  => 'edit_theme_options',
                 'description' => __( 'Nastavení pro patičku webu.', 'martindemko' ),
             )
         );
         // Settings
+        $wp_customize->add_setting( 'header_foreground_color' , array(
+            'capability' => 'edit_theme_options',
+            'default'    => '#000000',
+            'type'       => 'option',
+            'transport'  => 'postMessage',
+        ) );
+        $wp_customize->add_setting( 'header_background_color' , array(
+            'capability' => 'edit_theme_options',
+            'default'    => '#ecd9d9',
+            'type'       => 'option',
+            'transport'  => 'postMessage',
+        ) );
         $wp_customize->add_setting( 'footer_foreground_color' , array(
             'capability' => 'edit_theme_options',
             'default'    => '#ffffff',
@@ -348,6 +334,20 @@ class MD_Customize {
             'transport'  => 'postMessage',
         ) );
         // Controls
+        $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
+            'cnt_header_foreground_color', array(
+	            'label'    => __( 'Barva textu hlavního nadpisu', 'martindemko' ),
+	            'section'  => 'martindemko_footer_options',
+	            'settings' => 'header_foreground_color',
+            )
+        ) );
+        $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
+            'cnt_header_background_color', array(
+	            'label'    => __( 'Barva pozadí hlavičky', 'martindemko' ),
+	            'section'  => 'martindemko_footer_options',
+	            'settings' => 'header_background_color',
+            )
+        ) );
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
             'cnt_footer_foreground_color', array(
 	            'label'    => __( 'Barva textu', 'martindemko' ),
