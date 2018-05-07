@@ -1,6 +1,6 @@
 <?php
 /**
- * WordPress theme "martindemko-20180501" based on Twentyseventeen theme.
+ * Theme "martindemko-20180501" for WordPress.
  * 
  * Copyright (C) 2018 Ondřej Doněk
  * 
@@ -24,11 +24,8 @@
  * @since 1.0.0
  */
 
-if ( ! is_active_sidebar( 'sidebar-1' ) ) {
-	return;
-}
+
+// Nepoužíváme sidebary
+return;
 ?>
 
-<aside id="secondary" class="widget-area" role="complementary" aria-label="<?php esc_attr_e( 'Blog Sidebar', 'twentyseventeen' ); ?>">
-	<?php dynamic_sidebar( 'sidebar-1' ); ?>
-</aside><!-- #secondary -->
