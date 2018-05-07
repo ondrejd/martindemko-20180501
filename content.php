@@ -24,12 +24,13 @@
  * @since 1.0.0
  */
 
-$additional_class = is_single() || get_post_type() == 'page' ? 'col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-12' : 'col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-6';
+$is_page_type = ( get_post_type() == 'page' );
+$additional_class = ( is_single() || $is_page_type ) ? 'col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-12' : 'col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-6';
 
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class( $additional_class ); ?>>
     <header class="entry-header"><?php
-        if ( is_single() ) {
+        if ( is_single() || $is_page_type ) {
             the_title( '<h2 class="entry-title">', '</h2>' );
         } else {
             the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
@@ -37,15 +38,19 @@ $additional_class = is_single() || get_post_type() == 'page' ? 'col-xs-12 col-sm
     ?></header><!-- .entry-header -->
 
     <div class="post-thumbnail">
-        <a href="<?php the_permalink(); ?>">
-            <?php if ( '' !== get_the_post_thumbnail() ) : ?>
-            <?php the_post_thumbnail( 'martindemko-featured-image-small' ); ?>
-            <?php else: ?>
-            <?php if( get_post_type() != 'page' ): ?>
-            <span class="no-post-thumbnail"></span>
-            <?php endif; ?>
-            <?php endif; ?>
-        </a>
+        <a href="<?php the_permalink(); ?>"><?php
+            if( '' !== get_the_post_thumbnail() ) {
+                if( is_single() ) {
+                    the_post_thumbnail( 'martindemko-featured-image' );
+                } else {
+                    the_post_thumbnail( 'martindemko-featured-image-small' );
+                }
+            } else {
+                if( ! $is_page_type && ! is_single() ) {
+                    echo '<span class="no-post-thumbnail"></span>';
+                }
+            }
+        ?></a>
     </div><!-- .post-thumbnail -->
 
     <div class="entry-content">

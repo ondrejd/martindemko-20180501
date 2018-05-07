@@ -64,14 +64,13 @@ Use it to make something cool, have fun, and share what you've learned with othe
 .content-area h2.entry-title {
     font-size: 2.1rem;
 }
-.content-area .post-thumbnail {
-    padding: 0 0 0 0;
-}
-.content-area .post-thumbnail > a {
-    display: inline-block;
-}
+
+.content-area .post-thumbnail { padding: 0 0 0 0; }
+.content-area .post-thumbnail > a { display: block; }
 .content-area .post-thumbnail > a > img {
     display: inline-block;
+    max-width: 100%;
+    height: auto;
 }
 .content-area .post-thumbnail > a > span.no-post-thumbnail {
     background-color: #cdcdcd;
@@ -79,8 +78,11 @@ Use it to make something cool, have fun, and share what you've learned with othe
     display: inline-block;
     height: 198px;
     padding: 0 0 0 0;
-    width: 333px;
+    width: 100%;
+    max-width: 333px;
 }
+.content-area .post-thumbnail > a > span.no-post-thumbnail-single {}
+
 .content-area .entry-content {
     font-size: 14px;
     padding-top: 16px;
@@ -116,6 +118,8 @@ Use it to make something cool, have fun, and share what you've learned with othe
 .comments-area form.comment-form p textarea {
     border: 1px solid #cccccc;
     border-radius: 3px;
+    max-width: 100%;
+    max-height: 120px;
 }
 .comments-area form.comment-form p input.submit {
     display: inline-block;
@@ -224,7 +228,8 @@ section.not-found .page-header h1 { margin-bottom: 48px; }
 
 
 /* Extra small devices (e.g. iPhone 7 etc.) */
-@media (max-width: 375px) {
+@media (max-width: 440px) {
+    .navbar .site-product-order-button { display: none; }
     .content-area article { padding: 16px 32px 16px 32px; }
     .site-product .site-product-card { min-width: 100%; text-align: center; padding: 32px; }
     .site-product .site-product-card:first-child { padding-top: 0px; }
@@ -234,20 +239,17 @@ section.not-found .page-header h1 { margin-bottom: 48px; }
     .hp-help-banner { padding-top: 32px; }
     .hp-help-banner .hp-help-banner-item { height: 226px; padding-top: 0px; }
     .site-footer ul.menu li { text-align: center; }
-    /*...*/
 }
 
 /* Small devices (landscape phones, 576px and up) */
 @media (max-width: 576px) {
     .site-product .site-product-card { min-width: 100%; }
-    /*...*/
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (max-width: 768px) {
     /*...*/
 }
-
 
 /* Large devices (desktops, 992px and up) */
 @media (max-width: 992px) {
@@ -257,4 +259,13 @@ section.not-found .page-header h1 { margin-bottom: 48px; }
 /* Extra large devices (large desktops, 1200px and up) */
 @media (max-width: 1200px) {
     /*...*/
+}
+
+
+/*
+ * Fix for some weird WP/BP behavior
+ */
+.row {
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
 }
