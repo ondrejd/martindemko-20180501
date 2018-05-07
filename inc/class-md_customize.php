@@ -50,7 +50,7 @@ class MD_Customize {
         self::register_other_options( $wp_customize );
 
         $wp_customize->remove_section( 'static_front_page' );
-        $wp_customize->remove_panel( 'nav_menus' );
+        //$wp_customize->remove_panel( 'nav_menus' );
 
         $wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
         $wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
@@ -326,8 +326,8 @@ class MD_Customize {
     public static function header_output() {
 ?>
 <style type="text/css">
-    .site-header .site-title a { color: <?php echo get_option( 'header_foreground_color' ) ?>; }
-    .site-header { background-color: <?php echo get_option( 'header_background_color' ) ?>; }
+    .navbar-brand { color: <?php echo get_option( 'header_foreground_color' ) ?>; }
+    .navbar { background-color: <?php echo get_option( 'header_background_color' ) ?>; }
     .site-product-logos { display: <?php echo get_option( 'show_product_logos' ) == 'yes' ? 'block' : 'none' ?>; }
     .hp-help-banner {
         background-color: <?php echo get_option( 'ordersteps_background_color_1' ) ?>;

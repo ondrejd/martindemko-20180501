@@ -65,12 +65,35 @@ if( !function_exists( 'martindemko_after_setup_theme' ) ) :
             )
         );
 
-        remove_theme_support( 'menus' );
-
         add_image_size( 'martindemko-featured-image', 2000, 1200, true );
         add_image_size( 'martindemko-featured-image-small', 400, 200, true );
         add_image_size( 'martindemko-default-product', 400, 340, true );
         add_image_size( 'martindemko-thumbnail-avatar', 100, 100, true );
+
+        register_nav_menus( array(
+            'footer-languages-menu' => __( 'Jazykové menu', 'martindemko' ),
+            'footer-contact-menu' => __( 'Kontaktní menu', 'martindemko' )
+        ) );
+
+        add_theme_support( 'starter-content', array(
+	        'widgets'     => array(),
+	        'posts'       => array(),
+	        'attachments' => array(),
+	        'options'     => array(
+		        'show_on_front'  => 'posts',
+	        ),
+	        'theme_mods'  => array(),
+	        'nav_menus'   => array(
+		        'footer-languages-menu' => array(
+			        'name'  => __( 'Jazykové menu', 'martindemko' ),
+			        'items' => array(),
+		        ),
+		        'footer-contact-menu' => array(
+			        'name'  => __( 'Kontaktní menu', 'martindemko' ),
+			        'items' => array(),
+		        ),
+	        ),
+        ) );
     }
 endif;
 // Setup up theme
@@ -136,8 +159,8 @@ if( !function_exists( 'martindemko_enqueue_styles' ) ) :
         );
         wp_enqueue_script( 'martindemko-script' );
 
-        //wp_enqueue_style( 'martindemko-bootstrap_reboot-style', get_stylesheet_directory_uri() . '/assets/css/bootstrap-reboot.min.css' );
-        wp_enqueue_style( 'martindemko-bootstrap_grid-style', get_stylesheet_directory_uri() . '/assets/css/bootstrap-grid.min.css' );
+        wp_enqueue_style( 'martindemko-bootstrap_reboot-style', get_stylesheet_directory_uri() . '/assets/css/bootstrap-reboot.min.css' );
+        //wp_enqueue_style( 'martindemko-bootstrap_grid-style', get_stylesheet_directory_uri() . '/assets/css/bootstrap-grid.min.css' );
         wp_enqueue_style( 'martindemko-bootstrap-style', get_stylesheet_directory_uri() . '/assets/css/bootstrap.min.css' );
 
         wp_enqueue_style(

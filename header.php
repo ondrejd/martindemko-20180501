@@ -24,6 +24,9 @@
  * @since 1.0.0
  */
 
+$default_product_ID = get_option( 'site_product_id', null );
+$default_product = get_post( $default_product_ID, OBJECT, 'display' );
+
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js no-svg">
 <head>
@@ -34,30 +37,23 @@
 </head>
 <body <?php body_class(); ?>>
 <div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'martindemko' ); ?></a>
 
-	<header id="masthead" class="site-header" role="banner">
-		<div class="row justify-content-md-center">
-			<div class="col-5 col-lg-4">
-                <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-			</div>
-			<div class="col-5 col-lg-4 site-product-order-button-cont">
-				<span class="btn btn-primary site-product-order-button">
-					<?php echo esc_html( get_option( 'product_order_btn_text' ) ) ?>
-				</span>
-			</div>
-		</div>
-	</header><!-- #masthead -->
+    <nav class="navbar navbar-light justify-content-between sticky-top">
+        <span class="d-none d-md-block d-lg-block d-xl-block"></span>
+        <a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+        <span class="d-none d-lg-block d-xl-block"></span>
+        <span class="d-none d-md-block d-lg-block d-xl-block"></span>
+        <span class="d-none d-lg-block d-xl-block"></span>
+        <span class="btn btn-primary site-product-order-button">
+            <?php echo esc_html( get_option( 'product_order_btn_text' ) ) ?>
+        </span>
+        <span class="d-none d-md-block d-lg-block d-xl-block"></span>
+    </nav>
 
-    <?php
-    $default_product_ID = get_option( 'site_product_id', null );
-    $default_product = get_post( $default_product_ID, OBJECT, 'display' );
-
-    if( ( $default_product instanceof \WP_Post ) ) :
-    ?>
+    <?php if( ( $default_product instanceof \WP_Post ) ) : ?>
     <div class="site-product">
-        <div class="row justify-content-md-center">
-            <div class="col-5 col-sm-6 col-lg-4">
+        <div class="row justify-content-center">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 site-product-card">
             	<div class="post-thumbnail">
 		            <a href="<?php the_permalink(); ?>">
                     	<?php if ( '' !== get_the_post_thumbnail( $default_product_ID ) ) : ?>
@@ -66,9 +62,9 @@
                         <span class="no-post-thumbnail"></span>
                     	<?php endif; ?>
 		            </a>
-	            </div><!-- .post-thumbnail -->
+	            </div>
             </div>
-            <div class="col-5 col-sm-4 col-lg-4">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 site-product-card">
                 <h2 class="entry-title">
                     <?php echo esc_html( $default_product->post_title ); ?>
                 </h2>
@@ -85,18 +81,18 @@
             </div>
         </div>
         <div class="site-product-logos">
-            <div class="row justify-content-md-center">
-                <div class="col-3 site-product-logo site-product-logo-1">
+            <div class="row justify-content-center">
+                <div class="col-xs-8 col-sm-8 col-md-4 col-lg-3 col-xl-2 site-product-logo site-product-logo-1">
                     <a href="#">
                         <img alt="logo 1" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/service-mark.png'; ?>">
                     </a>
                 </div>
-                <div class="col-3 site-product-logo site-product-logo-2">
+                <div class="col-xs-8 col-sm-8 col-md-4 col-lg-3 col-xl-2 site-product-logo site-product-logo-2">
                     <a href="#">
                         <img alt="logo 2" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/service-mark.png'; ?>">
                     </a>
                 </div>
-                <div class="col-3 site-product-logo site-product-logo-3">
+                <div class="col-xs-8 col-sm-8 col-md-4 col-lg-3 col-xl-2 site-product-logo site-product-logo-3">
                     <a href="#">
                         <img alt="logo 3" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/service-mark.png'; ?>">
                     </a>

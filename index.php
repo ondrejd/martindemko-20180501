@@ -33,12 +33,13 @@ get_header(); ?>
 	</header>
 	<?php else : ?>
 	<header class="page-header hp-help-banner">
-        <div class="row justify-content-md-center">
-            <div class="col-10 col-lg-8">
-                <ul>
-                    <li><span class="help-banner-num">1</span><p class="help-banner-lbl help-banner-lbl-1"><?php echo esc_html( get_option( 'ordersteps_text_1' ) ) ?></p></li>
-                    <li><span class="help-banner-num">2</span><p class="help-banner-lbl help-banner-lbl-2"><?php echo esc_html( get_option( 'ordersteps_text_2' ) ) ?></p></li>
-                    <li><span class="help-banner-num">3</span><p class="help-banner-lbl help-banner-lbl-3"><?php echo esc_html( get_option( 'ordersteps_text_3' ) ) ?></p></li>
+        <div class="row justify-content-center">
+            <div class="col-xs-10 col-sm-8 col-md-10 col-lg-8 col-xs-6">
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xs-2 hp-help-banner-item"><span class="help-banner-num">1</span><p class="help-banner-lbl help-banner-lbl-1"><?php echo esc_html( get_option( 'ordersteps_text_1' ) ) ?></p></div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xs-2 hp-help-banner-item"><span class="help-banner-num">2</span><p class="help-banner-lbl help-banner-lbl-2"><?php echo esc_html( get_option( 'ordersteps_text_2' ) ) ?></p></div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xs-2 hp-help-banner-item"><span class="help-banner-num">3</span><p class="help-banner-lbl help-banner-lbl-3"><?php echo esc_html( get_option( 'ordersteps_text_3' ) ) ?></p></div>
+                </div>
             </div>
         </div>
 	</header>
@@ -46,8 +47,8 @@ get_header(); ?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
-            <div class="row justify-content-md-center">
-                <div class="col-10 col-md-10 col-lg-8">
+            <div class="row justify-content-center">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xs-6">
                     <div class="row"><?php
 			        if ( have_posts() ) :
 				        while ( have_posts() ) :
@@ -66,7 +67,7 @@ get_header(); ?>
 				        get_template_part( 'content', 'none' );
 			        endif;
 ?>                    </div>
-                </div><!-- .col-10.col-lg-8 -->
+                </div>
             </div>
 		</main><!-- #main -->
 	</div><!-- #primary -->

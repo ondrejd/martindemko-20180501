@@ -63,7 +63,7 @@ if( !class_exists( 'MD_Product' ) ) :
                 'menu_positions' => 21,
                 'menu_icon' => 'dashicons-paperclip',
                 'hierarchical' => false,
-                'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'custom-fields', 'comments', 'revisions', 'page-attributes' ),
+                'supports' => array( 'title', 'author', 'thumbnail', 'excerpt', 'custom-fields', 'comments', 'revisions', 'page-attributes' ),
                 'delete_with_user' => false,
                 'show_in_rest' => false,
                 'slug' => array( __( 'product', 'martindemko' ) )

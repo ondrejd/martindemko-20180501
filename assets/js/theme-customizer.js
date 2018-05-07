@@ -8,7 +8,7 @@
 
 	wp.customize( 'blogname', function( value ) {
 		value.bind( function( newval ) {
-			$( 'h1.site-title a' ).html( newval );
+			$( 'a.navbar-brand' ).html( newval );
 		} );
 	} );
 
@@ -26,13 +26,13 @@
 
 	wp.customize( 'header_foreground_color', function( value ) {
 		value.bind( function( newval ) {
-			$( '.site-header .site-title a', '' ).css( 'color', newval + '!important' );
+			$( '.navbar-brand', '' ).css( 'color', newval + '!important' );
 		} );
 	} );
 
 	wp.customize( 'header_background_color', function( value ) {
 		value.bind( function( newval ) {
-			$( '.site-header' ).css( 'background-color', newval );
+			$( '.navbar' ).css( 'background-color', newval );
 		} );
 	} );
 
@@ -58,9 +58,9 @@
 
 	wp.customize( 'ordersteps_foreground_color', function( value ) {
 		value.bind( function( newval ) {
-			$( '.hp-help-banner span.help-banner-num' ).css( 'color', newval );
-			$( '.hp-help-banner span.help-banner-num' ).css( 'border-color', newval );
-			$( '.hp-help-banner span.help-banner-lbl' ).css( 'color', newval );
+			$( '.hp-help-banner .help-banner-num' ).css( 'color', newval );
+			$( '.hp-help-banner .help-banner-num' ).css( 'border-color', newval );
+			$( '.hp-help-banner .help-banner-lbl' ).css( 'color', newval );
 		} );
 	} );
 
@@ -72,25 +72,25 @@
 
 	wp.customize( 'ordersteps_background_color_2', function( value ) {
 		value.bind( function( newval ) {
-			$( '.hp-help-banner span.help-banner-num' ).css( 'background-color', newval );
+			$( '.hp-help-banner .help-banner-num' ).css( 'background-color', newval );
 		} );
 	} );
 
 	wp.customize( 'ordersteps_text_1', function( value ) {
 		value.bind( function( newval ) {
-			$( '.hp-help-banner span.help-banner-lbl-1' ).html( newval );
+			$( '.hp-help-banner .help-banner-lbl-1' ).html( newval );
 		} );
 	} );
 
 	wp.customize( 'ordersteps_text_2', function( value ) {
 		value.bind( function( newval ) {
-			$( '.hp-help-banner span.help-banner-lbl-2' ).html( newval );
+			$( '.hp-help-banner .help-banner-lbl-2' ).html( newval );
 		} );
 	} );
 
 	wp.customize( 'ordersteps_text_3', function( value ) {
 		value.bind( function( newval ) {
-			$( '.hp-help-banner span.help-banner-lbl-3' ).html( newval );
+			$( '.hp-help-banner .help-banner-lbl-3' ).html( newval );
 		} );
 	} );
 	

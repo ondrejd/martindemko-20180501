@@ -30,11 +30,11 @@
 
 <footer id="colophon" class="site-footer" role="contentinfo">
     <div class="row justify-content-md-center">
-        <div class="col-5 col-lg-4 site-footer-pane site-footer-left">
-            xxx
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4 col-xl-3 site-footer-pane site-footer-left">
+            <?php wp_nav_menu( array( 'theme_location' => 'footer-languages-menu' ) ); ?>
         </div>
-        <div class="col-5 col-lg-4 site-footer-pane site-footer-right">
-            xxx
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4 col-xl-3 site-footer-pane site-footer-right">
+            <?php wp_nav_menu( array( 'theme_location' => 'footer-contact-menu' ) ); ?>
         </div>
     </div>
 </footer><!-- #colophon -->

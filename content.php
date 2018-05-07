@@ -24,9 +24,10 @@
  * @since 1.0.0
  */
 
-?>
+$additional_class = is_single() || get_post_type() == 'page' ? 'col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-12' : 'col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-6';
 
-<article id="post-<?php the_ID(); ?>" <?php post_class( 'col-6' ); ?>>
+?>
+<article id="post-<?php the_ID(); ?>" <?php post_class( $additional_class ); ?>>
 	<header class="entry-header">
         <?php
 		if ( is_single() ) {
@@ -42,7 +43,9 @@
         	<?php if ( '' !== get_the_post_thumbnail() ) : ?>
 			<?php the_post_thumbnail( 'martindemko-featured-image-small' ); ?>
             <?php else: ?>
+            <?php if( get_post_type() != 'page' ): ?>
             <span class="no-post-thumbnail"></span>
+            <?php endif; ?>
         	<?php endif; ?>
 		</a>
 	</div><!-- .post-thumbnail -->
