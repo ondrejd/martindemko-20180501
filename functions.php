@@ -24,6 +24,10 @@
  * @since 1.0.0
  */
 
+if( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 
 // Includes
 include( dirname( __FILE__ ) . '/inc/class-md_products.php' );

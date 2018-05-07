@@ -29,6 +29,10 @@ if( ! defined( 'ABSPATH' ) ) {
 }
 
 
+// Includes
+include( dirname( __FILE__ ) . '/class-md_product_dropdown_wp_customize_control.php' );
+
+
 if( !class_exists( 'MD_Customize' ) ) :
 
 /**
@@ -38,12 +42,20 @@ if( !class_exists( 'MD_Customize' ) ) :
  * @since 1.0.0
  */
 class MD_Customize {
+    const THEME_PANEL_ID = 'martindemko_theme_panel';
+
     /**
      * @param \WP_Customize_Manager $wp_customize
      * @return void
      * @since 1.0.0
      */
     public static function register( $wp_customize ) {
+        $wp_customize->add_panel( self::THEME_PANEL_ID, array(
+            'title' => __( 'Vzhled tématu', 'martindemko' ),
+            'description' => __( 'Sdružuje nastavení vzhledu tématu <strong>martindemko-20180501</strong>', 'martindemko' ),
+            'priority' => 15,
+        ) );
+
         self::register_product_options( $wp_customize );
         self::register_ordersteps_options( $wp_customize );
         self::register_other_options( $wp_customize );
@@ -68,9 +80,10 @@ class MD_Customize {
         $wp_customize->add_section( 'martindemko_product_options', 
             array(
                 'title'       => __( 'Produkt', 'martindemko' ),
-                'priority'    => 35,
+                'priority'    => 10,
                 'capability'  => 'edit_theme_options',
                 'description' => __( 'Nastavení pro produkt, kterému je web věnován.', 'martindemko' ),
+                'panel'       => self::THEME_PANEL_ID,
             )
         );
         // Settings
@@ -86,12 +99,12 @@ class MD_Customize {
             'transport'  => 'postMessage',
         ) );
         // Controls
-        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
+        $wp_customize->add_control( new MD_Product_Dropdown_WP_Customize_Control( $wp_customize, 
             'cnt_site_product_id', array(
-	            'label'    => __( 'ID produktu', 'martindemko' ),
-	            'section'  => 'martindemko_product_options',
-	            'settings' => 'site_product_id',
-                'type'     => 'number',
+                'label'       => __( 'Produkt', 'martindemko' ),
+                'description' => __( 'Vyberte defaultní produkt tématu', 'martindemko' ),
+                'section'     => 'martindemko_product_options',
+                'settings'    => 'site_product_id',
             )
         ) );
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
@@ -120,8 +133,9 @@ class MD_Customize {
             array(
                 'title'       => __( 'Postup objednávky', 'martindemko' ),
                 'description' => __( 'Nastavení pro panel s postupem objednávky.', 'martindemko' ),
-                'priority'    => 35,
+                'priority'    => 30,
                 'capability'  => 'edit_theme_options',
+                'panel'       => self::THEME_PANEL_ID,
             )
         );
         // Settings
@@ -237,9 +251,10 @@ class MD_Customize {
         $wp_customize->add_section( 'martindemko_other_options', 
             array(
                 'title'       => __( 'Další volby', 'martindemko' ),
-                'priority'    => 35,
+                'priority'    => 40,
                 'capability'  => 'edit_theme_options',
                 'description' => __( 'Další nastavení šablony.', 'martindemko' ),
+                'panel'       => self::THEME_PANEL_ID,
             )
         );
         // Settings
@@ -303,9 +318,10 @@ class MD_Customize {
         $wp_customize->add_section( 'martindemko_footer_options', 
             array(
                 'title'       => __( 'Hlavička & Patička', 'martindemko' ),
-                'priority'    => 155,
+                'priority'    => 20,
                 'capability'  => 'edit_theme_options',
                 'description' => __( 'Nastavení pro patičku webu.', 'martindemko' ),
+                'panel'       => self::THEME_PANEL_ID,
             )
         );
         // Settings

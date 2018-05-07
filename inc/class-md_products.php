@@ -31,45 +31,51 @@ if( ! defined( 'ABSPATH' ) ) {
 
 
 if( !class_exists( 'MD_Product' ) ) :
+
+/**
+ * Class that implements all what necessary for our CPT.
+ * @author Ondřej Doněk, <ondrejd@gmail.com>
+ * @since 1.0.0
+ */
+class MD_Product {
+
+    const SLUG = 'martindemko_product';
+
     /**
-     * Class that implements all what necessary for our CPT.
-     * @author Ondřej Doněk, <ondrejd@gmail.com>
+     * Constructor.
+     * @return void
      * @since 1.0.0
      */
-    class MD_Product {
-        /**
-         * Constructor.
-         * @return void
-         * @since 1.0.0
-         */
-        function __construct() {
-            add_action( 'init', array( $this, 'init' ) );
-        }
-
-        /**
-         * Initialize our CPT.
-         * @return void
-         * @since 1.0.0
-         */
-        function init() {
-            register_post_type( 'martindemko_product', array(
-                'labels' => array(
-                    'name' => __( 'Products', 'martindemko' ),
-                    'singular_name' => __( 'Product', 'martindemko' )
-                ),
-                'description' => __( 'Products custom post type', 'martindemko' ),
-                'public' => true,
-                'has_archive' => true,
-                'menu_positions' => 21,
-                'menu_icon' => 'dashicons-paperclip',
-                'hierarchical' => false,
-                'supports' => array( 'title', 'author', 'thumbnail', 'excerpt', 'custom-fields', 'comments', 'revisions', 'page-attributes' ),
-                'delete_with_user' => false,
-                'show_in_rest' => false,
-                'slug' => array( __( 'product', 'martindemko' ) )
-            ) );
-        }
+    function __construct() {
+        add_action( 'init', array( $this, 'init' ) );
     }
+
+    /**
+     * Initialize our CPT.
+     * @return void
+     * @since 1.0.0
+     */
+    function init() {
+        register_post_type( self::SLUG, array(
+            'labels' => array(
+                'name' => __( 'Products', 'martindemko' ),
+                'singular_name' => __( 'Product', 'martindemko' )
+            ),
+            'description' => __( 'Products custom post type', 'martindemko' ),
+            'public' => true,
+            'has_archive' => true,
+            'menu_positions' => 21,
+            'menu_icon' => 'dashicons-paperclip',
+            'hierarchical' => false,
+            'supports' => array( 'title', 'author', 'thumbnail', 'excerpt', 'custom-fields', 'comments', 'revisions', 'page-attributes' ),
+            'delete_with_user' => false,
+            'show_in_rest' => false,
+            'slug' => array( __( 'product', 'martindemko' ) )
+        ) );
+    }
+
+}
+
 endif;
 
 // Initialize CPT
