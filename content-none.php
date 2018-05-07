@@ -26,24 +26,14 @@
 
 ?>
 
-<section class="no-results not-found">
+<section class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-12 no-results not-found">
 	<header class="page-header">
-		<h1 class="page-title"><?php _e( 'Nothing Found', 'martindemko' ); ?></h1>
+		<h1 class="page-title"><?php _e( 'Nemůžeme najít to, co hledáte…', 'martindemko' ); ?></h1>
 	</header>
 	<div class="page-content">
-		<?php
-		if ( is_home() && current_user_can( 'publish_posts' ) ) :
-		?>
-
-			<p><?php printf( __( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'martindemko' ), esc_url( admin_url( 'post-new.php' ) ) ); ?></p>
-
-		<?php else : ?>
-
-			<p><?php _e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'martindemko' ); ?></p>
-			<?php
-				get_search_form();
-
-		endif;
-		?>
+        <p><?php printf(
+            __( 'Nemůžeme najít to, co hledáte - jste si jisti, že jste napsali URL adresu správně? Nejlepší bude, pokud přejdete na %1$sdomovskou stránku%2$s a zkusíte se podívat tam.', 'martindemko' ),
+            '<a href="' . home_url() . '" rel="home">', '</a>' 
+        ); ?></p>
 	</div><!-- .page-content -->
 </section><!-- .no-results -->
