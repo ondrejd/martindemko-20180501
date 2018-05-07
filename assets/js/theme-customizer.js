@@ -1,9 +1,28 @@
 /**
- * This file adds some LIVE to the Theme Customizer live preview. To leverage
- * this, set your custom settings to 'postMessage' and then add your handling
- * here. Your javascript should grab settings from customizer controls, and 
- * then make any necessary changes to the page using jQuery.
+ * Theme "martindemko-20180501" for WordPress.
+ * 
+ * Copyright (C) 2018 Ondřej Doněk
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @author Ondřej Doněk <ondrejd@gmail.com>
+ * @license https://www.gnu.org/licenses/gpl-3.0.en.html GNU General Public License 3.0
+ * @link https://github.com/ondrejd/martindemko-20180501 for the canonical source repository
+ * @package martindemko-20180501
+ * @since 1.0.0
  */
+
 ( function( $ ) {
 
 	wp.customize( 'blogname', function( value ) {
@@ -26,7 +45,7 @@
 
 	wp.customize( 'header_foreground_color', function( value ) {
 		value.bind( function( newval ) {
-			$( '.navbar-brand', '' ).css( 'color', newval + '!important' );
+			$( '.navbar-brand' ).css( 'color', newval + '!important' );
 		} );
 	} );
 
@@ -91,6 +110,19 @@
 	wp.customize( 'ordersteps_text_3', function( value ) {
 		value.bind( function( newval ) {
 			$( '.hp-help-banner .help-banner-lbl-3' ).html( newval );
+		} );
+	} );
+
+	wp.customize( 'footer_foreground_color', function( value ) {
+		value.bind( function( newval ) {
+			$( '.site-footer' ).css( 'color', newval );
+            $( '.site-footer ul.menu li a' ).css( 'color', newval );
+		} );
+	} );
+
+	wp.customize( 'footer_background_color', function( value ) {
+		value.bind( function( newval ) {
+			$( '.site-footer' ).css( 'background-color', newval );
 		} );
 	} );
 	

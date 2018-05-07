@@ -36,8 +36,6 @@ Use it to make something cool, have fun, and share what you've learned with othe
  * Paticka ( + menu)
  */
 .site-footer {
-    background-color: #2f1b1b;
-    color: #fff;
     min-height: 200px;
 }
 .site-footer .site-footer-pane {
@@ -49,9 +47,6 @@ Use it to make something cool, have fun, and share what you've learned with othe
     list-style-type: none;
     margin: 0px 0px 0px 0px;
     padding: 0px 0px 0px 0px;
-}
-.site-footer ul.menu li a {
-    color: #fff;
 }
 
 

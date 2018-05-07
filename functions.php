@@ -54,6 +54,8 @@ if( !function_exists( 'martindemko_after_setup_theme' ) ) :
         add_option( 'ordersteps_text_2', __( 'Vyplňte formulář', 'martindemko' ) );
         add_option( 'ordersteps_text_3', __( 'Počkejte, až Vám zavoláme', 'martindemko' ) );
         add_option( 'homepage_post_excerpts_show', 'yes' );
+        add_option( 'footer_foreground_color', '#ffffff' );
+        add_option( 'footer_background_color', '#2f1b1b' );
 
         add_theme_support( 'automatic-feed-links' );
         add_theme_support( 'title-tag' );

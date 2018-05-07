@@ -47,6 +47,7 @@ class MD_Customize {
         self::register_product_options( $wp_customize );
         self::register_ordersteps_options( $wp_customize );
         self::register_other_options( $wp_customize );
+        self::register_footer_options( $wp_customize );
 
         $wp_customize->remove_section( 'static_front_page' );
         //$wp_customize->remove_panel( 'nav_menus' );
@@ -319,6 +320,51 @@ class MD_Customize {
     }
 
     /**
+     * @param \WP_Customize_Manager $wp_customize
+     * @return void
+     * @since 1.0.0
+     */
+    protected static function register_footer_options( $wp_customize ) {
+        // Section
+        $wp_customize->add_section( 'martindemko_footer_options', 
+            array(
+                'title'       => __( 'Patička', 'martindemko' ),
+                'priority'    => 45,
+                'capability'  => 'edit_theme_options',
+                'description' => __( 'Nastavení pro patičku webu.', 'martindemko' ),
+            )
+        );
+        // Settings
+        $wp_customize->add_setting( 'footer_foreground_color' , array(
+            'capability' => 'edit_theme_options',
+            'default'    => '#ffffff',
+            'type'       => 'option',
+            'transport'  => 'postMessage',
+        ) );
+        $wp_customize->add_setting( 'footer_background_color' , array(
+            'capability' => 'edit_theme_options',
+            'default'    => '#2f1b1b',
+            'type'       => 'option',
+            'transport'  => 'postMessage',
+        ) );
+        // Controls
+        $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
+            'cnt_footer_foreground_color', array(
+	            'label'    => __( 'Barva textu', 'martindemko' ),
+	            'section'  => 'martindemko_footer_options',
+	            'settings' => 'footer_foreground_color',
+            )
+        ) );
+        $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
+            'cnt_footer_background_color', array(
+	            'label'    => __( 'Barva pozadí', 'martindemko' ),
+	            'section'  => 'martindemko_footer_options',
+	            'settings' => 'footer_background_color',
+            )
+        ) );
+    }
+
+    /**
      * @return void
      * @since 1.0.0
      */
@@ -338,6 +384,11 @@ class MD_Customize {
         color: <?php echo get_option( 'ordersteps_foreground_color' ) ?>;
     }
     .hp-help-banner span.help-banner-lbl { color: <?php echo get_option( 'ordersteps_foreground_color' ) ?>; }
+    .site-footer {
+        background-color: <?php echo get_option( 'footer_background_color' ) ?>;
+        color: <?php echo get_option( 'footer_foreground_color' ) ?>;
+    }
+    .site-footer ul.menu li a { color: <?php echo get_option( 'footer_foreground_color' ) ?>; }
 </style> 
 <?php
     }
