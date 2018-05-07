@@ -1,6 +1,6 @@
 <?php
 /**
- * WordPress theme "martindemko-20180501" based on Twentyseventeen theme.
+ * Theme "martindemko-20180501" for WordPress.
  * 
  * Copyright (C) 2018 Ondřej Doněk
  * 
@@ -69,7 +69,7 @@ if ( ! function_exists( 'martindemko_entry_footer' ) ) :
 			}
 		}
 
-		echo '</footer> <!-- .entry-footer -->';
+		echo '</footer><!-- .entry-footer -->';
 	}
 endif;
 

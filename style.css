@@ -8,7 +8,7 @@ Version: 1.0
 License: GNUv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Text Domain: martindemko
-Tags: flexible-header, accessibility-ready, custom-colors, custom-header, custom-menu, custom-logo, editor-style, sticky-post, theme-options, threaded-comments, translation-ready
+Tags: flexible-header, accessibility-ready, custom-colors, custom-header, custom-menu, custom-logo, editor-style, theme-options, threaded-comments, translation-ready
 
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
@@ -16,36 +16,13 @@ Use it to make something cool, have fun, and share what you've learned with othe
 
 .screen-reader-text { display: none; visibility: collapsed; }
 
-.site-header {
+.navbar {
     height: 80px;
-    /* Bereme nyni pres `get_option( 'header_foreground', 'ecd9d9' )
-    background-color: #ecd9d9;
-    */
-    left: 0px;
-    position: sticky;
-    right: 0px;
-    top: 0px;
-    z-index: 1000;
 }
-body.admin-bar .site-header {
-    top: 32px
-}
-.site-header > div {
-    height: 80px;
-    padding-top: 20px;
-}
-.site-header .site-title {
-    font-size: 24pt;
+.navbar .navbar-brand {
+    font-size: 2.2rem;
     font-weight: 400;
     margin: 0;
-}
-.site-header .site-title a {
-    /* Bereme nyni pres `get_option( 'header_foreground', '0000' )
-    color: #000 !important;
-    */
-}
-.site-header .site-product-order-button-cont {
-    text-align: right;
 }
 
 
@@ -85,7 +62,7 @@ body.admin-bar .site-header {
     padding: 32px 32px 32px 32px;
 }
 .content-area h2.entry-title {
-    font-size: 24px;
+    font-size: 2.1rem;
 }
 .content-area .post-thumbnail {
     padding: 0 0 0 0;
@@ -109,7 +86,7 @@ body.admin-bar .site-header {
     padding-top: 16px;
 }
 .content-area .entry-footer {
-    font-size: 0.95em;
+    font-size: 0.95rem;
     padding-top: 16px;
 }
 .content-area .entry-footer .posted-on span:first-child,
@@ -117,13 +94,66 @@ body.admin-bar .site-header {
 .content-area .entry-footer .cat-links span:first-child,
 .content-area .entry-footer .tags-links span:first-child {
     display: inline-block;
-    font-size: 1em;
-    padding-left: 16px;
-    padding-right: 8px;
+    font-size: 1rem;
+    padding-left: 1.6rem;
+    padding-right: 0.8rem;
 }
 .content-area .entry-footer > span:nth-child(1) > span:nth-child(1) { padding-left: 0px; }
 
-
+/* Komentare */
+.content-area .comments-area {
+    margin-top: 2.4rem;
+}
+.content-area .comments-area .no-comments {
+    font-size: 1.1rem;
+}
+.comments-area .comment-respond {}
+.comments-area form.comment-form {}
+.comments-area form.comment-form p > label {
+    display: block;
+}
+.comments-area form.comment-form p input,
+.comments-area form.comment-form p textarea {
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+}
+.comments-area form.comment-form p input.submit {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.comments-area form.comment-form p input[type="text"],
+.comments-area form.comment-form p input[type="email"],
+.comments-area form.comment-form p input[type="url"] {
+    width: 320px;
+}
+.comments-area form.comment-form p input.submit:not(:disabled):not(.disabled) { cursor: pointer; }
+.comments-area .comment-author .avatar {
+    width: 32px;
+    height: 32px;
+}
+.comments-area .comment article {
+    padding: 0px 32px 8px 32px;
+}
+.comments-area .comment .comment-content {
+    margin-bottom: 0.4rem;
+}
 /*
  * Defaultni produkt
  */

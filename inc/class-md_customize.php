@@ -1,7 +1,6 @@
 <?php
 /**
- * WordPress plugin "odwp-mdct" that customizes WordPress with 
- * Twentyseventeen theme installed.
+ * Theme "martindemko-20180501" for WordPress.
  * 
  * Copyright (C) 2018 Ondřej Doněk
  * 
@@ -20,8 +19,8 @@
  *
  * @author Ondřej Doněk <ondrejd@gmail.com>
  * @license https://www.gnu.org/licenses/gpl-3.0.en.html GNU General Public License 3.0
- * @link https://github.com/ondrejd/odwp-mdct for the canonical source repository
- * @package odwp-mdct
+ * @link https://github.com/ondrejd/martindemko-20180501 for the canonical source repository
+ * @package martindemko-20180501
  * @since 1.0.0
  */
 

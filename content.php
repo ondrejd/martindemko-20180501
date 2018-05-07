@@ -1,6 +1,6 @@
 <?php
 /**
- * WordPress theme "martindemko-20180501" based on Twentyseventeen theme.
+ * Theme "martindemko-20180501" for WordPress.
  * 
  * Copyright (C) 2018 Ondřej Doněk
  * 
@@ -28,55 +28,54 @@ $additional_class = is_single() || get_post_type() == 'page' ? 'col-xs-12 col-sm
 
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class( $additional_class ); ?>>
-	<header class="entry-header">
-        <?php
-		if ( is_single() ) {
-			the_title( '<h2 class="entry-title">', '</h2>' );
-		} else {
-			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-		}
-		?>
-	</header><!-- .entry-header -->
+    <header class="entry-header"><?php
+        if ( is_single() ) {
+            the_title( '<h2 class="entry-title">', '</h2>' );
+        } else {
+            the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
+        }
+    ?></header><!-- .entry-header -->
 
-	<div class="post-thumbnail">
-		<a href="<?php the_permalink(); ?>">
-        	<?php if ( '' !== get_the_post_thumbnail() ) : ?>
-			<?php the_post_thumbnail( 'martindemko-featured-image-small' ); ?>
+    <div class="post-thumbnail">
+        <a href="<?php the_permalink(); ?>">
+            <?php if ( '' !== get_the_post_thumbnail() ) : ?>
+            <?php the_post_thumbnail( 'martindemko-featured-image-small' ); ?>
             <?php else: ?>
             <?php if( get_post_type() != 'page' ): ?>
             <span class="no-post-thumbnail"></span>
             <?php endif; ?>
-        	<?php endif; ?>
-		</a>
-	</div><!-- .post-thumbnail -->
+            <?php endif; ?>
+        </a>
+    </div><!-- .post-thumbnail -->
 
-	<div class="entry-content">
-	<?php
+    <div class="entry-content">
+    <?php
         if ( is_single() ) {
-		    the_content( sprintf(
-			    __( 'Pokračujte ve čtení<span class="screen-reader-text"> "%s"</span>', 'martindemko' ),
-			    get_the_title()
-		    ) );
+            the_content( sprintf(
+                __( 'Pokračujte ve čtení<span class="screen-reader-text"> "%s"</span>', 'martindemko' ),
+                get_the_title()
+            ) );
 
-		    wp_link_pages( array(
-				    'before'      => '<div class="page-links">' . __( 'Stránky:', 'martindemko' ),
-				    'after'       => '</div>',
-				    'link_before' => '<span class="page-number">',
-				    'link_after'  => '</span>',
-		    ) );
+            wp_link_pages( array(
+                'before'      => '<div class="page-links">' . __( 'Stránky:', 'martindemko' ),
+                'after'       => '</div>',
+                'link_before' => '<span class="page-number">',
+                'link_after'  => '</span>',
+            ) );
         }
         elseif( get_option( 'homepage_post_excerpts_show' ) == 'yes' ) {
-		    the_content( sprintf(
-			    __( 'Pokračujte ve čtení<span class="screen-reader-text"> "%s"</span>', 'martindemko' ),
-			    get_the_title()
-		    ) );
+            the_content( sprintf(
+                __( 'Pokračujte ve čtení<span class="screen-reader-text"> "%s"</span>', 'martindemko' ),
+                get_the_title()
+            ) );
         }
-	?>
-	</div><!-- .entry-content -->
+    ?>
+    </div><!-- .entry-content -->
 
-	<?php
-	if ( is_single() ) {
-		martindemko_entry_footer();
-	}
-	?>
+    <?php
+    if ( is_single() ) {
+        martindemko_entry_footer();
+        comments_template();
+    }
+    ?>
 </article><!-- #post-## -->
