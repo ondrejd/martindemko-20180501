@@ -49,7 +49,7 @@ class MD_Customize {
      * @return void
      * @since 1.0.0
      */
-    public static function register( $wp_customize ) {
+    public static function register( \WP_Customize_Manager $wp_customize ) {
         $wp_customize->add_panel( self::THEME_PANEL_ID, array(
             'title' => __( 'Vzhled tématu', 'martindemko' ),
             'description' => __( 'Sdružuje nastavení vzhledu tématu <strong>martindemko-20180501</strong>', 'martindemko' ),
@@ -61,21 +61,20 @@ class MD_Customize {
         self::register_other_options( $wp_customize );
         self::register_footer_options( $wp_customize );
 
-        $wp_customize->remove_section( 'static_front_page' );
-        //$wp_customize->remove_panel( 'nav_menus' );
+        self::register_blogname_partials( $wp_customize );
+        self::register_orderbtn_partial( $wp_customize );
+        self::register_product_partials( $wp_customize );
 
-        $wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
-        $wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
-        $wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
-        $wp_customize->get_setting( 'background_color' )->transport = 'postMessage';
+        $wp_customize->remove_section( 'static_front_page' );
     }
 
     /**
+     * @internal Register options for theme's default product.
      * @param \WP_Customize_Manager $wp_customize
      * @return void
      * @since 1.0.0
      */
-    protected static function register_product_options( $wp_customize ) {
+    protected static function register_product_options( \WP_Customize_Manager $wp_customize ) {
         // Section
         $wp_customize->add_section( 'martindemko_product_options', 
             array(
@@ -91,6 +90,7 @@ class MD_Customize {
             'capability' => 'edit_theme_options',
             'default'    => 0,
             'type'       => 'option',
+            'transport'  => 'postMessage',
         ) );
         $wp_customize->add_setting( 'show_product_logos' , array(
             'capability' => 'edit_theme_options',
@@ -207,21 +207,12 @@ class MD_Customize {
     }
 
     /**
-     * @internal Active callback for controls around product logos.
-     * @param WP_Cusomize_Control $control
-     * @return boolean
-     * @since 1.0.0
-     */
-    public static function callback_product_logos( $control ) {
-        return ( $control->manager->get_setting( 'show_product_logos' )->value() == 'yes' );
-    }
-
-    /**
+     * @internal Register ordersteps banner options.
      * @param \WP_Customize_Manager $wp_customize
      * @return void
      * @since 1.0.0
      */
-    protected static function register_ordersteps_options( $wp_customize ) {
+    protected static function register_ordersteps_options( \WP_Customize_Manager $wp_customize ) {
         // Section
         $wp_customize->add_section( 'martindemko_ordersteps_options', 
             array(
@@ -336,11 +327,12 @@ class MD_Customize {
     }
 
     /**
+     * @internal Register other theme options.
      * @param \WP_Customize_Manager $wp_customize
      * @return void
      * @since 1.0.0
      */
-    protected static function register_other_options( $wp_customize ) {
+    protected static function register_other_options( \WP_Customize_Manager $wp_customize ) {
         // Section
         $wp_customize->add_section( 'martindemko_other_options', 
             array(
@@ -436,11 +428,12 @@ class MD_Customize {
     }
 
     /**
+     * @internal Register header/footer options.
      * @param \WP_Customize_Manager $wp_customize
      * @return void
      * @since 1.0.0
      */
-    protected static function register_footer_options( $wp_customize ) {
+    protected static function register_footer_options( \WP_Customize_Manager $wp_customize ) {
         // Section
         $wp_customize->add_section( 'martindemko_footer_options', 
             array(
@@ -508,6 +501,7 @@ class MD_Customize {
     }
 
     /**
+     * Hook for `wp_head` action.
      * @return void
      * @since 1.0.0
      */
@@ -537,6 +531,7 @@ class MD_Customize {
     }
    
     /**
+     * Hook for `customize_preview_init` action.
      * @return void
      * @since 1.0.0
      */
@@ -549,6 +544,188 @@ class MD_Customize {
 		      true
 	    );
     }
+
+    /**
+     * @internal Register partials for blogame.
+     * @param \WP_Customize_Manager $wp_customize
+     * @return void
+     * @since 1.0.0
+     */
+    public static function register_blogname_partials( \WP_Customize_Manager $wp_customize ) {
+        if( ! isset( $wp_customize->selective_refresh ) ) {
+            return;
+        }
+
+        $wp_customize->selective_refresh->add_partial( 'header_site_title', array(
+            'selector'        => '.navbar-brand',
+            'settings'        => array( 'blogname' ),
+            'render_callback' => array( 'MD_Customize' , 'callback_site_title' ),
+        ) );
+
+        $wp_customize->selective_refresh->add_partial( 'document_title', array(
+            'selector'        => 'head > title',
+            'settings'        => array( 'blogname' ),
+            'render_callback' => 'wp_get_document_title',
+        ) );
+    }
+
+    /**
+     * @internal Register partials for product order button.
+     * @param \WP_Customize_Manager $wp_customize
+     * @return void
+     * @since 1.0.0
+     */
+    public static function register_orderbtn_partial( \WP_Customize_Manager $wp_customize ) {
+        if( ! isset( $wp_customize->selective_refresh ) ) {
+            return;
+        }
+
+        $wp_customize->selective_refresh->add_partial( 'product_order_button', array(
+            'selector'        => '.site-product-order-button',
+            'settings'        => array( 'product_order_btn_text', 'product_order_btn_link' ),
+            'render_callback' => array( 'MD_Customize' , 'callback_order_button' ),
+        ) );
+    }
+
+    /**
+     * @internal Register partials for theme's default product.
+     * @param \WP_Customize_Manager $wp_customize
+     * @return void
+     * @since 1.0.0
+     */
+    public static function register_product_partials( \WP_Customize_Manager $wp_customize ) {
+        if( ! isset( $wp_customize->selective_refresh ) ) {
+            return;
+        }
+
+        $wp_customize->selective_refresh->add_partial( 'product_thumbnail', array(
+            'selector'        => '.site-product .post-thumbnail',
+            'settings'        => array( 'site_product_id' ),
+            'render_callback' => array( 'MD_Customize' , 'callback_product_thumbnail' ),
+        ) );
+
+        $wp_customize->selective_refresh->add_partial( 'product_title', array(
+            'selector'        => '.site-product .entry-title',
+            'settings'        => array( 'site_product_id' ),
+            'render_callback' => array( 'MD_Customize' , 'callback_product_title' ),
+        ) );
+
+        $wp_customize->selective_refresh->add_partial( 'product_excerpt', array(
+            'selector'        => '.site-product .entry-content',
+            'settings'        => array( 'site_product_id' ),
+            'render_callback' => array( 'MD_Customize' , 'callback_product_excerpt' ),
+        ) );
+    }
+
+    /**
+     * @internal Active callback for controls around product logos.
+     * @param \WP_Customize_Control $control
+     * @return boolean
+     * @see MD_Customize::register_product_options()
+     * @since 1.0.0
+     */
+    public static function callback_product_logos( \WP_Customize_Control $control ) {
+        return ( $control->manager->get_setting( 'show_product_logos' )->value() == 'yes' );
+    }
+
+    /**
+     * @internal Callback for blogname parial.
+     * @return void
+     * @see MD_Customize::register_blogname_partials()
+     * @since 1.0.0
+     * @uses get_bloginfo()
+     */
+    public static function callback_site_title() {
+        return get_bloginfo( 'name', 'display' );
+    }
+
+    /**
+     * @internal Callback for product order button parial.
+     * @return void
+     * @see MD_Customize::register_orderbtn_partial()
+     * @since 1.0.0
+     * @uses esc_attr()
+     * @uses esc_html()
+     * @uses get_option()
+     */
+    public static function callback_order_button() {
+        return ''
+            . '<span class="site-product-order-button">'
+            .   '<a href="' . esc_attr( get_option( 'product_order_btn_link', '#' ) ) .'" class="btn btn-primary">'
+            .     esc_html( get_option( 'product_order_btn_text' ) )
+            .   '</a>'
+            . '</span>';
+    }
+
+    /**
+     * @internal Callback for partial with thumbnail of theme's default product.
+     * @return void
+     * @see MD_Customize::register_product_partials()
+     * @since 1.0.0
+     * @uses get_option()
+     * @uses get_post()
+     * @uses get_the_post_thumbnail()
+     */
+    public static function callback_product_thumbnail() {
+        $product_ID = get_option( 'site_product_id', null );
+        $product = get_post( $product_ID, OBJECT, 'display' );
+
+        if( ! ( $product instanceof \WP_Post ) ) {
+            return '';
+        }
+
+        $html = '<a href="#">';
+
+        if( '' !== get_the_post_thumbnail( $product_ID ) ) {
+            $html .= get_the_post_thumbnail( $product_ID, 'martindemko-default-product' );
+        } else {
+            $html .= '<span class="no-post-thumbnail"></span>';
+        }
+
+        $html .= '</a>';
+
+        return $html;
+    }
+
+    /**
+     * @internal Callback for partial with title of theme's default product.
+     * @return void
+     * @see MD_Customize::register_product_partials()
+     * @since 1.0.0
+     * @uses get_option()
+     * @uses get_post()
+     */
+    public static function callback_product_title() {
+        $product_ID = get_option( 'site_product_id', null );
+        $product = get_post( $product_ID, OBJECT, 'display' );
+
+        if( ! ( $product instanceof \WP_Post ) ) {
+            return '';
+        }
+
+        return esc_html( $product->post_title );
+    }
+
+    /**
+     * @internal Callback for partial with excerpt of theme's default product.
+     * @return void
+     * @see MD_Customize::register_product_partials()
+     * @since 1.0.0
+     * @uses esc_html()
+     * @uses get_option()
+     * @uses get_post()
+     */
+    public static function callback_product_excerpt() {
+        $product_ID = get_option( 'site_product_id', null );
+        $product = get_post( $product_ID, OBJECT, 'display' );
+
+        if( ! ( $product instanceof \WP_Post ) ) {
+            return '';
+        }
+
+        return '<p>' . esc_html( $product->post_excerpt ) . '</p>';
+    }
+
 }
 
 endif;

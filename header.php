@@ -24,9 +24,6 @@
  * @since 1.0.0
  */
 
-$default_product_ID = get_option( 'site_product_id', null );
-$default_product = get_post( $default_product_ID, OBJECT, 'display' );
-
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js no-svg">
 <head>
@@ -44,45 +41,11 @@ $default_product = get_post( $default_product_ID, OBJECT, 'display' );
         <span class="d-none d-lg-block d-xl-block"></span>
         <span class="d-none d-md-block d-lg-block d-xl-block"></span>
         <span class="d-none d-lg-block d-xl-block"></span>
-        <span class="btn btn-primary site-product-order-button">
-            <?php echo esc_html( get_option( 'product_order_btn_text' ) ) ?>
-        </span>
+        <?php martindemko_product_order_button(); ?>
         <span class="d-none d-md-block d-lg-block d-xl-block"></span>
     </nav>
 
-    <?php if( ( $default_product instanceof \WP_Post ) ) : ?>
-    <div class="site-product">
-        <div class="row justify-content-center">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 site-product-card">
-            	<div class="post-thumbnail">
-		            <a href="<?php the_permalink(); ?>">
-                    	<?php if ( '' !== get_the_post_thumbnail( $default_product_ID ) ) : ?>
-			            <?php echo get_the_post_thumbnail( $default_product_ID, 'martindemko-default-product' ); ?>
-                        <?php else: ?>
-                        <span class="no-post-thumbnail"></span>
-                    	<?php endif; ?>
-		            </a>
-	            </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 site-product-card">
-                <h2 class="entry-title">
-                    <?php echo esc_html( $default_product->post_title ); ?>
-                </h2>
-                <div class="entry-content">
-                    <p><?php echo esc_html( $default_product->post_excerpt ); ?></p>
-                </div>
-                <div class="entry-footer">
-                    <p>
-                        <span class="btn btn-primary site-product-order-button">
-					        <?php echo esc_html( get_option( 'product_order_btn_text' ) ) ?>
-				        </span>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <?php martindemko_product_logos(); ?>
-    </div><!-- .site-product -->
-    <?php endif; ?>
+    <?php martindemko_site_product(); ?>
 
 	<div class="site-content-contain">
 		<div id="content" class="site-content">

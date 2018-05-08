@@ -154,6 +154,7 @@ if ( ! function_exists( 'martindemko_hp_help_banner' ) ) :
      * Prints help banner with steps how to order.
      * @return void
      * @since 1.0.0
+     * @uses esc_html()
      * @uses get_option()
      * @uses wp_get_attachment_image()
      */
@@ -181,7 +182,7 @@ if ( ! function_exists( 'martindemko_hp_pagination' ) ) :
      * @return void
      * @since 1.0.0
      * @uses get_option()
-     * @uses wp_get_attachment_image()
+     * @uses the_posts_pagination()
      */
     function martindemko_hp_pagination() {
         if( get_option( 'homepage_show_posts_pagination' ) != 'yes' ) {
@@ -200,3 +201,76 @@ if ( ! function_exists( 'martindemko_hp_pagination' ) ) :
         echo '</div>';
     }
 endif;
+
+
+if ( ! function_exists( 'martindemko_product_order_button' ) ) :
+    /**
+     * Prints product order button.
+     * @return void
+     * @since 1.0.0
+     * @uses esc_attr()
+     * @uses esc_html()
+     * @uses get_option()
+     */
+    function martindemko_product_order_button() {
+?>
+        <span class="site-product-order-button">
+            <a href="<?php echo esc_attr( get_option( 'product_order_btn_link', '#' ) ); ?>" class="btn btn-primary">
+                <?php echo esc_html( get_option( 'product_order_btn_text' ) ) ?>
+            </a>
+        </span>
+<?php
+    }
+endif;
+
+
+if ( ! function_exists( 'martindemko_site_product' ) ) :
+    /**
+     * Prints section of site product.
+     * @return void
+     * @since 1.0.0
+     * @uses esc_html()
+     * @uses get_option()
+     * @uses get_post()
+     * @uses get_the_post_thumbnail()
+     */
+    function martindemko_site_product() {
+        $product_ID = get_option( 'site_product_id', null );
+        $product = get_post( $product_ID, OBJECT, 'display' );
+
+        if( ! ( $product instanceof \WP_Post ) ) {
+            return;
+        }
+
+?>
+    <div class="site-product">
+        <div class="row justify-content-center">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 site-product-card">
+            	<div class="post-thumbnail">
+		            <a href="<?php the_permalink(); ?>">
+                    	<?php if ( '' !== get_the_post_thumbnail( $product_ID ) ) : ?>
+			            <?php echo get_the_post_thumbnail( $product_ID, 'martindemko-default-product' ); ?>
+                        <?php else: ?>
+                        <span class="no-post-thumbnail"></span>
+                    	<?php endif; ?>
+		            </a>
+	            </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 site-product-card">
+                <h2 class="entry-title">
+                    <?php echo esc_html( $product->post_title ); ?>
+                </h2>
+                <div class="entry-content">
+                    <p><?php echo esc_html( $product->post_excerpt ); ?></p>
+                </div>
+                <div class="entry-footer">
+                    <p><?php martindemko_product_order_button(); ?></p>
+                </div>
+            </div>
+        </div>
+        <?php martindemko_product_logos(); ?>
+    </div><!-- .site-product -->
+<?php
+    }
+endif;
+

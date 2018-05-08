@@ -40,13 +40,13 @@ if( !function_exists( 'martindemko_after_setup_theme' ) ) :
      * Setup theme.
      * @return void
      * @since 1.0.0
+     * @todo We need support `starter-content` with example logo image
      */
     function martindemko_setup_theme() {
         load_theme_textdomain( 'martindemko', get_stylesheet_directory() . '/languages' );
 
         add_option( 'site_product_id', 'yes' );
         add_option( 'show_product_logos', 'yes' );
-        // TODO We need support `starter-content` with example logo image
         add_option( 'product_logo_img_1', 0 );
         add_option( 'product_logo_url_1', '#' );
         add_option( 'product_logo_img_2', 0 );
@@ -92,6 +92,7 @@ if( !function_exists( 'martindemko_after_setup_theme' ) ) :
             'footer-contact-menu' => __( 'Kontaktní menu', 'martindemko' )
         ) );
 
+        // TODO We need support `starter-content` with example logo image
         add_theme_support( 'starter-content', array(
 	        'widgets'     => array(),
 	        'posts'       => array(),
@@ -111,6 +112,8 @@ if( !function_exists( 'martindemko_after_setup_theme' ) ) :
 		        ),
 	        ),
         ) );
+
+        add_theme_support( 'customize-selective-refresh-widgets' );
     }
 endif;
 // Setup up theme

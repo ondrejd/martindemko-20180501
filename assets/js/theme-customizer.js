@@ -25,24 +25,6 @@
 
 ( function( $ ) {
 
-	wp.customize( 'blogname', function( value ) {
-		value.bind( function( newval ) {
-			$( 'a.navbar-brand' ).html( newval );
-		} );
-	} );
-
-	wp.customize( 'product_order_btn_text', function( value ) {
-		value.bind( function( newval ) {
-			$( '.site-product-order-button' ).html( newval );
-		} );
-	} );
-
-	wp.customize( 'product_order_btn_link', function( value ) {
-		value.bind( function( newval ) {
-			$( '.site-product-order-button' ).html( newval );
-		} );
-	} );
-
 	wp.customize( 'header_foreground_color', function( value ) {
 		value.bind( function( newval ) {
 			$( '.navbar-brand' ).css( 'color', newval + '!important' );
