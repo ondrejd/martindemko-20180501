@@ -187,6 +187,11 @@ Use it to make something cool, have fun, and share what you've learned with othe
 .site-product .site-product-logo {
     text-align: center;
 }
+.site-product .site-product-logo img {
+    text-align: center;
+    max-height: 80px;
+    width: auto;
+}
 
 
 

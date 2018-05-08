@@ -46,6 +46,13 @@ if( !function_exists( 'martindemko_after_setup_theme' ) ) :
 
         add_option( 'site_product_id', 'yes' );
         add_option( 'show_product_logos', 'yes' );
+        // TODO We need support `starter-content` with example logo image
+        add_option( 'product_logo_img_1', 0 );
+        add_option( 'product_logo_url_1', '#' );
+        add_option( 'product_logo_img_2', 0 );
+        add_option( 'product_logo_url_2', '#' );
+        add_option( 'product_logo_img_3', 0 );
+        add_option( 'product_logo_url_3', '#' );
         add_option( 'product_order_btn_text', __( 'Objednat PRODUKT', 'martindemko' ) );
         add_option( 'product_order_btn_link', __( '#', 'martindemko' ) );
         add_option( 'header_foreground_color', '#000000' );

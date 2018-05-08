@@ -98,6 +98,39 @@ class MD_Customize {
             'type'       => 'option',
             'transport'  => 'postMessage',
         ) );
+        $wp_customize->add_setting( 'product_logo_img_1' , array(
+            'capability' => 'edit_theme_options',
+            'default'    => 0,
+            'type'       => 'option',
+        ) );
+        $wp_customize->add_setting( 'product_logo_url_1' , array(
+            'capability' => 'edit_theme_options',
+            'default'    => 0,
+            'type'       => 'option',
+            'transport'  => 'postMessage',
+        ) );
+        $wp_customize->add_setting( 'product_logo_img_2' , array(
+            'capability' => 'edit_theme_options',
+            'default'    => 0,
+            'type'       => 'option',
+        ) );
+        $wp_customize->add_setting( 'product_logo_url_2' , array(
+            'capability' => 'edit_theme_options',
+            'default'    => 0,
+            'type'       => 'option',
+            'transport'  => 'postMessage',
+        ) );
+        $wp_customize->add_setting( 'product_logo_img_3' , array(
+            'capability' => 'edit_theme_options',
+            'default'    => 0,
+            'type'       => 'option',
+        ) );
+        $wp_customize->add_setting( 'product_logo_url_3' , array(
+            'capability' => 'edit_theme_options',
+            'default'    => 0,
+            'type'       => 'option',
+            'transport'  => 'postMessage',
+        ) );
         // Controls
         $wp_customize->add_control( new MD_Product_Dropdown_WP_Customize_Control( $wp_customize, 
             'cnt_site_product_id', array(
@@ -120,6 +153,67 @@ class MD_Customize {
                 )
             )
         ) );
+        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
+            'cnt_product_logo_url_1', array(
+	            'label'           => __( 'Odkaz prvního loga', 'martindemko' ),
+	            'section'         => 'martindemko_product_options',
+	            'settings'        => 'product_logo_url_1',
+                'type'            => 'url',
+                'active_callback' => array( 'MD_Customize', 'callback_product_logos' ),
+            )
+        ) );
+        $wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize,
+            'cnt_product_logo_img_1', array(
+                'label'    => __( 'První logo', 'martindemko' ),
+                'section'  => 'martindemko_product_options',
+                'settings' => 'product_logo_img_1',
+                'active_callback' => array( 'MD_Customize', 'callback_product_logos' ),
+            )
+        ) );
+        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
+            'cnt_product_logo_url_2', array(
+	            'label'       => __( 'Odkaz druhého loga', 'martindemko' ),
+	            'section'     => 'martindemko_product_options',
+	            'settings'    => 'product_logo_url_2',
+                'type'        => 'url',
+                'active_callback' => array( 'MD_Customize', 'callback_product_logos' ),
+            )
+        ) );
+        $wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize,
+            'cnt_product_logo_img_2', array(
+                'label'    => __( 'Druhé logo', 'martindemko' ),
+                'section'  => 'martindemko_product_options',
+                'settings' => 'product_logo_img_2',
+                'active_callback' => array( 'MD_Customize', 'callback_product_logos' ),
+            )
+        ) );
+        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
+            'cnt_product_logo_url_3', array(
+	            'label'       => __( 'Odkaz třetího loga', 'martindemko' ),
+	            'section'     => 'martindemko_product_options',
+	            'settings'    => 'product_logo_url_3',
+                'type'        => 'url',
+                'active_callback' => array( 'MD_Customize', 'callback_product_logos' ),
+            )
+        ) );
+        $wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize,
+            'cnt_product_logo_img_3', array(
+                'label'    => __( 'Třetí logo', 'martindemko' ),
+                'section'  => 'martindemko_product_options',
+                'settings' => 'product_logo_img_3',
+                'active_callback' => array( 'MD_Customize', 'callback_product_logos' ),
+            )
+        ) );
+    }
+
+    /**
+     * @internal Active callback for controls around product logos.
+     * @param WP_Cusomize_Control $control
+     * @return boolean
+     * @since 1.0.0
+     */
+    public static function callback_product_logos( $control ) {
+        return ( $control->manager->get_setting( 'show_product_logos' )->value() === 'yes' );
     }
 
     /**

@@ -80,25 +80,7 @@ $default_product = get_post( $default_product_ID, OBJECT, 'display' );
                 </div>
             </div>
         </div>
-        <div class="site-product-logos">
-            <div class="row justify-content-center">
-                <div class="col-xs-8 col-sm-8 col-md-4 col-lg-3 col-xl-2 site-product-logo site-product-logo-1">
-                    <a href="#">
-                        <img alt="logo 1" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/service-mark.png'; ?>">
-                    </a>
-                </div>
-                <div class="col-xs-8 col-sm-8 col-md-4 col-lg-3 col-xl-2 site-product-logo site-product-logo-2">
-                    <a href="#">
-                        <img alt="logo 2" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/service-mark.png'; ?>">
-                    </a>
-                </div>
-                <div class="col-xs-8 col-sm-8 col-md-4 col-lg-3 col-xl-2 site-product-logo site-product-logo-3">
-                    <a href="#">
-                        <img alt="logo 3" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/service-mark.png'; ?>">
-                    </a>
-                </div>
-            </div>
-        </div><!-- .site-product-logos -->
+        <?php martindemko_product_logos(); ?>
     </div><!-- .site-product -->
     <?php endif; ?>
 

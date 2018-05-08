@@ -125,5 +125,23 @@
 			$( '.site-footer' ).css( 'background-color', newval );
 		} );
 	} );
+
+	wp.customize( 'product_logo_url_1', function( value ) {
+		value.bind( function( newval ) {
+			$( '.site-product-logo-1 > a' ).attr( 'href', newval );
+		} );
+	} );
+
+	wp.customize( 'product_logo_url_2', function( value ) {
+		value.bind( function( newval ) {
+			$( '.site-product-logo-2 > a' ).attr( 'href', newval );
+		} );
+	} );
+
+	wp.customize( 'product_logo_url_3', function( value ) {
+		value.bind( function( newval ) {
+			$( '.site-product-logo-3 > a' ).attr( 'href', newval );
+		} );
+	} );
 	
 } )( jQuery );

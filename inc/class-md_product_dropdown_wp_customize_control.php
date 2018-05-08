@@ -29,7 +29,7 @@ if( ! defined( 'ABSPATH' ) ) {
 }
 
 if( ! class_exists( 'WP_Customize_Control' ) ) {
-    exit;
+    return;
 }
 
 if( ! class_exists( 'MD_Product_Dropdown_WP_Customize_Control' ) ) :
