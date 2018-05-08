@@ -213,7 +213,7 @@ class MD_Customize {
      * @since 1.0.0
      */
     public static function callback_product_logos( $control ) {
-        return ( $control->manager->get_setting( 'show_product_logos' )->value() === 'yes' );
+        return ( $control->manager->get_setting( 'show_product_logos' )->value() == 'yes' );
     }
 
     /**
@@ -369,11 +369,21 @@ class MD_Customize {
             'default'    => 'yes',
             'type'       => 'option',
         ) );
+        $wp_customize->add_setting( 'posts_per_page' , array(
+            'capability' => 'edit_theme_options',
+            'default'    => 6,
+            'type'       => 'option',
+        ) );
+        $wp_customize->add_setting( 'homepage_show_posts_pagination' , array(
+            'capability' => 'edit_theme_options',
+            'default'    => 'yes',
+            'type'       => 'option',
+        ) );
         // Controls
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_product_order_btn_text', array(
 	            'label'       => __( 'Text tlačítka objednat', 'martindemko' ),
-                'description' => __( 'Tato změna se projeví u obou tlačítek objednat.   ', 'martindemko' ),
+                'description' => __( 'Tato změna se projeví u všech obednávacích tlačítek.   ', 'martindemko' ),
 	            'section'     => 'martindemko_other_options',
 	            'settings'    => 'product_order_btn_text',
                 'type'        => 'text',
@@ -393,6 +403,29 @@ class MD_Customize {
 	            'description' => __( 'Zobrazit texty příspěvků blogu na úvodní stránce?', 'martindemko' ),
 	            'section'     => 'martindemko_other_options',
 	            'settings'    => 'homepage_post_excerpts_show',
+                'type'        => 'select',
+                'choices'     => array(
+                    'yes'     => __( 'Ano', 'martindemko' ),
+                    'no'      => __( 'Ne', 'martindemko' ),
+                )
+            )
+        ) );
+        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
+            'cnt_posts_per_page', array(
+	            'label'       => __( 'Počet přísěvků', 'martindemko' ),
+	            'description' => __( 'Počet přípěvků, které se mají na úvodní stránce zobrazit.', 'martindemko' ),
+	            'section'     => 'martindemko_other_options',
+	            'settings'    => 'posts_per_page',
+                'type'        => 'number',
+                'input_attrs' => array( 'min' => 2, 'step' => 1 ),
+            )
+        ) );
+        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
+            'cnt_homepage_show_posts_pagination', array(
+	            'label'       => __( 'Zobrazit stránkování', 'martindemko' ),
+	            'description' => __( 'Zobrazi stránkováí pokud počet příspěvků překročí daný počet k zobrazení?', 'martindemko' ),
+	            'section'     => 'martindemko_other_options',
+	            'settings'    => 'homepage_show_posts_pagination',
                 'type'        => 'select',
                 'choices'     => array(
                     'yes'     => __( 'Ano', 'martindemko' ),

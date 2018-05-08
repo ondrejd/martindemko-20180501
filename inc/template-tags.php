@@ -147,3 +147,56 @@ if ( ! function_exists( 'martindemko_product_logos' ) ) :
 <?php
     }
 endif;
+
+
+if ( ! function_exists( 'martindemko_hp_help_banner' ) ) :
+    /**
+     * Prints help banner with steps how to order.
+     * @return void
+     * @since 1.0.0
+     * @uses get_option()
+     * @uses wp_get_attachment_image()
+     */
+    function martindemko_hp_help_banner() {
+?>
+	<header class="page-header hp-help-banner">
+        <div class="row justify-content-center">
+            <div class="col-xs-10 col-sm-8 col-md-10 col-lg-8 col-xs-6">
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xs-2 hp-help-banner-item"><span class="help-banner-num">1</span><p class="help-banner-lbl help-banner-lbl-1"><?php echo esc_html( get_option( 'ordersteps_text_1' ) ) ?></p></div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xs-2 hp-help-banner-item"><span class="help-banner-num">2</span><p class="help-banner-lbl help-banner-lbl-2"><?php echo esc_html( get_option( 'ordersteps_text_2' ) ) ?></p></div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xs-2 hp-help-banner-item"><span class="help-banner-num">3</span><p class="help-banner-lbl help-banner-lbl-3"><?php echo esc_html( get_option( 'ordersteps_text_3' ) ) ?></p></div>
+                </div>
+            </div>
+        </div>
+	</header>
+<?php
+    }
+endif;
+
+
+if ( ! function_exists( 'martindemko_hp_pagination' ) ) :
+    /**
+     * Prints pagination for blog posts on HP.
+     * @return void
+     * @since 1.0.0
+     * @uses get_option()
+     * @uses wp_get_attachment_image()
+     */
+    function martindemko_hp_pagination() {
+        if( get_option( 'homepage_show_posts_pagination' ) != 'yes' ) {
+            return;
+        }
+
+        echo '<div class="row justify-content-center">';
+        echo '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xs-6">';
+
+        the_posts_pagination( array(
+            'prev_text' => '<span>' . __( '«', 'martindemko' ) . '</span>',
+            'next_text' => '<span>' . __( '»', 'martindemko' ) . '</span>',
+        ) );
+
+        echo '</div>';
+        echo '</div>';
+    }
+endif;

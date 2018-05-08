@@ -32,43 +32,32 @@ get_header(); ?>
 		<h1 class="page-title"><?php single_post_title(); ?></h1>
 	</header>
 	<?php else : ?>
-	<header class="page-header hp-help-banner">
-        <div class="row justify-content-center">
-            <div class="col-xs-10 col-sm-8 col-md-10 col-lg-8 col-xs-6">
-                <div class="row justify-content-center">
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xs-2 hp-help-banner-item"><span class="help-banner-num">1</span><p class="help-banner-lbl help-banner-lbl-1"><?php echo esc_html( get_option( 'ordersteps_text_1' ) ) ?></p></div>
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xs-2 hp-help-banner-item"><span class="help-banner-num">2</span><p class="help-banner-lbl help-banner-lbl-2"><?php echo esc_html( get_option( 'ordersteps_text_2' ) ) ?></p></div>
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xs-2 hp-help-banner-item"><span class="help-banner-num">3</span><p class="help-banner-lbl help-banner-lbl-3"><?php echo esc_html( get_option( 'ordersteps_text_3' ) ) ?></p></div>
-                </div>
-            </div>
-        </div>
-	</header>
+    <?php martindemko_hp_help_banner(); ?>
 	<?php endif; ?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
             <div class="row justify-content-center">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xs-6">
-                    <div class="row"><?php
-			        if ( have_posts() ) :
-				        while ( have_posts() ) :
-					        the_post();
-					        get_template_part( 'content', get_post_format() );
-				        endwhile;
+                    <div class="row">
+                    <?php
+			            if( have_posts() ) {
+				            while( have_posts() ) :
+					            the_post();
+					            get_template_part( 'content', get_post_format() );
+				            endwhile;
 
-				        the_posts_pagination(
-					        array(
-						        'prev_text' => '<span class="screen-reader-text">' . __( 'Předchozí', 'martindemko' ) . '</span>',
-						        'next_text' => '<span class="screen-reader-text">' . __( 'Následující', 'martindemko' ) . '</span>',
-						        'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Stránka', 'martindemko' ) . ' </span>',
-					        )
-				        );
-			        else :
-				        get_template_part( 'content', 'none' );
-			        endif;
-?>                    </div>
+                            if( $wp_query->post_count % 2 != 0 ) {
+                                echo '<article class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-6"> </article>';
+                            }
+			            } else {
+				            get_template_part( 'content', 'none' );
+			            }
+                    ?>
+                    </div>
                 </div>
             </div>
+            <?php martindemko_hp_pagination(); ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 	<?php get_sidebar(); ?>

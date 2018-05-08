@@ -67,6 +67,8 @@ if( !function_exists( 'martindemko_after_setup_theme' ) ) :
         add_option( 'homepage_post_excerpts_show', 'yes' );
         add_option( 'footer_foreground_color', '#ffffff' );
         add_option( 'footer_background_color', '#2f1b1b' );
+        update_option( 'posts_per_page', 6 );
+        add_option( 'homepage_show_posts_pagination', 'yes' );
 
         add_theme_support( 'automatic-feed-links' );
         add_theme_support( 'title-tag' );
