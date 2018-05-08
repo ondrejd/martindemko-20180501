@@ -1,17 +1,37 @@
 /*
-Theme Name: Martin Demko Theme
-Theme URI: https://github.com/ondrejd/martindemko-20180501
+Theme Name: Single Product
+Theme URI: https://github.com/ondrejd/singleproduct
 Author: ondrejd
 Author URI: https://ondrejd.com/
-Description: ...
+Description: Simple but configurable theme for small e-commerce sites that offer just one product.
 Version: 1.0
 License: GNUv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
-Text Domain: martindemko
-Tags: flexible-header, accessibility-ready, custom-colors, custom-header, custom-menu, custom-logo, editor-style, theme-options, threaded-comments, translation-ready
+Text Domain: singleproduct
+Tags: accessibility-ready, custom-colors, custom-header, custom-menu, theme-options, threaded-comments, translation-ready
 
-This theme, like WordPress, is licensed under the GPL.
-Use it to make something cool, have fun, and share what you've learned with others.
+Theme "Single Product" for WordPress.
+
+Copyright (C) 2018 Ondřej Doněk
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+@author Ondřej Doněk <ondrejd@gmail.com>
+@license https://www.gnu.org/licenses/gpl-3.0.en.html GNU General Public License 3.0
+@link https://github.com/ondrejd/singleproduct for the canonical source repository
+@package singleproduct
+@since 1.0.0
 */
 
 .screen-reader-text { display: none; visibility: collapsed; }

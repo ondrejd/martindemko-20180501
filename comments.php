@@ -1,6 +1,6 @@
 <?php
 /**
- * Theme "martindemko-20180501" for WordPress.
+ * Theme "Single Product" for WordPress.
  * 
  * Copyright (C) 2018 Ondřej Doněk
  * 
@@ -19,8 +19,8 @@
  *
  * @author Ondřej Doněk <ondrejd@gmail.com>
  * @license https://www.gnu.org/licenses/gpl-3.0.en.html GNU General Public License 3.0
- * @link https://github.com/ondrejd/martindemko-20180501 for the canonical source repository
- * @package martindemko-20180501
+ * @link https://github.com/ondrejd/singleproduct for the canonical source repository
+ * @package singleproduct
  * @since 1.0.0
  */
 
@@ -34,7 +34,9 @@ if ( post_password_required() ) {
 }
 
 $comments_count = get_comments_number();
+
 ?>
+
 <div id="comments" class="comments-area">
     <?php if ( have_comments() ) : ?>
 
