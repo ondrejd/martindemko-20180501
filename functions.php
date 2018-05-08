@@ -31,6 +31,7 @@ if( ! defined( 'ABSPATH' ) ) {
 
 // Includes
 include( dirname( __FILE__ ) . '/inc/class-md_products.php' );
+include( dirname( __FILE__ ) . '/inc/class-md_navwalker.php' );
 include( dirname( __FILE__ ) . '/inc/class-md_customize.php' );
 include( dirname( __FILE__ ) . '/inc/template-tags.php' );
 

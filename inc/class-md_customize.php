@@ -29,10 +29,6 @@ if( ! defined( 'ABSPATH' ) ) {
 }
 
 
-// Includes
-include( dirname( __FILE__ ) . '/class-md_product_dropdown_wp_customize_control.php' );
-
-
 if( !class_exists( 'MD_Customize' ) ) :
 
 /**
@@ -75,6 +71,7 @@ class MD_Customize {
      * @since 1.0.0
      */
     protected static function register_product_options( \WP_Customize_Manager $wp_customize ) {
+
         // Section
         $wp_customize->add_section( 'martindemko_product_options', 
             array(
@@ -85,6 +82,7 @@ class MD_Customize {
                 'panel'       => self::THEME_PANEL_ID,
             )
         );
+
         // Settings
         $wp_customize->add_setting( 'site_product_id' , array(
             'capability' => 'edit_theme_options',
@@ -131,15 +129,35 @@ class MD_Customize {
             'type'       => 'option',
             'transport'  => 'postMessage',
         ) );
+
         // Controls
-        $wp_customize->add_control( new MD_Product_Dropdown_WP_Customize_Control( $wp_customize, 
-            'cnt_site_product_id', array(
-                'label'       => __( 'Produkt', 'martindemko' ),
-                'description' => __( 'Vyberte defaultní produkt tématu', 'martindemko' ),
-                'section'     => 'martindemko_product_options',
-                'settings'    => 'site_product_id',
-            )
-        ) );
+
+        include( dirname( __FILE__ ) . '/class-md_product_dropdown_wp_customize_control.php' );
+        if( class_exists( 'MD_Product_Dropdown_WP_Customize_Control' ) ) {
+
+            // Our products dropdown control
+            $wp_customize->add_control( new MD_Product_Dropdown_WP_Customize_Control( $wp_customize, 
+                'cnt_site_product_id', array(
+                    'label'       => __( 'Produkt', 'martindemko' ),
+                    'description' => __( 'Vyberte defaultní produkt tématu', 'martindemko' ),
+                    'section'     => 'martindemko_product_options',
+                    'settings'    => 'site_product_id',
+                )
+            ) );
+        } else {
+
+            // Failsafe control
+            $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
+                'cnt_site_product_id', array(
+                    'label'       => __( 'ID produktu', 'martindemko' ),
+                    'description' => __( 'Zadejte ID defaultního produktu', 'martindemko' ),
+                    'section'     => 'martindemko_product_options',
+                    'settings'    => 'site_product_id',
+                    'type'        => 'number',
+                )
+            ) );
+        }
+
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_show_product_logos', array(
 	            'label'       => __( 'Zobrazit loga produktu', 'martindemko' ),
@@ -213,6 +231,7 @@ class MD_Customize {
      * @since 1.0.0
      */
     protected static function register_ordersteps_options( \WP_Customize_Manager $wp_customize ) {
+        
         // Section
         $wp_customize->add_section( 'martindemko_ordersteps_options', 
             array(
@@ -223,6 +242,7 @@ class MD_Customize {
                 'panel'       => self::THEME_PANEL_ID,
             )
         );
+        
         // Settings
         $wp_customize->add_setting( 'ordersteps_show' , array(
             'capability' => 'edit_theme_options',
@@ -266,6 +286,7 @@ class MD_Customize {
             'type'       => 'option',
             'transport'  => 'postMessage',
         ) );
+        
         // Controls
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_ordersteps_show', array(
@@ -333,6 +354,7 @@ class MD_Customize {
      * @since 1.0.0
      */
     protected static function register_other_options( \WP_Customize_Manager $wp_customize ) {
+        
         // Section
         $wp_customize->add_section( 'martindemko_other_options', 
             array(
@@ -343,6 +365,7 @@ class MD_Customize {
                 'panel'       => self::THEME_PANEL_ID,
             )
         );
+        
         // Settings
         $wp_customize->add_setting( 'product_order_btn_text' , array(
             'capability' => 'edit_theme_options',
@@ -371,6 +394,7 @@ class MD_Customize {
             'default'    => 'yes',
             'type'       => 'option',
         ) );
+        
         // Controls
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_product_order_btn_text', array(
@@ -434,6 +458,7 @@ class MD_Customize {
      * @since 1.0.0
      */
     protected static function register_footer_options( \WP_Customize_Manager $wp_customize ) {
+        
         // Section
         $wp_customize->add_section( 'martindemko_footer_options', 
             array(
@@ -444,6 +469,7 @@ class MD_Customize {
                 'panel'       => self::THEME_PANEL_ID,
             )
         );
+        
         // Settings
         $wp_customize->add_setting( 'header_foreground_color' , array(
             'capability' => 'edit_theme_options',
@@ -469,6 +495,7 @@ class MD_Customize {
             'type'       => 'option',
             'transport'  => 'postMessage',
         ) );
+        
         // Controls
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
             'cnt_header_foreground_color', array(
@@ -508,8 +535,8 @@ class MD_Customize {
     public static function header_output() {
 ?>
 <style type="text/css">
-    .navbar-brand { color: <?php echo get_option( 'header_foreground_color' ) ?>; }
-    .navbar { background-color: <?php echo get_option( 'header_background_color' ) ?>; }
+    .site-title { color: <?php echo get_option( 'header_foreground_color' ) ?>; }
+    #page-header { background-color: <?php echo get_option( 'header_background_color' ) ?>; }
     .site-product-logos { display: <?php echo get_option( 'show_product_logos' ) == 'yes' ? 'block' : 'none' ?>; }
     .hp-help-banner {
         background-color: <?php echo get_option( 'ordersteps_background_color_1' ) ?>;
@@ -557,7 +584,7 @@ class MD_Customize {
         }
 
         $wp_customize->selective_refresh->add_partial( 'header_site_title', array(
-            'selector'        => '.navbar-brand',
+            'selector'        => '.site-title',
             'settings'        => array( 'blogname' ),
             'render_callback' => array( 'MD_Customize' , 'callback_site_title' ),
         ) );

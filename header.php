@@ -25,27 +25,31 @@
  */
 
 ?><!DOCTYPE html>
-<html <?php language_attributes(); ?> class="no-js no-svg">
+<html <?php language_attributes(); ?>>
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link rel="profile" href="http://gmpg.org/xfn/11">
 <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
 <div id="page" class="site">
-
-    <nav class="navbar navbar-light justify-content-between sticky-top">
-        <span class="d-none d-md-block d-lg-block d-xl-block"></span>
-        <a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
-        <span class="d-none d-lg-block d-xl-block"></span>
-        <span class="d-none d-md-block d-lg-block d-xl-block"></span>
-        <span class="d-none d-lg-block d-xl-block"></span>
-        <?php martindemko_product_order_button(); ?>
-        <span class="d-none d-md-block d-lg-block d-xl-block"></span>
-    </nav>
-
+	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'martindemko' ); ?></a>
+    <header id="page-header" class="site-header navbar-static-top <?php echo get_option( 'bootstrap_bg_class', '' ) ?>" role="banner">
+        <div class="container">
+            <nav class="navbar navbar-expand-xl justify-content-between p-0">
+                <div class="navbar-brand">
+                    <a class="site-title" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-orderbtn" aria-controls="" aria-expanded="false" aria-label="<?php echo esc_attr( 'Skrýt navigaci', 'martindemko' ) ?>">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div id="navbar-orderbtn">
+                    <?php martindemko_product_order_button(); ?>
+                </div>
+            </nav>
+        </div>
+    </header>
     <?php martindemko_site_product(); ?>
-
-	<div class="site-content-contain">
-		<div id="content" class="site-content">
+    <div id="content" class="site-content">

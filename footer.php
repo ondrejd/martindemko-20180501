@@ -26,19 +26,33 @@
 
 ?>
 
-</div><!-- #content -->
+    </div><!-- #content -->
 
-<footer id="colophon" class="site-footer" role="contentinfo">
-    <div class="row justify-content-md-center">
-        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4 col-xl-3 site-footer-pane site-footer-left">
-            <?php wp_nav_menu( array( 'theme_location' => 'footer-languages-menu' ) ); ?>
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="row justify-content-md-center" ><!-- justify-content-md-center -->
+                <div class="col col-lg-4 site-footer-pane site-footer-left">
+                    <?php wp_nav_menu( array( 
+                        'theme_location' => 'footer-languages-menu',
+                        'menu_class'     => 'nav flex-column footer-menu',
+                        'depth'          => 1,
+                        'fallback_cb'    => 'martindemko_navwalker::fallback',
+                        'walker'         => new martindemko_navwalker()
+                    ) ); ?>
+                </div>
+                <div class="col col-lg-4 site-footer-pane site-footer-right">
+                    <?php wp_nav_menu( array(
+                        'theme_location' => 'footer-contact-menu',
+                        'menu_class'     => 'nav flex-column footer-menu',
+                        'depth'          => 1,
+                        'fallback_cb'    => 'martindemko_navwalker::fallback',
+                        'walker'         => new martindemko_navwalker()
+                    ) ); ?>
+                </div>
+            </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4 col-xl-3 site-footer-pane site-footer-right">
-            <?php wp_nav_menu( array( 'theme_location' => 'footer-contact-menu' ) ); ?>
-        </div>
-    </div>
-</footer><!-- #colophon -->
-</div><!-- .site-content-contain -->
+    </footer><!-- #colophon -->
+
 </div><!-- #page -->
 <?php wp_footer(); ?>
 
