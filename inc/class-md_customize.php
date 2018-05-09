@@ -56,6 +56,7 @@ class MD_Customize {
         self::register_ordersteps_options( $wp_customize );
         self::register_other_options( $wp_customize );
         self::register_footer_options( $wp_customize );
+        self::register_bootstrap_options( $wp_customize );
 
         self::register_blogname_partials( $wp_customize );
         self::register_orderbtn_partial( $wp_customize );
@@ -523,6 +524,115 @@ class MD_Customize {
 	            'label'    => __( 'Barva pozadí', 'martindemko' ),
 	            'section'  => 'martindemko_footer_options',
 	            'settings' => 'footer_background_color',
+            )
+        ) );
+    }
+
+    /**
+     * @internal Register Bootstrap related options.
+     * @param \WP_Customize_Manager $wp_customize
+     * @return void
+     * @since 1.0.0
+     */
+    protected static function register_bootstrap_options( \WP_Customize_Manager $wp_customize ) {
+
+        // Section
+        $wp_customize->add_section( 'martindemko_bootstrap_options', 
+            array(
+                'title'       => __( 'Bootstrap', 'martindemko' ),
+                'priority'    => 20,
+                'capability'  => 'edit_theme_options',
+                'description' => __( 'Nastavení pro knihovnu <a href="https://getbootstrap.com/" target="_blank">Bootstrap</a>.', 'martindemko' ),
+                'panel'       => self::THEME_PANEL_ID,
+            )
+        );
+        
+        // Settings
+        $wp_customize->add_setting( 'bootstrap_color_theme' , array(
+            'capability' => 'edit_theme_options',
+            'default'    => '---',
+            'type'       => 'option',
+        ) );
+        $wp_customize->add_setting( 'bootstrap_theme_option' , array(
+            'capability' => 'edit_theme_options',
+            'default'    => '---',
+            'type'       => 'option',
+        ) );
+        $wp_customize->add_setting( 'bootstrap_typography' , array(
+            'capability' => 'edit_theme_options',
+            'default'    => '---',
+            'type'       => 'option',
+        ) );
+
+        // Controls
+        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
+            'cnt_bootstrap_color_theme', array(
+                'label'       => __( 'Barevné schéma', 'martindemko' ),
+                'description' => __( 'Vyberte si jedno z před-definovaných barevných schémat knihovny <strong>Bootstrap</strong>.', 'martindemko' ),
+                'section'     => 'martindemko_bootstrap_options',
+                'settings'    => 'bootstrap_color_theme',
+                'type'        => 'select',
+                'choices'     => array(
+                    '---'     => __( '--- Vyberte ---', 'martindemko' ),
+                    'red'     => __( 'Červená', 'martindemko' ),
+                    'blue'    => __( 'Modrá', 'martindemko' ),
+                    'orange'  => __( 'Oranžová', 'martindemko' ),
+                    'pink'    => __( 'Růžová', 'martindemko' ),
+                    'green'   => __( 'Zelená', 'martindemko' ),
+                )
+            )
+        ) );
+        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
+            'cnt_bootstrap_theme_option', array(
+                'label'       => __( 'Možnost tématu', 'martindemko' ),
+                'description' => __( 'Vyberte si jednu z před-definovaných možností knihovny <strong>Bootstrap</strong>.', 'martindemko' ),
+                'section'     => 'martindemko_bootstrap_options',
+                'settings'    => 'bootstrap_theme_option',
+                'type'        => 'select',
+                'choices'     => array(
+                    '---'       => __( '--- Vyberte ---', 'martindemko' ),
+                    'cerulean'  => __( 'Cerulean', 'martindemko' ),
+                    'cosmo'     => __( 'Cosmo', 'martindemko' ),
+                    'cyborg'    => __( 'Cyborg', 'martindemko' ),
+                    'darkly'    => __( 'Darkly', 'martindemko' ),
+                    'flatly'    => __( 'Flatly', 'martindemko' ),
+                    'journal'   => __( 'Journal', 'martindemko' ),
+                    'litera'    => __( 'Litera', 'martindemko' ),
+                    'lumen'     => __( 'Lumen', 'martindemko' ),
+                    'lux'       => __( 'Lux', 'martindemko' ),
+                    'materia'   => __( 'Materia', 'martindemko' ),
+                    'minty'     => __( 'Minty', 'martindemko' ),
+                    'pulse'     => __( 'Pulse', 'martindemko' ),
+                    'sandstone' => __( 'Sandstone', 'martindemko' ),
+                    'simplex'   => __( 'Simplex', 'martindemko' ),
+                    'sketchy'   => __( 'Sketchy', 'martindemko' ),
+                    'slate'     => __( 'Slate', 'martindemko' ),
+                    'solar'     => __( 'Solar', 'martindemko' ),
+                    'spacelab'  => __( 'SpaceLab', 'martindemko' ),
+                    'superhero' => __( 'SuperHero', 'martindemko' ),
+                    'united'    => __( 'United', 'martindemko' ),
+                    'yeti'      => __( 'Yeti', 'martindemko' ),
+                )
+            )
+        ) );
+        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
+            'cnt_bootstrap_typography', array(
+                'label'       => __( 'Typografie', 'martindemko' ),
+                'description' => __( 'Vyberte si jednu z před-definovaných typografických standardů knihovny <strong>Bootstrap</strong>.', 'martindemko' ),
+                'section'     => 'martindemko_bootstrap_options',
+                'settings'    => 'bootstrap_typography',
+                'type'        => 'select',
+                'choices'     => array(
+                    '---' => __( '--- Vyberte ---', 'martindemko' ),
+                    'a-o' => __( 'ArbutussLab - OpenSans', 'martindemko' ),
+                    'm-m' => __( 'MontSerrat - MerriWeather', 'martindemko' ),
+                    'm-o' => __( 'MontSerrat - OpenSans', 'martindemko' ),
+                    'o-m' => __( 'Oswald - Muli', 'martindemko' ),
+                    'p-l' => __( 'Poppins - Lora', 'martindemko' ),
+                    'p-p' => __( 'Poppins - Poppins', 'martindemko' ),
+                    'r-r' => __( 'Roboto - Roboto', 'martindemko' ),
+                    's-r' => __( 'RobotoSlab - Roboto', 'martindemko' ),
+                )
             )
         ) );
     }

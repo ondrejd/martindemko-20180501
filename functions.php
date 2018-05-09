@@ -70,6 +70,9 @@ if( !function_exists( 'martindemko_after_setup_theme' ) ) :
         add_option( 'footer_background_color', '#2f1b1b' );
         update_option( 'posts_per_page', 6 );
         add_option( 'homepage_show_posts_pagination', 'yes' );
+        add_option( 'bootstrap_color_theme', '---' );
+        add_option( 'bootstrap_theme_option', '---' );
+        add_option( 'bootstrap_typography', '---' );
 
         add_theme_support( 'automatic-feed-links' );
         add_theme_support( 'title-tag' );
