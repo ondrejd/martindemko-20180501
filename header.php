@@ -36,7 +36,7 @@
 <body <?php body_class(); ?>>
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'martindemko' ); ?></a>
-    <header id="page-header" class="site-header navbar-static-top <?php echo get_option( 'bootstrap_bg_class', '' ) ?>" role="banner">
+    <header id="page-header" class="site-header sticky-top <?php echo get_option( 'bootstrap_bg_class', '' ) ?>" role="banner">
         <div class="container">
             <nav class="navbar navbar-expand-xl justify-content-between p-0">
                 <div class="navbar-brand">
