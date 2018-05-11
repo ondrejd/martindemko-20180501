@@ -34,7 +34,7 @@
                 <div class="col col-lg-4 site-footer-pane site-footer-left">
                     <?php wp_nav_menu( array( 
                         'theme_location' => 'footer-languages-menu',
-                        'menu_class'     => 'nav flex-column footer-menu',
+                        'menu_class'     => 'nav flex-column menu footer-menu',
                         'depth'          => 1,
                         'fallback_cb'    => 'martindemko_navwalker::fallback',
                         'walker'         => new martindemko_navwalker()
@@ -43,7 +43,7 @@
                 <div class="col col-lg-4 site-footer-pane site-footer-right">
                     <?php wp_nav_menu( array(
                         'theme_location' => 'footer-contact-menu',
-                        'menu_class'     => 'nav flex-column footer-menu',
+                        'menu_class'     => 'nav flex-column footer-menu menu',
                         'depth'          => 1,
                         'fallback_cb'    => 'martindemko_navwalker::fallback',
                         'walker'         => new martindemko_navwalker()

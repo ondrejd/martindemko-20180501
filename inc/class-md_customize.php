@@ -61,6 +61,9 @@ class MD_Customize {
         self::register_blogname_partials( $wp_customize );
         self::register_orderbtn_partial( $wp_customize );
         self::register_product_partials( $wp_customize );
+        self::register_productlogos_partial( $wp_customize );
+        self::register_footer_partial( $wp_customize );
+        self::register_ordersteps_partial( $wp_customize );
 
         $wp_customize->remove_section( 'static_front_page' );
     }
@@ -89,13 +92,11 @@ class MD_Customize {
             'capability' => 'edit_theme_options',
             'default'    => 0,
             'type'       => 'option',
-            'transport'  => 'postMessage',
         ) );
         $wp_customize->add_setting( 'show_product_logos' , array(
             'capability' => 'edit_theme_options',
             'default'    => 'yes',
             'type'       => 'option',
-            'transport'  => 'postMessage',
         ) );
         $wp_customize->add_setting( 'product_logo_img_1' , array(
             'capability' => 'edit_theme_options',
@@ -106,7 +107,6 @@ class MD_Customize {
             'capability' => 'edit_theme_options',
             'default'    => 0,
             'type'       => 'option',
-            'transport'  => 'postMessage',
         ) );
         $wp_customize->add_setting( 'product_logo_img_2' , array(
             'capability' => 'edit_theme_options',
@@ -117,7 +117,6 @@ class MD_Customize {
             'capability' => 'edit_theme_options',
             'default'    => 0,
             'type'       => 'option',
-            'transport'  => 'postMessage',
         ) );
         $wp_customize->add_setting( 'product_logo_img_3' , array(
             'capability' => 'edit_theme_options',
@@ -128,7 +127,6 @@ class MD_Customize {
             'capability' => 'edit_theme_options',
             'default'    => 0,
             'type'       => 'option',
-            'transport'  => 'postMessage',
         ) );
 
         // Controls
@@ -476,25 +474,21 @@ class MD_Customize {
             'capability' => 'edit_theme_options',
             'default'    => '#000000',
             'type'       => 'option',
-            'transport'  => 'postMessage',
         ) );
         $wp_customize->add_setting( 'header_background_color' , array(
             'capability' => 'edit_theme_options',
             'default'    => '#ecd9d9',
             'type'       => 'option',
-            'transport'  => 'postMessage',
         ) );
         $wp_customize->add_setting( 'footer_foreground_color' , array(
             'capability' => 'edit_theme_options',
             'default'    => '#ffffff',
             'type'       => 'option',
-            'transport'  => 'postMessage',
         ) );
         $wp_customize->add_setting( 'footer_background_color' , array(
             'capability' => 'edit_theme_options',
             'default'    => '#2f1b1b',
             'type'       => 'option',
-            'transport'  => 'postMessage',
         ) );
         
         // Controls
@@ -650,7 +644,6 @@ class MD_Customize {
     .site-product-logos { display: <?php echo get_option( 'show_product_logos' ) == 'yes' ? 'block' : 'none' ?>; }
     .hp-help-banner {
         background-color: <?php echo get_option( 'ordersteps_background_color_1' ) ?>;
-        display: <?php echo get_option( 'ordersteps_show' ) == 'yes' ? 'block' : 'none' ?>;
     }
     .hp-help-banner span.help-banner-num {
         background-color: <?php echo get_option( 'ordersteps_background_color_2' ) ?>;
@@ -663,6 +656,10 @@ class MD_Customize {
         color: <?php echo get_option( 'footer_foreground_color' ) ?>;
     }
     .site-footer ul.menu li a { color: <?php echo get_option( 'footer_foreground_color' ) ?>; }
+
+    /* There are some invisible edit icons in preview mode and nothing other works... */
+    .customize-partial-edit-shortcut-product_logos { left: 50%; float: none; }
+    .customize-partial-edit-shortcut-header_site_title { left: 31px; top: 0px; }
 </style> 
 <?php
     }
@@ -673,13 +670,13 @@ class MD_Customize {
      * @since 1.0.0
      */
     public static function live_preview() {
-	    wp_enqueue_script( 
+	    wp_enqueue_script(
 		      'martindemko-themecustomizer',
 		      get_template_directory_uri() . '/assets/js/theme-customizer.js',
 		      array( 'jquery', 'customize-preview' ),
 		      '',
 		      true
-	    );
+        );
     }
 
     /**
@@ -752,6 +749,56 @@ class MD_Customize {
             'settings'        => array( 'site_product_id' ),
             'render_callback' => array( 'MD_Customize' , 'callback_product_excerpt' ),
         ) );
+    }
+
+    /**
+     * @internal Register partial for the logos beneath the product.
+     * @param \WP_Customize_Manager $wp_customize
+     * @return void
+     * @since 1.0.0
+     */
+    public static function register_productlogos_partial( \WP_Customize_Manager $wp_customize ) {
+        if( ! isset( $wp_customize->selective_refresh ) ) {
+            return;
+        }
+
+        $wp_customize->selective_refresh->add_partial( 'product_logos', array(
+            'selector'        => '.site-product-logos',
+            'settings'        => array( 'show_product_logos', 'product_logo_img_1', 'product_logo_url_1', 'product_logo_img_2', 'product_logo_url_2', 'product_logo_img_3', 'product_logo_url_3' ),
+            'render_callback' => array( 'MD_Customize' , 'callback_productlogos' ),
+        ) );
+    }
+
+    /**
+     * @internal Register partials for the order steps widget.
+     * @param \WP_Customize_Manager $wp_customize
+     * @return void
+     * @since 1.0.0
+     */
+    public static function register_ordersteps_partial( \WP_Customize_Manager $wp_customize ) {
+        if( ! isset( $wp_customize->selective_refresh ) ) {
+            return;
+        }
+
+        $wp_customize->selective_refresh->add_partial( 'ordersteps', array(
+            'selector'        => '.hp-help-banner',
+            'settings'        => array( 'ordersteps_show', 'ordersteps_foreground_color', 'ordersteps_background_color_1', 'ordersteps_background_color_2', 'ordersteps_text_1', 'ordersteps_text_2', 'ordersteps_text_3' ),
+            'render_callback' => array( 'MD_Customize' , 'callback_ordersteps' ),
+        ) );
+    }
+
+    /**
+     * @internal Register partials for the footer.
+     * @param \WP_Customize_Manager $wp_customize
+     * @return void
+     * @since 1.0.0
+     */
+    public static function register_footer_partial( \WP_Customize_Manager $wp_customize ) {
+        if( ! isset( $wp_customize->selective_refresh ) ) {
+            return;
+        }
+
+        //...
     }
 
     /**
@@ -863,12 +910,31 @@ class MD_Customize {
         return '<p>' . esc_html( $product->post_excerpt ) . '</p>';
     }
 
+    /**
+     * @internal Callback for partial with order steps.
+     * @return void
+     * @see MD_Customize::register_productlogos_partial()
+     * @since 1.0.0
+     */
+    public static function callback_productlogos() {
+        return martindemko_product_logos( false );
+    }
+
+    /**
+     * @internal Callback for partial with order steps.
+     * @return void
+     * @see MD_Customize::register_ordersteps_partial()
+     * @since 1.0.0
+     */
+    public static function callback_ordersteps() {
+        return martindemko_hp_help_banner( false );
+    }
+
 }
 
 endif;
 
 // Setup the Theme Customizer settings and controls...
-add_action( 'customize_register' , array( 'MD_Customize' , 'register' ), 99 );
-add_action( 'wp_head' , array( 'MD_Customize' , 'header_output' ), 99 );
-add_action( 'customize_preview_init' , array( 'MD_Customize' , 'live_preview' ), 99 );
-
+add_action( 'customize_register' , array( 'MD_Customize' , 'register' ), 999 );
+add_action( 'wp_head' , array( 'MD_Customize' , 'header_output' ), 999 );
+add_action( 'customize_preview_init' , array( 'MD_Customize' , 'live_preview' ), 999 );

@@ -231,7 +231,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 .hp-help-banner span.help-banner-num {
     border-width: 2px;
     border-style: solid;
-    border-radius: 50%;
     display: inline-block;
     font-size: 32px;
     font-weight: 400;

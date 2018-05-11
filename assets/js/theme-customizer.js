@@ -21,6 +21,8 @@
  * @link https://github.com/ondrejd/singleproduct for the canonical source repository
  * @package singleproduct
  * @since 1.0.0
+ * 
+ * @todo Remove this in favor of in PHP written partials.
  */
 
 ( function( $ ) {
@@ -37,64 +39,6 @@
 		} );
 	} );
 
-	wp.customize( 'show_product_logos', function( value ) {
-		value.bind( function( newval ) {
-            if( newval == 'yes' ) {
-                $( '.site-product-logos' ).show();
-            } else {
-                $( '.site-product-logos' ).hide();
-            }
-		} );
-	} );
-
-	wp.customize( 'ordersteps_show', function( value ) {
-		value.bind( function( newval ) {
-            if( newval == 'yes' ) {
-                $( '.hp-help-banner' ).show();
-            } else {
-                $( '.hp-help-banner' ).hide();
-            }
-		} );
-	} );
-
-	wp.customize( 'ordersteps_foreground_color', function( value ) {
-		value.bind( function( newval ) {
-			$( '.hp-help-banner .help-banner-num' ).css( 'color', newval );
-			$( '.hp-help-banner .help-banner-num' ).css( 'border-color', newval );
-			$( '.hp-help-banner .help-banner-lbl' ).css( 'color', newval );
-		} );
-	} );
-
-	wp.customize( 'ordersteps_background_color_1', function( value ) {
-		value.bind( function( newval ) {
-			$( '.hp-help-banner' ).css( 'background-color', newval );
-		} );
-	} );
-
-	wp.customize( 'ordersteps_background_color_2', function( value ) {
-		value.bind( function( newval ) {
-			$( '.hp-help-banner .help-banner-num' ).css( 'background-color', newval );
-		} );
-	} );
-
-	wp.customize( 'ordersteps_text_1', function( value ) {
-		value.bind( function( newval ) {
-			$( '.hp-help-banner .help-banner-lbl-1' ).html( newval );
-		} );
-	} );
-
-	wp.customize( 'ordersteps_text_2', function( value ) {
-		value.bind( function( newval ) {
-			$( '.hp-help-banner .help-banner-lbl-2' ).html( newval );
-		} );
-	} );
-
-	wp.customize( 'ordersteps_text_3', function( value ) {
-		value.bind( function( newval ) {
-			$( '.hp-help-banner .help-banner-lbl-3' ).html( newval );
-		} );
-	} );
-
 	wp.customize( 'footer_foreground_color', function( value ) {
 		value.bind( function( newval ) {
 			$( '.site-footer' ).css( 'color', newval );
@@ -108,22 +52,7 @@
 		} );
 	} );
 
-	wp.customize( 'product_logo_url_1', function( value ) {
-		value.bind( function( newval ) {
-			$( '.site-product-logo-1 > a' ).attr( 'href', newval );
-		} );
-	} );
-
-	wp.customize( 'product_logo_url_2', function( value ) {
-		value.bind( function( newval ) {
-			$( '.site-product-logo-2 > a' ).attr( 'href', newval );
-		} );
-	} );
-
-	wp.customize( 'product_logo_url_3', function( value ) {
-		value.bind( function( newval ) {
-			$( '.site-product-logo-3 > a' ).attr( 'href', newval );
-		} );
-	} );
+	// Some icons for editig partials are hidden...
+	//$( '.customize-partial-edit-shortcut-product_logos' ).css( 'left', '50% !important' ).css( 'float', 'none' );
 	
 } )( jQuery );

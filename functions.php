@@ -73,6 +73,7 @@ if( !function_exists( 'martindemko_after_setup_theme' ) ) :
         add_option( 'bootstrap_color_theme', '---' );
         add_option( 'bootstrap_theme_option', '---' );
         add_option( 'bootstrap_typography', '---' );
+        add_option( 'show_post_navigation', 'yes' );
 
         add_theme_support( 'automatic-feed-links' );
         add_theme_support( 'title-tag' );

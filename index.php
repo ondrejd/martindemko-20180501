@@ -57,7 +57,7 @@ get_header(); ?>
                     </div>
                 </div>
             </div>
-            <?php martindemko_hp_pagination(); ?>
+            <?php martindemko_posts_pagination(); ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 	<?php get_sidebar(); ?>

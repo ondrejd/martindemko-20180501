@@ -105,46 +105,40 @@ endif;
 if ( ! function_exists( 'martindemko_product_logos' ) ) :
     /**
      * Prints product logos.
+     * @param boolean $echo (Optional.)
      * @return void
      * @since 1.0.0
      * @uses get_option()
      * @uses wp_get_attachment_image()
      */
-    function martindemko_product_logos() {
-        $product_logo_url_1 = get_option( 'product_logo_url_1', '#' );
-        $product_logo_url_2 = get_option( 'product_logo_url_2', '#' );
-        $product_logo_url_3 = get_option( 'product_logo_url_3', '#' );
+    function martindemko_product_logos( $echo = true ) {
+        $logo_url_1 = get_option( 'product_logo_url_1', '#' );
+        $logo_url_2 = get_option( 'product_logo_url_2', '#' );
+        $logo_url_3 = get_option( 'product_logo_url_3', '#' );
 
-        $product_logo_img_1 = wp_get_attachment_image( get_option( 'product_logo_img_1' ), 'full', false );
-        $product_logo_img_2 = wp_get_attachment_image( get_option( 'product_logo_img_2' ), 'full', false );
-        $product_logo_img_3 = wp_get_attachment_image( get_option( 'product_logo_img_3' ), 'full', false );
-?>
-        <div class="site-product-logos">
-            <div class="row justify-content-center">
-                <div class="col-xs-8 col-sm-8 col-md-4 col-lg-3 col-xl-2 site-product-logo site-product-logo-1">
-                    <?php if( ! empty( $product_logo_img_1 ) ) : ?>
-                    <a href="<?php echo esc_attr( $product_logo_url_1 ) ?>" target="_blank">
-                        <?php echo $product_logo_img_1; ?>
-                    </a>
-                    <?php endif; ?>
-                </div>
-                <div class="col-xs-8 col-sm-8 col-md-4 col-lg-3 col-xl-2 site-product-logo site-product-logo-2">
-                    <?php if( ! empty( $product_logo_img_2 ) ) : ?>
-                    <a href="<?php echo esc_attr( $product_logo_url_2 ) ?>" target="_blank">
-                        <?php echo $product_logo_img_2; ?>
-                    </a>
-                    <?php endif; ?>
-                </div>
-                <div class="col-xs-8 col-sm-8 col-md-4 col-lg-3 col-xl-2 site-product-logo site-product-logo-3">
-                    <?php if( ! empty( $product_logo_img_3 ) ) : ?>
-                    <a href="<?php echo esc_attr( $product_logo_url_3 ) ?>" target="_blank">
-                        <?php echo $product_logo_img_3; ?>
-                    </a>
-                    <?php endif; ?>
-                </div>
-            </div>
-        </div><!-- .site-product-logos -->
-<?php
+        $logo_img_1 = wp_get_attachment_image( get_option( 'product_logo_img_1' ), 'full', false );
+        $logo_img_2 = wp_get_attachment_image( get_option( 'product_logo_img_2' ), 'full', false );
+        $logo_img_3 = wp_get_attachment_image( get_option( 'product_logo_img_3' ), 'full', false );
+
+        $logo_out_1 = ! empty( $logo_img_1 ) ? '<a href="' . esc_attr( $logo_url_1 ) . '" target="_blank">' . $logo_img_1 . '</a>' : '';
+        $logo_out_2 = ! empty( $logo_img_2 ) ? '<a href="' . esc_attr( $logo_url_2 ) . '" target="_blank">' . $logo_img_2 . '</a>' : '';
+        $logo_out_3 = ! empty( $logo_img_3 ) ? '<a href="' . esc_attr( $logo_url_3 ) . '" target="_blank">' . $logo_img_3 . '</a>' : '';
+
+        $out = <<<EOC
+<div class="site-product-logos">
+    <div class="row justify-content-center">
+        <div class="col-xs-8 col-sm-8 col-md-4 col-lg-3 col-xl-2 site-product-logo site-product-logo-1">$logo_out_1</div>
+        <div class="col-xs-8 col-sm-8 col-md-4 col-lg-3 col-xl-2 site-product-logo site-product-logo-2">$logo_out_2</div>
+        <div class="col-xs-8 col-sm-8 col-md-4 col-lg-3 col-xl-2 site-product-logo site-product-logo-3">$logo_out_3</div>
+    </div>
+</div><!-- .site-product-logos -->
+EOC;
+
+        if( $echo === true ) {
+            echo $out;
+        } else {
+            return $out;
+        }
     }
 endif;
 
@@ -152,53 +146,131 @@ endif;
 if ( ! function_exists( 'martindemko_hp_help_banner' ) ) :
     /**
      * Prints help banner with steps how to order.
-     * @return void
+     * @param boolean $echo (Optional.)
+     * @return string|void
      * @since 1.0.0
      * @uses esc_html()
      * @uses get_option()
-     * @uses wp_get_attachment_image()
      */
-    function martindemko_hp_help_banner() {
-?>
-	<header class="page-header hp-help-banner">
-        <div class="row justify-content-center">
-            <div class="col-xs-10 col-sm-8 col-md-10 col-lg-8 col-xs-6">
-                <div class="row justify-content-center">
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xs-2 hp-help-banner-item"><span class="help-banner-num">1</span><p class="help-banner-lbl help-banner-lbl-1"><?php echo esc_html( get_option( 'ordersteps_text_1' ) ) ?></p></div>
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xs-2 hp-help-banner-item"><span class="help-banner-num">2</span><p class="help-banner-lbl help-banner-lbl-2"><?php echo esc_html( get_option( 'ordersteps_text_2' ) ) ?></p></div>
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xs-2 hp-help-banner-item"><span class="help-banner-num">3</span><p class="help-banner-lbl help-banner-lbl-3"><?php echo esc_html( get_option( 'ordersteps_text_3' ) ) ?></p></div>
+    function martindemko_hp_help_banner( $echo = true ) {
+
+        // Should be order steps visible?
+        if( get_option( 'ordersteps_show' ) != 'yes' ) {
+            if( $echo === true ) {
+                return;
+            } else {
+                return '';
+            }
+        }
+
+        $text1 = esc_html( get_option( 'ordersteps_text_1', '' ) );
+        $text2 = esc_html( get_option( 'ordersteps_text_2', '' ) );
+        $text3 = esc_html( get_option( 'ordersteps_text_3', '' ) );
+
+        $out = <<<EOC
+<div class="hp-help-banner">
+    <div class="row justify-content-center">
+        <div class="col-xs-10 col-sm-8 col-md-10 col-lg-8 col-xs-6">
+            <div class="row justify-content-center">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xs-2 hp-help-banner-item">
+                    <span class="rounded-circle help-banner-num">1</span>
+                    <p class="help-banner-lbl help-banner-lbl-1">$text1</p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xs-2 hp-help-banner-item">
+                    <span class="rounded-circle help-banner-num">2</span>
+                    <p class="help-banner-lbl help-banner-lbl-2">$text2</p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xs-2 hp-help-banner-item">
+                    <span class="rounded-circle help-banner-num">3</span>
+                    <p class="help-banner-lbl help-banner-lbl-3">$text3</p>
                 </div>
             </div>
         </div>
-	</header>
-<?php
+    </div>
+</div>
+EOC;
+
+        if( $echo === true ) {
+            echo $out;
+        } else {
+            return $out;
+        }
     }
 endif;
 
 
-if ( ! function_exists( 'martindemko_hp_pagination' ) ) :
+if ( ! function_exists( 'martindemko_posts_pagination' ) ) :
     /**
      * Prints pagination for blog posts on HP.
-     * @return void
+     * @param boolean $echo (Optional.)
+     * @return string|void
      * @since 1.0.0
      * @uses get_option()
-     * @uses the_posts_pagination()
+     * @uses get_the_posts_pagination()
      */
-    function martindemko_hp_pagination() {
+    function martindemko_posts_pagination( $echo = true ) {
         if( get_option( 'homepage_show_posts_pagination' ) != 'yes' ) {
-            return;
+            if( $echo === true ) {
+                return;
+            } else {
+                return '';
+            }
         }
 
-        echo '<div class="row justify-content-center">';
-        echo '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xs-6">';
-
-        the_posts_pagination( array(
+        $nav = get_the_posts_pagination( array(
             'prev_text' => '<span>' . __( '«', 'martindemko' ) . '</span>',
             'next_text' => '<span>' . __( '»', 'martindemko' ) . '</span>',
         ) );
 
-        echo '</div>';
-        echo '</div>';
+        $out = $out = <<<EOC
+<div class="row justify-content-center">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xs-6">$nav</div>
+</div>
+EOC;
+
+        if( $echo === true ) {
+            echo $out;
+        } else {
+            return $out;
+        }
+    }
+endif;
+
+
+if ( ! function_exists( 'martindemko_post_navigation' ) ) :
+    /**
+     * Prints post navigation.
+     * @param boolean $echo (Optional.)
+     * @return string|void
+     * @since 1.0.0
+     * @uses get_option()
+     * @uses get_the_posts_navigation()
+     */
+    function martindemko_post_navigation( $echo = true ) {
+        if( get_option( 'show_post_navigation' ) != 'yes' ) {
+            if( $echo === true ) {
+                return;
+            } else {
+                return '';
+            }
+        }
+
+        $nav = get_the_post_navigation( array(
+            'prev_text' => '<span>' . __( '«', 'martindemko' ) . '</span>',
+            'next_text' => '<span>' . __( '»', 'martindemko' ) . '</span>',
+        ) );
+
+        $out = $out = <<<EOC
+<div class="row justify-content-center">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xs-6">$nav</div>
+</div>
+EOC;
+
+        if( $echo === true ) {
+            echo $out;
+        } else {
+            return $out;
+        }
     }
 endif;
 
@@ -206,20 +278,27 @@ endif;
 if ( ! function_exists( 'martindemko_product_order_button' ) ) :
     /**
      * Prints product order button.
-     * @return void
+     * @param boolean $echo (Optional.)
+     * @return string|void
      * @since 1.0.0
      * @uses esc_attr()
      * @uses esc_html()
      * @uses get_option()
      */
-    function martindemko_product_order_button() {
-?>
-        <span class="site-product-order-button">
-            <a href="<?php echo esc_attr( get_option( 'product_order_btn_link', '#' ) ); ?>" class="btn btn-primary">
-                <?php echo esc_html( get_option( 'product_order_btn_text' ) ) ?>
-            </a>
-        </span>
-<?php
+    function martindemko_product_order_button( $echo = true ) {
+        $url = esc_attr( get_option( 'product_order_btn_link', '#' ) );
+        $lbl = esc_html( get_option( 'product_order_btn_text' ) );
+        $out = <<<EOC
+<span class="site-product-order-button">
+    <a href="$url" class="btn btn-primary">$lbl</a>
+</span>
+EOC;
+
+        if( $echo === true ) {
+            echo $out;
+        } else {
+            return $out;
+        }
     }
 endif;
 

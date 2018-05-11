@@ -58,18 +58,18 @@ class MD_Product_Dropdown_WP_Customize_Control extends WP_Customize_Control {
     <?php endif; ?>
     <select id="<?php echo $this->id; ?>" data-customize-setting-link="<?php echo esc_attr( $this->setting->id, 'martindemko' ) ?>">
     <?php
-        $args = wp_parse_args( $this->args, array(
+        $posts = get_posts( array(
             'numberposts' => '-1',
             'post_type'   => MD_Product::SLUG,
             'orderby'     => 'title',
             'order'       => 'asc',
         ) );
-        $posts = get_posts( $args );
 
         echo '<option value="0">' . __( '--- Vyberte ---', 'martindemko' ) . '</option>';
 
         foreach ( $posts as $post ) {
-            echo '<option value="' . $post->ID . '" '.selected( $this->value, $post->ID ) . '>' . $post->post_title . '</option>';
+            $value = isset( $this->value ) ? $this->value : null;
+            echo '<option value="' . $post->ID . '" '.selected( $value, $post->ID ) . '>' . $post->post_title . '</option>';
         }
     ?>
     </select>
