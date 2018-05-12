@@ -79,5 +79,3 @@ endif;
 
 // Initialize CPT
 $md_product = new MD_Product();
-
-

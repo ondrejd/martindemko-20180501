@@ -42,6 +42,13 @@ if( !function_exists( 'martindemko_after_setup_theme' ) ) :
      * @return void
      * @since 1.0.0
      * @todo We need support `starter-content` with example logo image
+     * @uses add_option()
+     * @uses add_image_size()
+     * @uses add_theme_support()
+     * @uses get_stylesheet_directory()
+     * @uses load_theme_textdomain()
+     * @uses register_nav_menus()
+     * @uses update_option()
      */
     function martindemko_setup_theme() {
         load_theme_textdomain( 'martindemko', get_stylesheet_directory() . '/languages' );
@@ -68,12 +75,12 @@ if( !function_exists( 'martindemko_after_setup_theme' ) ) :
         add_option( 'homepage_post_excerpts_show', 'yes' );
         add_option( 'footer_foreground_color', '#ffffff' );
         add_option( 'footer_background_color', '#2f1b1b' );
-        update_option( 'posts_per_page', 6 );
         add_option( 'homepage_show_posts_pagination', 'yes' );
-        add_option( 'bootstrap_color_theme', '---' );
         add_option( 'bootstrap_theme_option', '---' );
         add_option( 'bootstrap_typography', '---' );
         add_option( 'show_post_navigation', 'yes' );
+
+        update_option( 'posts_per_page', 6 );
 
         add_theme_support( 'automatic-feed-links' );
         add_theme_support( 'title-tag' );
@@ -94,7 +101,7 @@ if( !function_exists( 'martindemko_after_setup_theme' ) ) :
 
         register_nav_menus( array(
             'footer-languages-menu' => __( 'Jazykové menu', 'martindemko' ),
-            'footer-contact-menu' => __( 'Kontaktní menu', 'martindemko' )
+            'footer-contact-menu'   => __( 'Kontaktní menu', 'martindemko' )
         ) );
 
         // TODO We need support `starter-content` with example logo image
@@ -125,50 +132,34 @@ endif;
 add_action( 'after_setup_theme', 'martindemko_setup_theme' );
 
 
-if( !function_exists( 'martindemko_create_post_type' ) ) :
-    /**
-     * Register new custom post type.
-     * @return void
-     * @since 1.0.0
-     */
-    function martindemko_create_post_type() {
-        register_post_type( 'martindemko_product', array(
-            'labels' => array(
-                'name' => __( 'Products', 'martindemko' ),
-                'singular_name' => __( 'Product', 'martindemko' )
-            ),
-            'description' => __( 'Products custom post type', 'martindemko' ),
-            'public' => true,
-            'has_archive' => true,
-            'menu_positions' => 21,
-            'menu_icon' => 'dashicons-paperclip',
-            'hierarchical' => false,
-            'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'custom-fields', 'comments', 'revisions', 'page-attributes' ),
-            'delete_with_user' => false,
-            'show_in_rest' => false,
-            'slug' => array( __( 'product', 'martindemko' ) )
-        ) );
-    }
-endif;
-add_action( 'init', 'martindemko_enqueue_styles' );
-
-
 if( !function_exists( 'martindemko_enqueue_styles' ) ) :
     /**
      * Register new custom post type.
      * @return void
      * @since 1.0.0
+     * @uses get_option()
+     * @uses get_stylesheet_directory_uri()
+     * @uses wp_enqueue_script()
+     * @uses wp_enqueue_style()
+     * @uses wp_get_theme()
+     * @uses wp_register_script()
      */
     function martindemko_enqueue_styles() {
 
-        wp_register_script( 'martindemko-html5', get_stylesheet_directory_uri() . '/assets/js/html5.js' );
-        wp_register_script( 'martindemko-popper', get_stylesheet_directory_uri() . '/assets/js/popper.min.js' );
-        wp_register_script( 'martindemko-bootstrap', get_stylesheet_directory_uri() . '/assets/js/bootstrap.bundle.min.js' );
-        wp_register_script( 'martindemko-fontawesome', get_stylesheet_directory_uri() . '/assets/js/fontawesome/fontawesome-all.min.js' );
+        $stylesheet_dir_uri = get_stylesheet_directory_uri();
+        $theme_version = wp_get_theme()->get( 'Version' );
 
+        // Bootstrap JS includes
+        wp_register_script( 'martindemko-html5', $stylesheet_dir_uri . '/assets/js/html5.js' );
+        wp_register_script( 'martindemko-popper', $stylesheet_dir_uri . '/assets/js/popper.min.js' );
+        wp_register_script( 'martindemko-bootstrap', $stylesheet_dir_uri . '/assets/js/bootstrap.bundle.min.js' );
+        wp_register_script( 'martindemko-fontawesome', $stylesheet_dir_uri . '/assets/js/fontawesome/fontawesome-all.min.js' );
+
+        // Our main script
         wp_register_script(
             'martindemko-script', 
-            get_stylesheet_directory_uri() . '/assets/js/theme-script.js',
+            $stylesheet_dir_uri . '/assets/js/theme-script.js',
+            // TODO Check what is really needed!
             array(
                 'jquery', 'jquery-color', 'jquery-form',
                 'jquery-masonry', 'jquery-ui-core', 'jquery-ui-widget', 'jquery-ui-mouse',
@@ -179,23 +170,34 @@ if( !function_exists( 'martindemko_enqueue_styles' ) ) :
                 'jquery-effects-slide', 'jquery-effects-transfer', 'martindemko-html5',
                 'martindemko-popper', 'martindemko-bootstrap', 'martindemko-fontawesome'
             ),
-            wp_get_theme()->get( 'Version' ),
+            $theme_version,
             true
         );
         wp_enqueue_script( 'martindemko-script' );
 
-        wp_enqueue_style( 'martindemko-bootstrap_reboot-style', get_stylesheet_directory_uri() . '/assets/css/bootstrap-reboot.min.css' );
-        //wp_enqueue_style( 'martindemko-bootstrap_grid-style', get_stylesheet_directory_uri() . '/assets/css/bootstrap-grid.min.css' );
-        wp_enqueue_style( 'martindemko-bootstrap-style', get_stylesheet_directory_uri() . '/assets/css/bootstrap.min.css' );
+        // Bootstrap style basics
+        wp_enqueue_style( 'martindemko-bootstrap_reboot-style', $stylesheet_dir_uri . '/assets/css/bootstrap-reboot.min.css' );
+        wp_enqueue_style( 'martindemko-bootstrap-style', $stylesheet_dir_uri . '/assets/css/bootstrap.min.css' );
+        wp_enqueue_style( 'martindemko-bootstrap_grid-style', $stylesheet_dir_uri . '/assets/css/bootstrap-grid.min.css' );
 
-        wp_enqueue_style(
-            'martindemko-style',
-            get_stylesheet_directory_uri() . '/style.css',
-            array(),
-            wp_get_theme()->get( 'Version' )
-        );
+        // Bootstrap Theme Option
+        $bootstrap_theme_option = get_option( 'bootstrap_theme_option' );
+
+        if( $bootstrap_theme_option != '---' ) {
+            $stylesheet_uri = $stylesheet_dir_uri . '/assets/css/presets/theme-option/' . $bootstrap_theme_option . '.css';
+            wp_enqueue_style( 'martindemko-bootstrap-theme_option', $stylesheet_uri );
+        }
+
+        // Bootstrap Typography
+        $bootstrap_typography = get_option( 'bootstrap_typography' );
+
+        if( $bootstrap_typography != '---' ) {
+            $stylesheet_uri = $stylesheet_dir_uri . '/assets/css/presets/typography/' . $bootstrap_typography . '.css';
+            wp_enqueue_style( 'martindemko-bootstrap-typography', $stylesheet_uri );
+        }
+
+        // Our own style
+        wp_enqueue_style( 'martindemko-style', $stylesheet_dir_uri . '/style.css', array(), $theme_version );
     }
 endif;
 add_action( 'wp_enqueue_scripts', 'martindemko_enqueue_styles' );
-
-
