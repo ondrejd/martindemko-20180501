@@ -59,11 +59,9 @@ class MD_Customize {
         self::register_bootstrap_options( $wp_customize );
 
         self::register_blogname_partials( $wp_customize );
-        self::register_orderbtn_partial( $wp_customize );
-        self::register_product_partials( $wp_customize );
-        self::register_productlogos_partial( $wp_customize );
-        self::register_footer_partial( $wp_customize );
         self::register_ordersteps_partial( $wp_customize );
+        self::register_product_partials( $wp_customize );
+        self::register_other_partials( $wp_customize );
 
         $wp_customize->remove_section( 'static_front_page' );
     }
@@ -596,7 +594,7 @@ class MD_Customize {
                     'arbutusslab-opensans'    => __( 'ArbutussLab - OpenSans', 'martindemko' ),
                     'montserrat-merriweather' => __( 'MontSerrat - MerriWeather', 'martindemko' ),
                     'montserrat-opensans'     => __( 'MontSerrat - OpenSans', 'martindemko' ),
-                    'oswald-multi'            => __( 'Oswald - Muli', 'martindemko' ),
+                    'oswald-muli'             => __( 'Oswald - Muli', 'martindemko' ),
                     'poppins-lora'            => __( 'Poppins - Lora', 'martindemko' ),
                     'poppins-poppins'         => __( 'Poppins - Poppins', 'martindemko' ),
                     'roboto-roboto'           => __( 'Roboto - Roboto', 'martindemko' ),
@@ -633,8 +631,11 @@ class MD_Customize {
     .site-footer ul.menu li a { color: <?php echo get_option( 'footer_foreground_color' ) ?>; }
 
     /* There are some invisible edit icons in preview mode and nothing other works... */
-    .customize-partial-edit-shortcut-product_logos { left: 50%; float: none; }
+    .customize-partial-edit-shortcut-product_logos { left: 50%; }
     .customize-partial-edit-shortcut-header_site_title { left: 31px; top: 0px; }
+    .customize-partial-edit-shortcut-product { left: 50%; }
+    .customize-partial-edit-shortcut-pagination { left: 45%; }
+    .customize-partial-edit-shortcut-ordersteps { left: 31px; }
 </style> 
 <?php
     }
@@ -679,24 +680,6 @@ class MD_Customize {
     }
 
     /**
-     * @internal Register partials for product order button.
-     * @param \WP_Customize_Manager $wp_customize
-     * @return void
-     * @since 1.0.0
-     */
-    public static function register_orderbtn_partial( \WP_Customize_Manager $wp_customize ) {
-        if( ! isset( $wp_customize->selective_refresh ) ) {
-            return;
-        }
-
-        $wp_customize->selective_refresh->add_partial( 'product_order_button', array(
-            'selector'        => '.site-product-order-button',
-            'settings'        => array( 'product_order_btn_text', 'product_order_btn_link' ),
-            'render_callback' => array( 'MD_Customize' , 'callback_order_button' ),
-        ) );
-    }
-
-    /**
      * @internal Register partials for theme's default product.
      * @param \WP_Customize_Manager $wp_customize
      * @return void
@@ -707,35 +690,10 @@ class MD_Customize {
             return;
         }
 
-        $wp_customize->selective_refresh->add_partial( 'product_thumbnail', array(
-            'selector'        => '.site-product .post-thumbnail',
+        $wp_customize->selective_refresh->add_partial( 'product', array(
+            'selector'        => '.site-product',
             'settings'        => array( 'site_product_id' ),
-            'render_callback' => array( 'MD_Customize' , 'callback_product_thumbnail' ),
         ) );
-
-        $wp_customize->selective_refresh->add_partial( 'product_title', array(
-            'selector'        => '.site-product .entry-title',
-            'settings'        => array( 'site_product_id' ),
-            'render_callback' => array( 'MD_Customize' , 'callback_product_title' ),
-        ) );
-
-        $wp_customize->selective_refresh->add_partial( 'product_excerpt', array(
-            'selector'        => '.site-product .entry-content',
-            'settings'        => array( 'site_product_id' ),
-            'render_callback' => array( 'MD_Customize' , 'callback_product_excerpt' ),
-        ) );
-    }
-
-    /**
-     * @internal Register partial for the logos beneath the product.
-     * @param \WP_Customize_Manager $wp_customize
-     * @return void
-     * @since 1.0.0
-     */
-    public static function register_productlogos_partial( \WP_Customize_Manager $wp_customize ) {
-        if( ! isset( $wp_customize->selective_refresh ) ) {
-            return;
-        }
 
         $wp_customize->selective_refresh->add_partial( 'product_logos', array(
             'selector'        => '.site-product-logos',
@@ -763,17 +721,31 @@ class MD_Customize {
     }
 
     /**
-     * @internal Register partials for the footer.
+     * @internal Register partials for theme's other settings pane.
      * @param \WP_Customize_Manager $wp_customize
      * @return void
      * @since 1.0.0
      */
-    public static function register_footer_partial( \WP_Customize_Manager $wp_customize ) {
+    public static function register_other_partials( \WP_Customize_Manager $wp_customize ) {
         if( ! isset( $wp_customize->selective_refresh ) ) {
             return;
         }
 
-        //...
+        $wp_customize->selective_refresh->add_partial( 'hp_post_excerpts_show', array(
+            'selector'        => 'article.post:first-child div.entry-content p:first-child',
+            'settings'        => array( 'homepage_post_excerpts_show' ),
+        ) );
+
+        $wp_customize->selective_refresh->add_partial( 'product_order_button', array(
+            'selector'        => '.site-product-order-button',
+            'settings'        => array( 'product_order_btn_text', 'product_order_btn_link' ),
+            'render_callback' => array( 'MD_Customize' , 'callback_order_button' ),
+        ) );
+
+        $wp_customize->selective_refresh->add_partial( 'pagination', array(
+            'selector'        => 'nav.pagination',
+            'settings'        => array( 'homepage_show_posts_pagination' ),
+        ) );
     }
 
     /**
@@ -814,75 +786,6 @@ class MD_Customize {
             .     esc_html( get_option( 'product_order_btn_text' ) )
             .   '</a>'
             . '</span>';
-    }
-
-    /**
-     * @internal Callback for partial with thumbnail of theme's default product.
-     * @return void
-     * @see MD_Customize::register_product_partials()
-     * @since 1.0.0
-     * @uses get_option()
-     * @uses get_post()
-     * @uses get_the_post_thumbnail()
-     */
-    public static function callback_product_thumbnail() {
-        $product_ID = get_option( 'site_product_id', null );
-        $product = get_post( $product_ID, OBJECT, 'display' );
-
-        if( ! ( $product instanceof \WP_Post ) ) {
-            return '';
-        }
-
-        $html = '<a href="#">';
-
-        if( '' !== get_the_post_thumbnail( $product_ID ) ) {
-            $html .= get_the_post_thumbnail( $product_ID, 'martindemko-default-product' );
-        } else {
-            $html .= '<span class="no-post-thumbnail"></span>';
-        }
-
-        $html .= '</a>';
-
-        return $html;
-    }
-
-    /**
-     * @internal Callback for partial with title of theme's default product.
-     * @return void
-     * @see MD_Customize::register_product_partials()
-     * @since 1.0.0
-     * @uses get_option()
-     * @uses get_post()
-     */
-    public static function callback_product_title() {
-        $product_ID = get_option( 'site_product_id', null );
-        $product = get_post( $product_ID, OBJECT, 'display' );
-
-        if( ! ( $product instanceof \WP_Post ) ) {
-            return '';
-        }
-
-        return esc_html( $product->post_title );
-    }
-
-    /**
-     * @internal Callback for partial with excerpt of theme's default product.
-     * @return void
-     * @see MD_Customize::register_product_partials()
-     * @since 1.0.0
-     * @uses esc_html()
-     * @uses get_option()
-     * @uses get_post()
-     */
-    public static function callback_product_excerpt() {
-        $product_ID = get_option( 'site_product_id', null );
-        $product = get_post( $product_ID, OBJECT, 'display' );
-
-        if( ! ( $product instanceof \WP_Post ) ) {
-            return '';
-        }
-
-        return '<p>' . esc_html( $product->post_excerpt ) . '</p>';
     }
 
     /**
