@@ -28,11 +28,11 @@
 
 <section class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-12 no-results not-found">
 	<header class="page-header">
-		<h1 class="page-title"><?php _e( 'Nemůžeme najít to, co hledáte…', 'martindemko' ); ?></h1>
+		<h1 class="page-title"><?php _e( 'Nemůžeme najít to, co hledáte…', 'singleproduct' ); ?></h1>
 	</header>
 	<div class="page-content">
         <p><?php printf(
-            __( 'Nemůžeme najít to, co hledáte - jste si jisti, že jste napsali URL adresu správně? Nejlepší bude, pokud přejdete na %1$sdomovskou stránku%2$s a zkusíte se podívat tam.', 'martindemko' ),
+            __( 'Nemůžeme najít to, co hledáte - jste si jisti, že jste napsali URL adresu správně? Nejlepší bude, pokud přejdete na %1$sdomovskou stránku%2$s a zkusíte se podívat tam.', 'singleproduct' ),
             '<a href="' . home_url() . '" rel="home">', '</a>' 
         ); ?></p>
 	</div><!-- .page-content -->

@@ -44,7 +44,7 @@ if ( ! function_exists( 'martindemko_entry_footer' ) ) :
     function martindemko_entry_footer() {
 
         /* translators: used between list items, there is a space after the comma */
-        $separate_meta = __( ', ', 'martindemko' );
+        $separate_meta = __( ', ', 'singleproduct' );
 
         $categories_list = get_the_category_list( $separate_meta );
         $tags_list = get_the_tag_list( '', $separate_meta );
@@ -52,11 +52,11 @@ if ( ! function_exists( 'martindemko_entry_footer' ) ) :
         echo '<footer class="entry-footer">';
 
         echo '<span class="posted-on">'
-            . '<span>' . __( 'Publikováno:', 'martindemko' ) . '</span>'
+            . '<span>' . __( 'Publikováno:', 'singleproduct' ) . '</span>'
             . martindemko_time_link() . '</span>';
 
         echo '<span class="posted-by">'
-            . '<span>' . __( 'Autor:', 'martindemko' ) . '</span>'
+            . '<span>' . __( 'Autor:', 'singleproduct' ) . '</span>'
             . get_the_author() . '</span>';
 
         if ( 'post' === get_post_type() ) {
@@ -65,7 +65,7 @@ if ( ! function_exists( 'martindemko_entry_footer' ) ) :
 
                 if ( $categories_list ) {
                     echo '<span class="cat-links">'
-                        . '<span>' . __( 'Kategorie:', 'martindemko' ) . '</span>'
+                        . '<span>' . __( 'Kategorie:', 'singleproduct' ) . '</span>'
                         . $categories_list . '</span>';
                 }
 
@@ -218,8 +218,8 @@ if ( ! function_exists( 'martindemko_posts_pagination' ) ) :
         }
 
         $nav = get_the_posts_pagination( array(
-            'prev_text' => '<span>' . __( '«', 'martindemko' ) . '</span>',
-            'next_text' => '<span>' . __( '»', 'martindemko' ) . '</span>',
+            'prev_text' => '<span>' . __( '«', 'singleproduct' ) . '</span>',
+            'next_text' => '<span>' . __( '»', 'singleproduct' ) . '</span>',
         ) );
 
         $out = $out = <<<EOC
@@ -256,8 +256,8 @@ if ( ! function_exists( 'martindemko_post_navigation' ) ) :
         }
 
         $nav = get_the_post_navigation( array(
-            'prev_text' => '<span>' . __( '«', 'martindemko' ) . '</span>',
-            'next_text' => '<span>' . __( '»', 'martindemko' ) . '</span>',
+            'prev_text' => '<span>' . __( '«', 'singleproduct' ) . '</span>',
+            'next_text' => '<span>' . __( '»', 'singleproduct' ) . '</span>',
         ) );
 
         $out = $out = <<<EOC

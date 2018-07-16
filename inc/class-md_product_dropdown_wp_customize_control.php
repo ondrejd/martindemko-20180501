@@ -65,7 +65,7 @@ class MD_Product_Dropdown_WP_Customize_Control extends WP_Customize_Control {
             'order'       => 'asc',
         ) );
 
-        echo '<option value="0">' . __( '--- Vyberte ---', 'martindemko' ) . '</option>';
+        echo '<option value="0">' . __( '--- Vyberte ---', 'singleproduct' ) . '</option>';
 
         foreach ( $posts as $post ) {
             $value = isset( $this->value ) ? $this->value : null;

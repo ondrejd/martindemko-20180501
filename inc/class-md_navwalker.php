@@ -191,9 +191,9 @@ class martindemko_navwalker extends Walker_Nav_Menu {
 
         $out .= ''
             . '<ul role="nav" class="nav flex-column">'
-            .   '<li class="nav-item"><a href="#" class="nav-link">' . __( 'Domů', 'martindemko' ) . '</a></li>'
-            .   '<li class="nav-item"><a href="#" class="nav-link">' . __( 'O nás', 'martindemko' ) . '</a></li>'
-            .   '<li class="nav-item"><a href="#" class="nav-link">' . __( 'Kontakt', 'martindemko' ) . '</a></li>'
+            .   '<li class="nav-item"><a href="#" class="nav-link">' . __( 'Domů', 'singleproduct' ) . '</a></li>'
+            .   '<li class="nav-item"><a href="#" class="nav-link">' . __( 'O nás', 'singleproduct' ) . '</a></li>'
+            .   '<li class="nav-item"><a href="#" class="nav-link">' . __( 'Kontakt', 'singleproduct' ) . '</a></li>'
             . '</ul>';
 
         if( $container ) {

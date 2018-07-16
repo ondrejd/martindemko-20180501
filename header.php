@@ -35,14 +35,14 @@
 </head>
 <body <?php body_class(); ?>>
 <div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'martindemko' ); ?></a>
+	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'singleproduct' ); ?></a>
     <header id="page-header" class="site-header sticky-top <?php echo get_option( 'bootstrap_bg_class', '' ) ?>" role="banner">
         <div class="container">
             <nav class="navbar navbar-expand-xl justify-content-between pl-1 pr-1">
                 <div class="navbar-brand">
                     <a class="site-title" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
                 </div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-orderbtn" aria-controls="" aria-expanded="false" aria-label="<?php echo esc_attr( 'Skrýt navigaci', 'martindemko' ) ?>">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-orderbtn" aria-controls="" aria-expanded="false" aria-label="<?php echo esc_attr( 'Skrýt navigaci', 'singleproduct' ) ?>">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div id="navbar-orderbtn">

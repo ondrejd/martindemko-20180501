@@ -41,13 +41,13 @@ $comments_count = get_comments_number();
     <?php if ( have_comments() ) : ?>
 
 	<h2 class="comments-title">
-        <?php esc_html_e( 'Komentáře', 'martindemko' ); ?>
+        <?php esc_html_e( 'Komentáře', 'singleproduct' ); ?>
         <?php if( $comments_count == 1 ) : ?>
-        <small>(<?php printf( __( '%1$s odpověď', 'martindemko' ), $comments_count ); ?>)</small>
+        <small>(<?php printf( __( '%1$s odpověď', 'singleproduct' ), $comments_count ); ?>)</small>
         <?php elseif( $comments_count > 1 && $comments_count < 5 ) : ?>
-        <small>(<?php printf( __( '%1$s odpovědi', 'martindemko' ), $comments_count ); ?>)</small>
+        <small>(<?php printf( __( '%1$s odpovědi', 'singleproduct' ), $comments_count ); ?>)</small>
         <?php elseif( $comments_count > 4 ) : ?>
-        <small>(<?php printf( __( '%1$s odpovědí', 'martindemko' ), $comments_count ); ?>)</small>
+        <small>(<?php printf( __( '%1$s odpovědí', 'singleproduct' ), $comments_count ); ?>)</small>
         <?php endif; ?>
     </h2>
 	<ol class="comment-list">
@@ -55,32 +55,32 @@ $comments_count = get_comments_number();
 				'avatar_size' => 100,
 				'style'       => 'ol',
 				'short_ping'  => true,
-				'reply_text'  => __( 'Odpovědět', 'martindemko' ),
+				'reply_text'  => __( 'Odpovědět', 'singleproduct' ),
 		) ); ?>
 	</ol>
 	<?php the_comments_pagination( array(
-		'prev_text' => '<span class="prev-text">' . __( 'Předchozí', 'martindemko' ) . '</span>',
-		'next_text' => '<span class="next-text">' . __( 'Následující', 'martindemko' ) . '</span>',
+		'prev_text' => '<span class="prev-text">' . __( 'Předchozí', 'singleproduct' ) . '</span>',
+		'next_text' => '<span class="next-text">' . __( 'Následující', 'singleproduct' ) . '</span>',
 	) ); ?>
 	<?php if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) : ?>
 	<p class="no-comments">
-        <?php _e( 'Další komentáře již nejsou povoleny.', 'martindemko' ); ?>
+        <?php _e( 'Další komentáře již nejsou povoleny.', 'singleproduct' ); ?>
     </p>
     <?php endif ; ?>
 
     <?php else : ?>
 
 	<h2 class="comments-title">
-        <?php esc_html_e( 'Komentáře', 'martindemko' ); ?>
+        <?php esc_html_e( 'Komentáře', 'singleproduct' ); ?>
     </h2>
 
 	<?php if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) : ?>
 	<p class="no-comments">
-        <?php _e( 'Komentáře nejsou povoleny.', 'martindemko' ); ?>
+        <?php _e( 'Komentáře nejsou povoleny.', 'singleproduct' ); ?>
     </p>
     <?php else : ?>
 	<p class="no-comments">
-        <?php _e( 'Prozatím nebyly přidány žádné komentáře.', 'martindemko' ); ?>
+        <?php _e( 'Prozatím nebyly přidány žádné komentáře.', 'singleproduct' ); ?>
     </p>
 	<?php endif; ?>
 

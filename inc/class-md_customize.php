@@ -47,8 +47,8 @@ class MD_Customize {
      */
     public static function register( \WP_Customize_Manager $wp_customize ) {
         $wp_customize->add_panel( self::THEME_PANEL_ID, array(
-            'title' => __( 'Vzhled tématu', 'martindemko' ),
-            'description' => __( 'Sdružuje nastavení vzhledu tématu <strong>martindemko-20180501</strong>', 'martindemko' ),
+            'title' => __( 'Vzhled tématu', 'singleproduct' ),
+            'description' => __( 'Sdružuje nastavení vzhledu tématu <strong>martindemko-20180501</strong>', 'singleproduct' ),
             'priority' => 15,
         ) );
 
@@ -77,10 +77,10 @@ class MD_Customize {
         // Section
         $wp_customize->add_section( 'martindemko_product_options', 
             array(
-                'title'       => __( 'Produkt', 'martindemko' ),
+                'title'       => __( 'Produkt', 'singleproduct' ),
                 'priority'    => 10,
                 'capability'  => 'edit_theme_options',
-                'description' => __( 'Nastavení pro produkt, kterému je web věnován.', 'martindemko' ),
+                'description' => __( 'Nastavení pro produkt, kterému je web věnován.', 'singleproduct' ),
                 'panel'       => self::THEME_PANEL_ID,
             )
         );
@@ -135,8 +135,8 @@ class MD_Customize {
             // Our products dropdown control
             $wp_customize->add_control( new MD_Product_Dropdown_WP_Customize_Control( $wp_customize, 
                 'cnt_site_product_id', array(
-                    'label'       => __( 'Produkt', 'martindemko' ),
-                    'description' => __( 'Vyberte defaultní produkt tématu', 'martindemko' ),
+                    'label'       => __( 'Produkt', 'singleproduct' ),
+                    'description' => __( 'Vyberte defaultní produkt tématu', 'singleproduct' ),
                     'section'     => 'martindemko_product_options',
                     'settings'    => 'site_product_id',
                 )
@@ -146,8 +146,8 @@ class MD_Customize {
             // Failsafe control
             $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
                 'cnt_site_product_id', array(
-                    'label'       => __( 'ID produktu', 'martindemko' ),
-                    'description' => __( 'Zadejte ID defaultního produktu', 'martindemko' ),
+                    'label'       => __( 'ID produktu', 'singleproduct' ),
+                    'description' => __( 'Zadejte ID defaultního produktu', 'singleproduct' ),
                     'section'     => 'martindemko_product_options',
                     'settings'    => 'site_product_id',
                     'type'        => 'number',
@@ -157,20 +157,20 @@ class MD_Customize {
 
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_show_product_logos', array(
-	            'label'       => __( 'Zobrazit loga produktu', 'martindemko' ),
-	            'description' => __( 'Zobrazí panel s třemi logy - ty musí být nastaveny v šabloně v souboru <code>header.php</code>', 'martindemko' ),
+	            'label'       => __( 'Zobrazit loga produktu', 'singleproduct' ),
+	            'description' => __( 'Zobrazí panel s třemi logy - ty musí být nastaveny v šabloně v souboru <code>header.php</code>', 'singleproduct' ),
 	            'section'     => 'martindemko_product_options',
 	            'settings'    => 'show_product_logos',
                 'type'        => 'select',
                 'choices' => array(
-                    'yes' => __( 'Ano', 'martindemko' ),
-                    'no'  => __( 'Ne', 'martindemko' ),
+                    'yes' => __( 'Ano', 'singleproduct' ),
+                    'no'  => __( 'Ne', 'singleproduct' ),
                 )
             )
         ) );
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_product_logo_url_1', array(
-	            'label'           => __( 'Odkaz prvního loga', 'martindemko' ),
+	            'label'           => __( 'Odkaz prvního loga', 'singleproduct' ),
 	            'section'         => 'martindemko_product_options',
 	            'settings'        => 'product_logo_url_1',
                 'type'            => 'url',
@@ -179,7 +179,7 @@ class MD_Customize {
         ) );
         $wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize,
             'cnt_product_logo_img_1', array(
-                'label'    => __( 'První logo', 'martindemko' ),
+                'label'    => __( 'První logo', 'singleproduct' ),
                 'section'  => 'martindemko_product_options',
                 'settings' => 'product_logo_img_1',
                 'active_callback' => array( 'MD_Customize', 'callback_product_logos' ),
@@ -187,7 +187,7 @@ class MD_Customize {
         ) );
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_product_logo_url_2', array(
-	            'label'       => __( 'Odkaz druhého loga', 'martindemko' ),
+	            'label'       => __( 'Odkaz druhého loga', 'singleproduct' ),
 	            'section'     => 'martindemko_product_options',
 	            'settings'    => 'product_logo_url_2',
                 'type'        => 'url',
@@ -196,7 +196,7 @@ class MD_Customize {
         ) );
         $wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize,
             'cnt_product_logo_img_2', array(
-                'label'    => __( 'Druhé logo', 'martindemko' ),
+                'label'    => __( 'Druhé logo', 'singleproduct' ),
                 'section'  => 'martindemko_product_options',
                 'settings' => 'product_logo_img_2',
                 'active_callback' => array( 'MD_Customize', 'callback_product_logos' ),
@@ -204,7 +204,7 @@ class MD_Customize {
         ) );
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_product_logo_url_3', array(
-	            'label'       => __( 'Odkaz třetího loga', 'martindemko' ),
+	            'label'       => __( 'Odkaz třetího loga', 'singleproduct' ),
 	            'section'     => 'martindemko_product_options',
 	            'settings'    => 'product_logo_url_3',
                 'type'        => 'url',
@@ -213,7 +213,7 @@ class MD_Customize {
         ) );
         $wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize,
             'cnt_product_logo_img_3', array(
-                'label'    => __( 'Třetí logo', 'martindemko' ),
+                'label'    => __( 'Třetí logo', 'singleproduct' ),
                 'section'  => 'martindemko_product_options',
                 'settings' => 'product_logo_img_3',
                 'active_callback' => array( 'MD_Customize', 'callback_product_logos' ),
@@ -232,8 +232,8 @@ class MD_Customize {
         // Section
         $wp_customize->add_section( 'martindemko_ordersteps_options', 
             array(
-                'title'       => __( 'Postup objednávky', 'martindemko' ),
-                'description' => __( 'Nastavení pro panel s postupem objednávky.', 'martindemko' ),
+                'title'       => __( 'Postup objednávky', 'singleproduct' ),
+                'description' => __( 'Nastavení pro panel s postupem objednávky.', 'singleproduct' ),
                 'priority'    => 30,
                 'capability'  => 'edit_theme_options',
                 'panel'       => self::THEME_PANEL_ID,
@@ -263,74 +263,74 @@ class MD_Customize {
         ) );
         $wp_customize->add_setting( 'ordersteps_text_1' , array(
             'capability' => 'edit_theme_options',
-            'default'    => __( 'Klikněte na "Objednat PRODUKT"', 'martindemko' ),
+            'default'    => __( 'Klikněte na "Objednat PRODUKT"', 'singleproduct' ),
             'type'       => 'option',
         ) );
         $wp_customize->add_setting( 'ordersteps_text_2' , array(
             'capability' => 'edit_theme_options',
-            'default'    => __( 'Vyplňte formulář', 'martindemko' ),
+            'default'    => __( 'Vyplňte formulář', 'singleproduct' ),
             'type'       => 'option',
         ) );
         $wp_customize->add_setting( 'ordersteps_text_3' , array(
             'capability' => 'edit_theme_options',
-            'default'    => __( 'Počkejte, až Vám zavoláme', 'martindemko' ),
+            'default'    => __( 'Počkejte, až Vám zavoláme', 'singleproduct' ),
             'type'       => 'option',
         ) );
         
         // Controls
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_ordersteps_show', array(
-	            'label'       => __( 'Zobrazit postup objednávky', 'martindemko' ),
+	            'label'       => __( 'Zobrazit postup objednávky', 'singleproduct' ),
 	            'section'     => 'martindemko_ordersteps_options',
 	            'settings'    => 'ordersteps_show',
                 'type'        => 'select',
                 'choices' => array(
-                    'yes' => __( 'Ano', 'martindemko' ),
-                    'no'  => __( 'Ne', 'martindemko' ),
+                    'yes' => __( 'Ano', 'singleproduct' ),
+                    'no'  => __( 'Ne', 'singleproduct' ),
                 )
             )
         ) );
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
             'cnt_ordersteps_foreground_color', array(
-	            'label'    => __( 'Barva textu', 'martindemko' ),
+	            'label'    => __( 'Barva textu', 'singleproduct' ),
 	            'section'  => 'martindemko_ordersteps_options',
 	            'settings' => 'ordersteps_foreground_color',
             )
         ) );
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
             'cnt_ordersteps_background_color_1', array(
-	            'label'    => __( 'Barva hlavního pozadí', 'martindemko' ),
+	            'label'    => __( 'Barva hlavního pozadí', 'singleproduct' ),
 	            'section'  => 'martindemko_ordersteps_options',
 	            'settings' => 'ordersteps_background_color_1',
             )
         ) );
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
             'cnt_ordersteps_background_color_2', array(
-	            'label'    => __( 'Barva pozadí kruhů', 'martindemko' ),
+	            'label'    => __( 'Barva pozadí kruhů', 'singleproduct' ),
 	            'section'  => 'martindemko_ordersteps_options',
 	            'settings' => 'ordersteps_background_color_2',
             )
         ) );
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_ordersteps_text_1', array(
-	            'label'       => __( 'První krok', 'martindemko' ),
-	            'description' => __( 'Text pro první krok', 'martindemko' ),
+	            'label'       => __( 'První krok', 'singleproduct' ),
+	            'description' => __( 'Text pro první krok', 'singleproduct' ),
 	            'section'     => 'martindemko_ordersteps_options',
 	            'settings'    => 'ordersteps_text_1',
             )
         ) );
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_ordersteps_text_2', array(
-	            'label'       => __( 'Druhý krok', 'martindemko' ),
-	            'description' => __( 'Text pro druhý krok', 'martindemko' ),
+	            'label'       => __( 'Druhý krok', 'singleproduct' ),
+	            'description' => __( 'Text pro druhý krok', 'singleproduct' ),
 	            'section'     => 'martindemko_ordersteps_options',
 	            'settings'    => 'ordersteps_text_2',
             )
         ) );
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_ordersteps_text_3', array(
-	            'label'       => __( 'Třetí krok', 'martindemko' ),
-	            'description' => __( 'Text pro třetí krok', 'martindemko' ),
+	            'label'       => __( 'Třetí krok', 'singleproduct' ),
+	            'description' => __( 'Text pro třetí krok', 'singleproduct' ),
 	            'section'     => 'martindemko_ordersteps_options',
 	            'settings'    => 'ordersteps_text_3',
             )
@@ -348,10 +348,10 @@ class MD_Customize {
         // Section
         $wp_customize->add_section( 'martindemko_other_options', 
             array(
-                'title'       => __( 'Další volby', 'martindemko' ),
+                'title'       => __( 'Další volby', 'singleproduct' ),
                 'priority'    => 40,
                 'capability'  => 'edit_theme_options',
-                'description' => __( 'Další nastavení šablony.', 'martindemko' ),
+                'description' => __( 'Další nastavení šablony.', 'singleproduct' ),
                 'panel'       => self::THEME_PANEL_ID,
             )
         );
@@ -359,13 +359,13 @@ class MD_Customize {
         // Settings
         $wp_customize->add_setting( 'product_order_btn_text' , array(
             'capability' => 'edit_theme_options',
-            'default'    => __( 'Objednat PRODUKT', 'martindemko' ),
+            'default'    => __( 'Objednat PRODUKT', 'singleproduct' ),
             'type'       => 'option',
             'transport'  => 'postMessage',
         ) );
         $wp_customize->add_setting( 'product_order_btn_link' , array(
             'capability' => 'edit_theme_options',
-            'default'    => __( '#', 'martindemko' ),
+            'default'    => __( '#', 'singleproduct' ),
             'type'       => 'option',
             'transport'  => 'postMessage',
         ) );
@@ -388,8 +388,8 @@ class MD_Customize {
         // Controls
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_product_order_btn_text', array(
-	            'label'       => __( 'Text tlačítka objednat', 'martindemko' ),
-                'description' => __( 'Tato změna se projeví u všech obednávacích tlačítek.   ', 'martindemko' ),
+	            'label'       => __( 'Text tlačítka objednat', 'singleproduct' ),
+                'description' => __( 'Tato změna se projeví u všech obednávacích tlačítek.   ', 'singleproduct' ),
 	            'section'     => 'martindemko_other_options',
 	            'settings'    => 'product_order_btn_text',
                 'type'        => 'text',
@@ -397,7 +397,7 @@ class MD_Customize {
         ) );
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_product_order_btn_link', array(
-	            'label'    => __( 'Odkaz tlačítka objednat', 'martindemko' ),
+	            'label'    => __( 'Odkaz tlačítka objednat', 'singleproduct' ),
 	            'section'  => 'martindemko_other_options',
 	            'settings' => 'product_order_btn_link',
                 'type'     => 'url',
@@ -405,21 +405,21 @@ class MD_Customize {
         ) );
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_homepage_post_excerpts_show', array(
-	            'label'       => __( 'Zobrazit texty příspěvků', 'martindemko' ),
-	            'description' => __( 'Zobrazit texty příspěvků blogu na úvodní stránce?', 'martindemko' ),
+	            'label'       => __( 'Zobrazit texty příspěvků', 'singleproduct' ),
+	            'description' => __( 'Zobrazit texty příspěvků blogu na úvodní stránce?', 'singleproduct' ),
 	            'section'     => 'martindemko_other_options',
 	            'settings'    => 'homepage_post_excerpts_show',
                 'type'        => 'select',
                 'choices'     => array(
-                    'yes'     => __( 'Ano', 'martindemko' ),
-                    'no'      => __( 'Ne', 'martindemko' ),
+                    'yes'     => __( 'Ano', 'singleproduct' ),
+                    'no'      => __( 'Ne', 'singleproduct' ),
                 )
             )
         ) );
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_posts_per_page', array(
-	            'label'       => __( 'Počet přísěvků', 'martindemko' ),
-	            'description' => __( 'Počet přípěvků, které se mají na úvodní stránce zobrazit.', 'martindemko' ),
+	            'label'       => __( 'Počet přísěvků', 'singleproduct' ),
+	            'description' => __( 'Počet přípěvků, které se mají na úvodní stránce zobrazit.', 'singleproduct' ),
 	            'section'     => 'martindemko_other_options',
 	            'settings'    => 'posts_per_page',
                 'type'        => 'number',
@@ -428,14 +428,14 @@ class MD_Customize {
         ) );
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_homepage_show_posts_pagination', array(
-	            'label'       => __( 'Zobrazit stránkování', 'martindemko' ),
-	            'description' => __( 'Zobrazi stránkováí pokud počet příspěvků překročí daný počet k zobrazení?', 'martindemko' ),
+	            'label'       => __( 'Zobrazit stránkování', 'singleproduct' ),
+	            'description' => __( 'Zobrazi stránkováí pokud počet příspěvků překročí daný počet k zobrazení?', 'singleproduct' ),
 	            'section'     => 'martindemko_other_options',
 	            'settings'    => 'homepage_show_posts_pagination',
                 'type'        => 'select',
                 'choices'     => array(
-                    'yes'     => __( 'Ano', 'martindemko' ),
-                    'no'      => __( 'Ne', 'martindemko' ),
+                    'yes'     => __( 'Ano', 'singleproduct' ),
+                    'no'      => __( 'Ne', 'singleproduct' ),
                 )
             )
         ) );
@@ -452,10 +452,10 @@ class MD_Customize {
         // Section
         $wp_customize->add_section( 'martindemko_footer_options', 
             array(
-                'title'       => __( 'Hlavička & Patička', 'martindemko' ),
+                'title'       => __( 'Hlavička & Patička', 'singleproduct' ),
                 'priority'    => 20,
                 'capability'  => 'edit_theme_options',
-                'description' => __( 'Nastavení barev pro hlavičku a patičku webu.', 'martindemko' ),
+                'description' => __( 'Nastavení barev pro hlavičku a patičku webu.', 'singleproduct' ),
                 'panel'       => self::THEME_PANEL_ID,
             )
         );
@@ -485,32 +485,32 @@ class MD_Customize {
         // Controls
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
             'cnt_header_foreground_color', array(
-	            'label'       => __( 'Barva textu', 'martindemko' ),
-	            'description' => __( 'Barva textu <strong>hlavičky</strong> webu.', 'martindemko' ),
+	            'label'       => __( 'Barva textu', 'singleproduct' ),
+	            'description' => __( 'Barva textu <strong>hlavičky</strong> webu.', 'singleproduct' ),
 	            'section'     => 'martindemko_footer_options',
 	            'settings'    => 'header_foreground_color',
             )
         ) );
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
             'cnt_header_background_color', array(
-	            'label'       => __( 'Barva pozadí', 'martindemko' ),
-	            'description' => __( 'Barva pozadí <strong>hlavičky</strong> webu.', 'martindemko' ),
+	            'label'       => __( 'Barva pozadí', 'singleproduct' ),
+	            'description' => __( 'Barva pozadí <strong>hlavičky</strong> webu.', 'singleproduct' ),
 	            'section'     => 'martindemko_footer_options',
 	            'settings'    => 'header_background_color',
             )
         ) );
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
             'cnt_footer_foreground_color', array(
-	            'label'       => __( 'Barva textu', 'martindemko' ),
-	            'description' => __( 'Barva text <strong>patičky</strong> webu.', 'martindemko' ),
+	            'label'       => __( 'Barva textu', 'singleproduct' ),
+	            'description' => __( 'Barva text <strong>patičky</strong> webu.', 'singleproduct' ),
 	            'section'     => 'martindemko_footer_options',
 	            'settings'    => 'footer_foreground_color',
             )
         ) );
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
             'cnt_footer_background_color', array(
-	            'label'       => __( 'Barva pozadí', 'martindemko' ),
-	            'description' => __( 'Barva pozadí <strong>patičky</strong> webu.', 'martindemko' ),
+	            'label'       => __( 'Barva pozadí', 'singleproduct' ),
+	            'description' => __( 'Barva pozadí <strong>patičky</strong> webu.', 'singleproduct' ),
 	            'section'     => 'martindemko_footer_options',
 	            'settings'    => 'footer_background_color',
             )
@@ -528,10 +528,10 @@ class MD_Customize {
         // Section
         $wp_customize->add_section( 'martindemko_bootstrap_options', 
             array(
-                'title'       => __( 'Bootstrap', 'martindemko' ),
+                'title'       => __( 'Bootstrap', 'singleproduct' ),
                 'priority'    => 20,
                 'capability'  => 'edit_theme_options',
-                'description' => __( 'Nastavení pro knihovnu <a href="https://getbootstrap.com/" target="_blank">Bootstrap</a>.', 'martindemko' ),
+                'description' => __( 'Nastavení pro knihovnu <a href="https://getbootstrap.com/" target="_blank">Bootstrap</a>.', 'singleproduct' ),
                 'panel'       => self::THEME_PANEL_ID,
             )
         );
@@ -551,54 +551,54 @@ class MD_Customize {
         // Controls
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_bootstrap_theme_option', array(
-                'label'       => __( 'Možnost tématu', 'martindemko' ),
-                'description' => __( 'Vyberte si jednu z před-definovaných možností knihovny <strong>Bootstrap</strong>.', 'martindemko' ),
+                'label'       => __( 'Možnost tématu', 'singleproduct' ),
+                'description' => __( 'Vyberte si jednu z před-definovaných možností knihovny <strong>Bootstrap</strong>.', 'singleproduct' ),
                 'section'     => 'martindemko_bootstrap_options',
                 'settings'    => 'bootstrap_theme_option',
                 'type'        => 'select',
                 'choices'     => array(
-                    '---'       => __( '--- Vyberte ---', 'martindemko' ),
-                    'cerulean'  => __( 'Cerulean', 'martindemko' ),
-                    'cosmo'     => __( 'Cosmo', 'martindemko' ),
-                    'cyborg'    => __( 'Cyborg', 'martindemko' ),
-                    'darkly'    => __( 'Darkly', 'martindemko' ),
-                    'flatly'    => __( 'Flatly', 'martindemko' ),
-                    'journal'   => __( 'Journal', 'martindemko' ),
-                    'litera'    => __( 'Litera', 'martindemko' ),
-                    'lumen'     => __( 'Lumen', 'martindemko' ),
-                    'lux'       => __( 'Lux', 'martindemko' ),
-                    'materia'   => __( 'Materia', 'martindemko' ),
-                    'minty'     => __( 'Minty', 'martindemko' ),
-                    'pulse'     => __( 'Pulse', 'martindemko' ),
-                    'sandstone' => __( 'Sandstone', 'martindemko' ),
-                    'simplex'   => __( 'Simplex', 'martindemko' ),
-                    'sketchy'   => __( 'Sketchy', 'martindemko' ),
-                    'slate'     => __( 'Slate', 'martindemko' ),
-                    'solar'     => __( 'Solar', 'martindemko' ),
-                    'spacelab'  => __( 'SpaceLab', 'martindemko' ),
-                    'superhero' => __( 'SuperHero', 'martindemko' ),
-                    'united'    => __( 'United', 'martindemko' ),
-                    'yeti'      => __( 'Yeti', 'martindemko' ),
+                    '---'       => __( '--- Vyberte ---', 'singleproduct' ),
+                    'cerulean'  => __( 'Cerulean', 'singleproduct' ),
+                    'cosmo'     => __( 'Cosmo', 'singleproduct' ),
+                    'cyborg'    => __( 'Cyborg', 'singleproduct' ),
+                    'darkly'    => __( 'Darkly', 'singleproduct' ),
+                    'flatly'    => __( 'Flatly', 'singleproduct' ),
+                    'journal'   => __( 'Journal', 'singleproduct' ),
+                    'litera'    => __( 'Litera', 'singleproduct' ),
+                    'lumen'     => __( 'Lumen', 'singleproduct' ),
+                    'lux'       => __( 'Lux', 'singleproduct' ),
+                    'materia'   => __( 'Materia', 'singleproduct' ),
+                    'minty'     => __( 'Minty', 'singleproduct' ),
+                    'pulse'     => __( 'Pulse', 'singleproduct' ),
+                    'sandstone' => __( 'Sandstone', 'singleproduct' ),
+                    'simplex'   => __( 'Simplex', 'singleproduct' ),
+                    'sketchy'   => __( 'Sketchy', 'singleproduct' ),
+                    'slate'     => __( 'Slate', 'singleproduct' ),
+                    'solar'     => __( 'Solar', 'singleproduct' ),
+                    'spacelab'  => __( 'SpaceLab', 'singleproduct' ),
+                    'superhero' => __( 'SuperHero', 'singleproduct' ),
+                    'united'    => __( 'United', 'singleproduct' ),
+                    'yeti'      => __( 'Yeti', 'singleproduct' ),
                 )
             )
         ) );
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_bootstrap_typography', array(
-                'label'       => __( 'Typografie', 'martindemko' ),
-                'description' => __( 'Vyberte si jednu z před-definovaných typografických standardů knihovny <strong>Bootstrap</strong>.', 'martindemko' ),
+                'label'       => __( 'Typografie', 'singleproduct' ),
+                'description' => __( 'Vyberte si jednu z před-definovaných typografických standardů knihovny <strong>Bootstrap</strong>.', 'singleproduct' ),
                 'section'     => 'martindemko_bootstrap_options',
                 'settings'    => 'bootstrap_typography',
                 'type'        => 'select',
                 'choices'     => array(
-                    '---' => __( '--- Vyberte ---', 'martindemko' ),
-                    'arbutusslab-opensans'    => __( 'ArbutussLab - OpenSans', 'martindemko' ),
-                    'montserrat-merriweather' => __( 'MontSerrat - MerriWeather', 'martindemko' ),
-                    'montserrat-opensans'     => __( 'MontSerrat - OpenSans', 'martindemko' ),
-                    'oswald-muli'             => __( 'Oswald - Muli', 'martindemko' ),
-                    'poppins-lora'            => __( 'Poppins - Lora', 'martindemko' ),
-                    'poppins-poppins'         => __( 'Poppins - Poppins', 'martindemko' ),
-                    'roboto-roboto'           => __( 'Roboto - Roboto', 'martindemko' ),
-                    'robotoslab-roboto'       => __( 'RobotoSlab - Roboto', 'martindemko' ),
+                    '---' => __( '--- Vyberte ---', 'singleproduct' ),
+                    'arbutusslab-opensans'    => __( 'ArbutussLab - OpenSans', 'singleproduct' ),
+                    'montserrat-merriweather' => __( 'MontSerrat - MerriWeather', 'singleproduct' ),
+                    'montserrat-opensans'     => __( 'MontSerrat - OpenSans', 'singleproduct' ),
+                    'oswald-muli'             => __( 'Oswald - Muli', 'singleproduct' ),
+                    'poppins-lora'            => __( 'Poppins - Lora', 'singleproduct' ),
+                    'poppins-poppins'         => __( 'Poppins - Poppins', 'singleproduct' ),
+                    'roboto-roboto'           => __( 'Roboto - Roboto', 'singleproduct' ),
+                    'robotoslab-roboto'       => __( 'RobotoSlab - Roboto', 'singleproduct' ),
                 )
             )
         ) );

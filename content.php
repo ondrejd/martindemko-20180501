@@ -58,12 +58,12 @@ $additional_class = ( is_single() || $is_page_type ) ? 'col-xs-12 col-sm-12 col-
     <?php
         if ( is_single() ) {
             the_content( sprintf(
-                __( 'Pokračujte ve čtení<span class="screen-reader-text"> "%s"</span>', 'martindemko' ),
+                __( 'Pokračujte ve čtení<span class="screen-reader-text"> "%s"</span>', 'singleproduct' ),
                 get_the_title()
             ) );
 
             wp_link_pages( array(
-                'before'      => '<div class="page-links">' . __( 'Stránky:', 'martindemko' ),
+                'before'      => '<div class="page-links">' . __( 'Stránky:', 'singleproduct' ),
                 'after'       => '</div>',
                 'link_before' => '<span class="page-number">',
                 'link_after'  => '</span>',
@@ -71,7 +71,7 @@ $additional_class = ( is_single() || $is_page_type ) ? 'col-xs-12 col-sm-12 col-
         }
         elseif( get_option( 'homepage_post_excerpts_show' ) == 'yes' ) {
             the_content( sprintf(
-                __( 'Pokračujte ve čtení<span class="screen-reader-text"> "%s"</span>', 'martindemko' ),
+                __( 'Pokračujte ve čtení<span class="screen-reader-text"> "%s"</span>', 'singleproduct' ),
                 get_the_title()
             ) );
         }

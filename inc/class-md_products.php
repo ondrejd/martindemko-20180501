@@ -57,10 +57,10 @@ class MD_Product {
     function init() {
         register_post_type( self::SLUG, array(
             'labels' => array(
-                'name' => __( 'Products', 'martindemko' ),
-                'singular_name' => __( 'Product', 'martindemko' )
+                'name' => __( 'Products', 'singleproduct' ),
+                'singular_name' => __( 'Product', 'singleproduct' )
             ),
-            'description' => __( 'Products custom post type', 'martindemko' ),
+            'description' => __( 'Products custom post type', 'singleproduct' ),
             'public' => true,
             'has_archive' => true,
             'menu_positions' => 21,
@@ -69,7 +69,7 @@ class MD_Product {
             'supports' => array( 'title', 'author', 'thumbnail', 'excerpt', 'custom-fields', 'comments', 'revisions', 'page-attributes' ),
             'delete_with_user' => false,
             'show_in_rest' => false,
-            'slug' => array( __( 'product', 'martindemko' ) )
+            'slug' => array( __( 'product', 'singleproduct' ) )
         ) );
     }
 

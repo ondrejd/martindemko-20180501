@@ -36,12 +36,11 @@ include( dirname( __FILE__ ) . '/inc/class-md_customize.php' );
 include( dirname( __FILE__ ) . '/inc/template-tags.php' );
 
 
-if( !function_exists( 'martindemko_after_setup_theme' ) ) :
+if( !function_exists( 'singleproduct_after_setup_theme' ) ) :
     /**
      * Setup theme.
      * @return void
      * @since 1.0.0
-     * @todo We need support `starter-content` with example logo image
      * @uses add_option()
      * @uses add_image_size()
      * @uses add_theme_support()
@@ -50,8 +49,8 @@ if( !function_exists( 'martindemko_after_setup_theme' ) ) :
      * @uses register_nav_menus()
      * @uses update_option()
      */
-    function martindemko_setup_theme() {
-        load_theme_textdomain( 'martindemko', get_stylesheet_directory() . '/languages' );
+    function singleproduct_setup_theme() {
+        load_theme_textdomain( 'singleproduct', get_stylesheet_directory() . '/languages' );
 
         add_option( 'site_product_id', 'yes' );
         add_option( 'show_product_logos', 'yes' );
@@ -61,17 +60,17 @@ if( !function_exists( 'martindemko_after_setup_theme' ) ) :
         add_option( 'product_logo_url_2', '#' );
         add_option( 'product_logo_img_3', 0 );
         add_option( 'product_logo_url_3', '#' );
-        add_option( 'product_order_btn_text', __( 'Objednat PRODUKT', 'martindemko' ) );
-        add_option( 'product_order_btn_link', __( '#', 'martindemko' ) );
+        add_option( 'product_order_btn_text', __( 'Objednat PRODUKT', 'singleproduct' ) );
+        add_option( 'product_order_btn_link', __( '#', 'singleproduct' ) );
         add_option( 'header_foreground_color', '#000000' );
         add_option( 'header_background_color', '#ecd9d9' );
         add_option( 'ordersteps_show', 'yes' );
         add_option( 'ordersteps_foreground_color', '#98a0a6' );
         add_option( 'ordersteps_background_color_1', '#ecd9d9' );
         add_option( 'ordersteps_background_color_2', '#ffffff' );
-        add_option( 'ordersteps_text_1', __( 'Klikněte na "Objednat PRODUKT"', 'martindemko' ) );
-        add_option( 'ordersteps_text_2', __( 'Vyplňte formulář', 'martindemko' ) );
-        add_option( 'ordersteps_text_3', __( 'Počkejte, až Vám zavoláme', 'martindemko' ) );
+        add_option( 'ordersteps_text_1', __( 'Klikněte na "Objednat PRODUKT"', 'singleproduct' ) );
+        add_option( 'ordersteps_text_2', __( 'Vyplňte formulář', 'singleproduct' ) );
+        add_option( 'ordersteps_text_3', __( 'Počkejte, až Vám zavoláme', 'singleproduct' ) );
         add_option( 'homepage_post_excerpts_show', 'yes' );
         add_option( 'footer_foreground_color', '#ffffff' );
         add_option( 'footer_background_color', '#2f1b1b' );
@@ -100,8 +99,8 @@ if( !function_exists( 'martindemko_after_setup_theme' ) ) :
         add_image_size( 'martindemko-thumbnail-avatar', 100, 100, true );
 
         register_nav_menus( array(
-            'footer-languages-menu' => __( 'Jazykové menu', 'martindemko' ),
-            'footer-contact-menu'   => __( 'Kontaktní menu', 'martindemko' )
+            'footer-languages-menu' => __( 'Jazykové menu', 'singleproduct' ),
+            'footer-contact-menu'   => __( 'Kontaktní menu', 'singleproduct' )
         ) );
 
         // TODO We need support `starter-content` with example logo image
@@ -115,11 +114,11 @@ if( !function_exists( 'martindemko_after_setup_theme' ) ) :
 	        'theme_mods'  => array(),
 	        'nav_menus'   => array(
 		        'footer-languages-menu' => array(
-			        'name'  => __( 'Jazykové menu', 'martindemko' ),
+			        'name'  => __( 'Jazykové menu', 'singleproduct' ),
 			        'items' => array(),
 		        ),
 		        'footer-contact-menu' => array(
-			        'name'  => __( 'Kontaktní menu', 'martindemko' ),
+			        'name'  => __( 'Kontaktní menu', 'singleproduct' ),
 			        'items' => array(),
 		        ),
 	        ),
@@ -129,10 +128,10 @@ if( !function_exists( 'martindemko_after_setup_theme' ) ) :
     }
 endif;
 // Setup up theme
-add_action( 'after_setup_theme', 'martindemko_setup_theme' );
+add_action( 'after_setup_theme', 'singleproduct_setup_theme' );
 
 
-if( !function_exists( 'martindemko_enqueue_styles' ) ) :
+if( !function_exists( 'singleproduct_enqueue_styles' ) ) :
     /**
      * Register new custom post type.
      * @return void
@@ -144,20 +143,20 @@ if( !function_exists( 'martindemko_enqueue_styles' ) ) :
      * @uses wp_get_theme()
      * @uses wp_register_script()
      */
-    function martindemko_enqueue_styles() {
+    function singleproduct_enqueue_styles() {
 
         $stylesheet_dir_uri = get_stylesheet_directory_uri();
         $theme_version = wp_get_theme()->get( 'Version' );
 
         // Bootstrap JS includes
-        wp_register_script( 'martindemko-html5', $stylesheet_dir_uri . '/assets/js/html5.js' );
-        wp_register_script( 'martindemko-popper', $stylesheet_dir_uri . '/assets/js/popper.min.js' );
-        wp_register_script( 'martindemko-bootstrap', $stylesheet_dir_uri . '/assets/js/bootstrap.bundle.min.js' );
-        wp_register_script( 'martindemko-fontawesome', $stylesheet_dir_uri . '/assets/js/fontawesome/fontawesome-all.min.js' );
+        wp_register_script( 'singleproduct-html5', $stylesheet_dir_uri . '/assets/js/html5.js' );
+        wp_register_script( 'singleproduct-popper', $stylesheet_dir_uri . '/assets/js/popper.min.js' );
+        wp_register_script( 'singleproduct-bootstrap', $stylesheet_dir_uri . '/assets/js/bootstrap.bundle.min.js' );
+        wp_register_script( 'singleproduct-fontawesome', $stylesheet_dir_uri . '/assets/js/fontawesome/fontawesome-all.min.js' );
 
         // Our main script
         wp_register_script(
-            'martindemko-script', 
+            'singleproduct-script', 
             $stylesheet_dir_uri . '/assets/js/theme-script.js',
             // TODO Check what is really needed!
             array(
@@ -167,25 +166,25 @@ if( !function_exists( 'martindemko_enqueue_styles' ) ) :
                 'jquery-ui-droppable', 'jquery-ui-selectable', 'jquery-ui-position',
                 'jquery-ui-tooltip', 'jquery-ui-dialog', 'jquery-ui-button', 'jquery-ui-datepicker', 
                 'jquery-effects-core', 'jquery-effects-fade', 'jquery-effects-highlight',
-                'jquery-effects-slide', 'jquery-effects-transfer', 'martindemko-html5',
-                'martindemko-popper', 'martindemko-bootstrap', 'martindemko-fontawesome'
+                'jquery-effects-slide', 'jquery-effects-transfer', 'singleproduct-html5',
+                'singleproduct-popper', 'singleproduct-bootstrap', 'singleproduct-fontawesome'
             ),
             $theme_version,
             true
         );
-        wp_enqueue_script( 'martindemko-script' );
+        wp_enqueue_script( 'singleproduct-script' );
 
         // Bootstrap style basics
-        wp_enqueue_style( 'martindemko-bootstrap_reboot-style', $stylesheet_dir_uri . '/assets/css/bootstrap-reboot.min.css' );
-        wp_enqueue_style( 'martindemko-bootstrap-style', $stylesheet_dir_uri . '/assets/css/bootstrap.min.css' );
-        wp_enqueue_style( 'martindemko-bootstrap_grid-style', $stylesheet_dir_uri . '/assets/css/bootstrap-grid.min.css' );
+        wp_enqueue_style( 'singleproduct-bootstrap_reboot-style', $stylesheet_dir_uri . '/assets/css/bootstrap-reboot.min.css' );
+        wp_enqueue_style( 'singleproduct-bootstrap-style', $stylesheet_dir_uri . '/assets/css/bootstrap.min.css' );
+        wp_enqueue_style( 'singleproduct-bootstrap_grid-style', $stylesheet_dir_uri . '/assets/css/bootstrap-grid.min.css' );
 
         // Bootstrap Theme Option
         $bootstrap_theme_option = get_option( 'bootstrap_theme_option' );
 
         if( $bootstrap_theme_option != '---' ) {
             $stylesheet_uri = $stylesheet_dir_uri . '/assets/css/presets/theme-option/' . $bootstrap_theme_option . '.css';
-            wp_enqueue_style( 'martindemko-bootstrap-theme_option', $stylesheet_uri );
+            wp_enqueue_style( 'singleproduct-bootstrap-theme_option', $stylesheet_uri );
         }
 
         // Bootstrap Typography
@@ -193,11 +192,11 @@ if( !function_exists( 'martindemko_enqueue_styles' ) ) :
 
         if( $bootstrap_typography != '---' ) {
             $stylesheet_uri = $stylesheet_dir_uri . '/assets/css/presets/typography/' . $bootstrap_typography . '.css';
-            wp_enqueue_style( 'martindemko-bootstrap-typography', $stylesheet_uri );
+            wp_enqueue_style( 'singleproduct-bootstrap-typography', $stylesheet_uri );
         }
 
         // Our own style
-        wp_enqueue_style( 'martindemko-style', $stylesheet_dir_uri . '/style.css', array(), $theme_version );
+        wp_enqueue_style( 'singleproduct-style', $stylesheet_dir_uri . '/style.css', array(), $theme_version );
     }
 endif;
-add_action( 'wp_enqueue_scripts', 'martindemko_enqueue_styles' );
+add_action( 'wp_enqueue_scripts', 'singleproduct_enqueue_styles' );
