@@ -24,21 +24,21 @@
  * @since 1.0.0
  */
 
-if( ! defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
 
-if( !class_exists( 'MD_Product' ) ) :
+if ( ! class_exists( 'Single_Product_Cpt' ) ) :
 
 /**
  * Class that implements all what necessary for our CPT.
  * @author Ondřej Doněk, <ondrejd@gmail.com>
  * @since 1.0.0
  */
-class MD_Product {
+class Single_Product_Cpt {
 
-    const SLUG = 'martindemko_product';
+    const SLUG = 'singleproduct';
 
     /**
      * Constructor.
@@ -53,6 +53,7 @@ class MD_Product {
      * Initialize our CPT.
      * @return void
      * @since 1.0.0
+     * @todo Add more labels!
      */
     function init() {
         register_post_type( self::SLUG, array(
@@ -78,4 +79,5 @@ class MD_Product {
 endif;
 
 // Initialize CPT
-$md_product = new MD_Product();
+new Single_Product_Cpt();
+

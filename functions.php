@@ -24,19 +24,18 @@
  * @since 1.0.0
  */
 
-if( ! defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
 
 // Includes
-include( dirname( __FILE__ ) . '/inc/class-md_products.php' );
-include( dirname( __FILE__ ) . '/inc/class-md_navwalker.php' );
-include( dirname( __FILE__ ) . '/inc/class-md_customize.php' );
-include( dirname( __FILE__ ) . '/inc/template-tags.php' );
+include( plugin_dir_path( __FILE__ ) . 'includes/class-singleproduct_cpt.php' );
+include( plugin_dir_path( __FILE__ ) . 'includes/class-md_navwalker.php' );
+include( plugin_dir_path( __FILE__ ) . 'includes/class-md_customize.php' );
+include( plugin_dir_path( __FILE__ ) . 'includes/template-tags.php' );
 
-
-if( !function_exists( 'singleproduct_after_setup_theme' ) ) :
+if ( ! function_exists( 'singleproduct_after_setup_theme' ) ) :
     /**
      * Setup theme.
      * @return void
@@ -49,7 +48,7 @@ if( !function_exists( 'singleproduct_after_setup_theme' ) ) :
      * @uses register_nav_menus()
      * @uses update_option()
      */
-    function singleproduct_setup_theme() {
+    function singleproduct_after_setup_theme() {
         load_theme_textdomain( 'singleproduct', get_stylesheet_directory() . '/languages' );
 
         add_option( 'site_product_id', 'yes' );
@@ -79,8 +78,6 @@ if( !function_exists( 'singleproduct_after_setup_theme' ) ) :
         add_option( 'bootstrap_typography', '---' );
         add_option( 'show_post_navigation', 'yes' );
 
-        update_option( 'posts_per_page', 6 );
-
         add_theme_support( 'automatic-feed-links' );
         add_theme_support( 'title-tag' );
         add_theme_support( 'post-thumbnails' );
@@ -93,10 +90,10 @@ if( !function_exists( 'singleproduct_after_setup_theme' ) ) :
             )
         );
 
-        add_image_size( 'martindemko-featured-image', 2000, 1200, true );
-        add_image_size( 'martindemko-featured-image-small', 400, 200, true );
-        add_image_size( 'martindemko-default-product', 400, 340, true );
-        add_image_size( 'martindemko-thumbnail-avatar', 100, 100, true );
+        add_image_size( 'singleproduct-featured-image', 2000, 1200, true );
+        add_image_size( 'singleproduct-featured-image-small', 400, 200, true );
+        add_image_size( 'singleproduct-default-product', 400, 340, true );
+        add_image_size( 'singleproduct-thumbnail-avatar', 100, 100, true );
 
         register_nav_menus( array(
             'footer-languages-menu' => __( 'Jazykové menu', 'singleproduct' ),
@@ -105,20 +102,35 @@ if( !function_exists( 'singleproduct_after_setup_theme' ) ) :
 
         // TODO We need support `starter-content` with example logo image
         add_theme_support( 'starter-content', array(
-	        'widgets'     => array(),
-	        'posts'       => array(),
-	        'attachments' => array(),
-	        'options'     => array(
-		        'show_on_front'  => 'posts',
+	        //'widgets' => array(),
+	        'attachments' => array(
+	            'starter-product-image' => array(
+	                'post_title' => _x( 'Starter product image', 'Theme starter content', 'singleproduct' ),
+	                'post_content' => _x( 'Starter product description', 'Theme starter content', 'singleproduct' ),
+	                'post_excerpt' => _x( 'Starter product caption', 'Theme starter content', 'singleproduct' ),
+	                'file' => 'assets/images/starter-product-image.php'
+	            )
 	        ),
-	        'theme_mods'  => array(),
-	        'nav_menus'   => array(
+	        'posts' => array(
+	            'starter-product' => array(
+	                'post_type' => Single_Product_Cpt::SLUG,
+	                'post_title' => _x( 'Starter product', 'Theme starter content', 'singleproduct' ),
+	                'post_excerpt' => _( 'Short description of the product.', 'Theme starter content', 'singleproduct' ),
+	                'thumbnail' => '{{starter-product-image}}'
+	            )
+	        ),
+	        'options' => array(
+		        'show_on_front'  => 'posts',
+		        'posts_per_page' => 6,
+	        ),
+	        //'theme_mods' => array(),
+	        'nav_menus' => array(
 		        'footer-languages-menu' => array(
-			        'name'  => __( 'Jazykové menu', 'singleproduct' ),
+			        'name' => __( 'Jazykové menu', 'singleproduct' ),
 			        'items' => array(),
 		        ),
 		        'footer-contact-menu' => array(
-			        'name'  => __( 'Kontaktní menu', 'singleproduct' ),
+			        'name' => __( 'Kontaktní menu', 'singleproduct' ),
 			        'items' => array(),
 		        ),
 	        ),
@@ -128,10 +140,10 @@ if( !function_exists( 'singleproduct_after_setup_theme' ) ) :
     }
 endif;
 // Setup up theme
-add_action( 'after_setup_theme', 'singleproduct_setup_theme' );
+add_action( 'after_setup_theme', 'singleproduct_after_setup_theme', 101 );
 
 
-if( !function_exists( 'singleproduct_enqueue_styles' ) ) :
+if ( ! function_exists( 'singleproduct_enqueue_styles' ) ) :
     /**
      * Register new custom post type.
      * @return void
@@ -182,7 +194,7 @@ if( !function_exists( 'singleproduct_enqueue_styles' ) ) :
         // Bootstrap Theme Option
         $bootstrap_theme_option = get_option( 'bootstrap_theme_option' );
 
-        if( $bootstrap_theme_option != '---' ) {
+        if ( $bootstrap_theme_option != '---' ) {
             $stylesheet_uri = $stylesheet_dir_uri . '/assets/css/presets/theme-option/' . $bootstrap_theme_option . '.css';
             wp_enqueue_style( 'singleproduct-bootstrap-theme_option', $stylesheet_uri );
         }
@@ -190,7 +202,7 @@ if( !function_exists( 'singleproduct_enqueue_styles' ) ) :
         // Bootstrap Typography
         $bootstrap_typography = get_option( 'bootstrap_typography' );
 
-        if( $bootstrap_typography != '---' ) {
+        if ( $bootstrap_typography != '---' ) {
             $stylesheet_uri = $stylesheet_dir_uri . '/assets/css/presets/typography/' . $bootstrap_typography . '.css';
             wp_enqueue_style( 'singleproduct-bootstrap-typography', $stylesheet_uri );
         }

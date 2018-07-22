@@ -24,12 +24,12 @@
  * @since 1.0.0
  */
 
-if( ! defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
 
-if ( ! function_exists( 'martindemko_entry_footer' ) ) :
+if ( ! function_exists( 'singleproduct_entry_footer' ) ) :
     /**
      * Prints HTML with meta information for the categories, tags and comments.
      * Based on `twentyseventeen_entry_footer()` from Twentyseventeen theme.
@@ -41,7 +41,7 @@ if ( ! function_exists( 'martindemko_entry_footer' ) ) :
      * @uses get_post_type()
      * @uses is_wp_error()
      */
-    function martindemko_entry_footer() {
+    function singleproduct_entry_footer() {
 
         /* translators: used between list items, there is a space after the comma */
         $separate_meta = __( ', ', 'singleproduct' );
@@ -53,7 +53,7 @@ if ( ! function_exists( 'martindemko_entry_footer' ) ) :
 
         echo '<span class="posted-on">'
             . '<span>' . __( 'Publikováno:', 'singleproduct' ) . '</span>'
-            . martindemko_time_link() . '</span>';
+            . singleproduct_time_link() . '</span>';
 
         echo '<span class="posted-by">'
             . '<span>' . __( 'Autor:', 'singleproduct' ) . '</span>'
@@ -84,7 +84,7 @@ if ( ! function_exists( 'martindemko_entry_footer' ) ) :
 endif;
 
 
-if ( ! function_exists( 'martindemko_time_link' ) ) :
+if ( ! function_exists( 'singleproduct_time_link' ) ) :
     /**
      * Gets a nicely formatted string for the published date.
      * Based on `twentyseventeen_time_link()` from Twentyseventeen theme.
@@ -92,7 +92,7 @@ if ( ! function_exists( 'martindemko_time_link' ) ) :
      * @since 1.0.0
      * @uses get_the_date()
      */
-    function martindemko_time_link() {
+    function singleproduct_time_link() {
         return sprintf(
             '<time class="entry-date published updated" datetime="%1$s">%2$s</time>',
             get_the_date( DATE_W3C ),
@@ -102,7 +102,7 @@ if ( ! function_exists( 'martindemko_time_link' ) ) :
 endif;
 
 
-if ( ! function_exists( 'martindemko_product_logos' ) ) :
+if ( ! function_exists( 'singleproduct_product_logos' ) ) :
     /**
      * Prints product logos.
      * @param boolean $echo (Optional.)
@@ -111,7 +111,7 @@ if ( ! function_exists( 'martindemko_product_logos' ) ) :
      * @uses get_option()
      * @uses wp_get_attachment_image()
      */
-    function martindemko_product_logos( $echo = true ) {
+    function singleproduct_product_logos( $echo = true ) {
         $logo_url_1 = get_option( 'product_logo_url_1', '#' );
         $logo_url_2 = get_option( 'product_logo_url_2', '#' );
         $logo_url_3 = get_option( 'product_logo_url_3', '#' );
@@ -134,7 +134,7 @@ if ( ! function_exists( 'martindemko_product_logos' ) ) :
 </div><!-- .site-product-logos -->
 EOC;
 
-        if( $echo === true ) {
+        if ( $echo === true ) {
             echo $out;
         } else {
             return $out;
@@ -143,7 +143,7 @@ EOC;
 endif;
 
 
-if ( ! function_exists( 'martindemko_hp_help_banner' ) ) :
+if ( ! function_exists( 'singleproduct_hp_help_banner' ) ) :
     /**
      * Prints help banner with steps how to order.
      * @param boolean $echo (Optional.)
@@ -152,11 +152,11 @@ if ( ! function_exists( 'martindemko_hp_help_banner' ) ) :
      * @uses esc_html()
      * @uses get_option()
      */
-    function martindemko_hp_help_banner( $echo = true ) {
+    function singleproduct_hp_help_banner( $echo = true ) {
 
         // Should be order steps visible?
-        if( get_option( 'ordersteps_show' ) != 'yes' ) {
-            if( $echo === true ) {
+        if ( get_option( 'ordersteps_show' ) != 'yes' ) {
+            if ( $echo === true ) {
                 return;
             } else {
                 return '';
@@ -190,7 +190,7 @@ if ( ! function_exists( 'martindemko_hp_help_banner' ) ) :
 </div>
 EOC;
 
-        if( $echo === true ) {
+        if ( $echo === true ) {
             echo $out;
         } else {
             return $out;
@@ -199,7 +199,7 @@ EOC;
 endif;
 
 
-if ( ! function_exists( 'martindemko_posts_pagination' ) ) :
+if ( ! function_exists( 'singleproduct_posts_pagination' ) ) :
     /**
      * Prints pagination for blog posts on HP.
      * @param boolean $echo (Optional.)
@@ -208,9 +208,9 @@ if ( ! function_exists( 'martindemko_posts_pagination' ) ) :
      * @uses get_option()
      * @uses get_the_posts_pagination()
      */
-    function martindemko_posts_pagination( $echo = true ) {
-        if( get_option( 'homepage_show_posts_pagination' ) != 'yes' ) {
-            if( $echo === true ) {
+    function singleproduct_posts_pagination( $echo = true ) {
+        if ( get_option( 'homepage_show_posts_pagination' ) != 'yes' ) {
+            if ( $echo === true ) {
                 return;
             } else {
                 return '';
@@ -228,7 +228,7 @@ if ( ! function_exists( 'martindemko_posts_pagination' ) ) :
 </div>
 EOC;
 
-        if( $echo === true ) {
+        if ( $echo === true ) {
             echo $out;
         } else {
             return $out;
@@ -237,7 +237,7 @@ EOC;
 endif;
 
 
-if ( ! function_exists( 'martindemko_post_navigation' ) ) :
+if ( ! function_exists( 'singleproduct_post_navigation' ) ) :
     /**
      * Prints post navigation.
      * @param boolean $echo (Optional.)
@@ -246,9 +246,9 @@ if ( ! function_exists( 'martindemko_post_navigation' ) ) :
      * @uses get_option()
      * @uses get_the_posts_navigation()
      */
-    function martindemko_post_navigation( $echo = true ) {
-        if( get_option( 'show_post_navigation' ) != 'yes' ) {
-            if( $echo === true ) {
+    function singleproduct_post_navigation( $echo = true ) {
+        if ( get_option( 'show_post_navigation' ) != 'yes' ) {
+            if ( $echo === true ) {
                 return;
             } else {
                 return '';
@@ -266,7 +266,7 @@ if ( ! function_exists( 'martindemko_post_navigation' ) ) :
 </div>
 EOC;
 
-        if( $echo === true ) {
+        if ( $echo === true ) {
             echo $out;
         } else {
             return $out;
@@ -275,7 +275,7 @@ EOC;
 endif;
 
 
-if ( ! function_exists( 'martindemko_product_order_button' ) ) :
+if ( ! function_exists( 'singleproduct_product_order_button' ) ) :
     /**
      * Prints product order button.
      * @param boolean $echo (Optional.)
@@ -285,7 +285,7 @@ if ( ! function_exists( 'martindemko_product_order_button' ) ) :
      * @uses esc_html()
      * @uses get_option()
      */
-    function martindemko_product_order_button( $echo = true ) {
+    function singleproduct_product_order_button( $echo = true ) {
         $url = esc_attr( get_option( 'product_order_btn_link', '#' ) );
         $lbl = esc_html( get_option( 'product_order_btn_text' ) );
         $out = <<<EOC
@@ -294,7 +294,7 @@ if ( ! function_exists( 'martindemko_product_order_button' ) ) :
 </span>
 EOC;
 
-        if( $echo === true ) {
+        if ( $echo === true ) {
             echo $out;
         } else {
             return $out;
@@ -303,7 +303,7 @@ EOC;
 endif;
 
 
-if ( ! function_exists( 'martindemko_site_product' ) ) :
+if ( ! function_exists( 'singleproduct_site_product' ) ) :
     /**
      * Prints section of site product.
      * @return void
@@ -313,11 +313,11 @@ if ( ! function_exists( 'martindemko_site_product' ) ) :
      * @uses get_post()
      * @uses get_the_post_thumbnail()
      */
-    function martindemko_site_product() {
+    function singleproduct_site_product() {
         $product_ID = get_option( 'site_product_id', null );
         $product = get_post( $product_ID, OBJECT, 'display' );
 
-        if( ! ( $product instanceof \WP_Post ) ) {
+        if ( ! ( $product instanceof \WP_Post ) ) {
             return;
         }
 
@@ -343,11 +343,11 @@ if ( ! function_exists( 'martindemko_site_product' ) ) :
                     <p><?php echo esc_html( $product->post_excerpt ); ?></p>
                 </div>
                 <div class="entry-footer">
-                    <p><?php martindemko_product_order_button(); ?></p>
+                    <p><?php singleproduct_product_order_button(); ?></p>
                 </div>
             </div>
         </div>
-        <?php martindemko_product_logos(); ?>
+        <?php singleproduct_product_logos(); ?>
     </div><!-- .site-product -->
 <?php
     }
