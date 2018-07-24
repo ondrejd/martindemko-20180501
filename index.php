@@ -32,7 +32,7 @@ get_header(); ?>
 		<h1 class="page-title"><?php single_post_title(); ?></h1>
 	</header>
 	<?php else : ?>
-    <?php martindemko_hp_help_banner(); ?>
+    <?php singleproduct_hp_help_banner(); ?>
 	<?php endif; ?>
 
 	<div id="primary" class="content-area">
@@ -57,7 +57,7 @@ get_header(); ?>
                     </div>
                 </div>
             </div>
-            <?php martindemko_posts_pagination(); ?>
+            <?php singleproduct_posts_pagination(); ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 	<?php get_sidebar(); ?>

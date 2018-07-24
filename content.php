@@ -42,9 +42,9 @@ $additional_class = ( is_single() || $is_page_type ) ? 'col-xs-12 col-sm-12 col-
         <a href="<?php the_permalink(); ?>"><?php
             if( '' !== get_the_post_thumbnail() ) {
                 if( is_single() ) {
-                    the_post_thumbnail( 'martindemko-featured-image' );
+                    the_post_thumbnail( 'singleproduct-featured-image' );
                 } else {
-                    the_post_thumbnail( 'martindemko-featured-image-small' );
+                    the_post_thumbnail( 'singleproduct-featured-image-small' );
                 }
             } else {
                 if( ! $is_page_type && ! is_single() ) {
@@ -80,7 +80,7 @@ $additional_class = ( is_single() || $is_page_type ) ? 'col-xs-12 col-sm-12 col-
 
     <?php
     if ( is_single() ) {
-        martindemko_entry_footer();
+        singleproduct_entry_footer();
         comments_template();
     }
     ?>

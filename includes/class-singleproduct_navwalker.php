@@ -24,19 +24,19 @@
  * @since 1.0.0
  */
 
-if( ! defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
 
-if( ! class_exists( 'martindemko_navwalker' ) ) :
+if ( ! class_exists( 'singleproduct_navwalker' ) ) :
 
 /**
  * Navigation walker.
  * @author Ondřej Doněk, <ondrejd@gmail.com>
  * @since 1.0.0
  */
-class martindemko_navwalker extends Walker_Nav_Menu {
+class singleproduct_navwalker extends Walker_Nav_Menu {
 
 	/**
 	 * @param string $output Passed by reference. Used to append additional content.
@@ -79,10 +79,10 @@ class martindemko_navwalker extends Walker_Nav_Menu {
 
 			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
 
-            if( $args->has_children && $depth === 0 ) {
+            if ( $args->has_children && $depth === 0 ) {
                 $class_names .= ' dropdown';
             }
-            elseif( $args->has_children && $depth > 0 ) {
+            elseif ( $args->has_children && $depth > 0 ) {
                 $class_names .= ' dropdown dropdown-submenu';
             }
 
@@ -104,7 +104,7 @@ class martindemko_navwalker extends Walker_Nav_Menu {
             $atts['href']   = ! empty( $item->url )    ? $item->url     : '';
 
 			// If item has_children add atts to a.
-			if( $args->has_children ) {
+			if ( $args->has_children ) {
 				$atts['href'] = '#';
 				$atts['data-toggle'] = 'dropdown';
 				$atts['class'] = 'dropdown-toggle nav-link';
@@ -114,10 +114,10 @@ class martindemko_navwalker extends Walker_Nav_Menu {
                 $atts['class'] = 'nav-link';
 			}
             
-            if( $depth > 0 && ! in_array( 'menu-item-has-children', $classes ) ) {
+            if ( $depth > 0 && ! in_array( 'menu-item-has-children', $classes ) ) {
                 $atts['class'] = 'dropdown-item';
             }
-            elseif( $depth > 0 && in_array( 'menu-item-has-children', $classes ) ){
+            elseif ( $depth > 0 && in_array( 'menu-item-has-children', $classes ) ) {
                 $atts['data-toggle'] = 'dropdown';
                 $atts['class'] = 'dropdown-toggle dropdown-item';
             }
@@ -129,8 +129,8 @@ class martindemko_navwalker extends Walker_Nav_Menu {
 			$attributes = '';
             
             // Transform array to string of HTML attributes
-			foreach( $atts as $attr => $value ) {
-				if( ! empty( $value ) ) {
+			foreach ( $atts as $attr => $value ) {
+				if ( ! empty( $value ) ) {
 					$value = ( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value );
 					$attributes .= ' ' . $attr . '="' . $value . '"';
 				}
@@ -158,7 +158,7 @@ class martindemko_navwalker extends Walker_Nav_Menu {
 	 * @since 2.5.0
 	 */
 	public function display_element( $element, &$children_elements, $max_depth, $depth, $args, &$output ) {
-        if( ! $element ) {
+        if ( ! $element ) {
             return;
         }
 
@@ -180,7 +180,7 @@ class martindemko_navwalker extends Walker_Nav_Menu {
 
         $out = '';
 
-        if( $container ) {
+        if ( $container ) {
             $out .= sprintf(
                 '<%1$s%2$s%3$s>',
                 $container,
@@ -196,7 +196,7 @@ class martindemko_navwalker extends Walker_Nav_Menu {
             .   '<li class="nav-item"><a href="#" class="nav-link">' . __( 'Kontakt', 'singleproduct' ) . '</a></li>'
             . '</ul>';
 
-        if( $container ) {
+        if ( $container ) {
             $out .= '</' . $container . '>';
         }
 

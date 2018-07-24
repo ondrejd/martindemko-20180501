@@ -46,10 +46,10 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div id="navbar-orderbtn">
-                    <?php martindemko_product_order_button(); ?>
+                    <?php singleproduct_product_order_button(); ?>
                 </div>
             </nav>
         </div>
     </header>
-    <?php martindemko_site_product(); ?>
+    <?php singleproduct_site_product(); ?>
     <div id="content" class="site-content">
