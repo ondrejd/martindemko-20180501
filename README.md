@@ -8,7 +8,7 @@ Simple yet fully configurable [WordPress][4] theme designed for single product e
 
 If your like this theme and you want to be maintained and improved more frequently consider donation using service
 
-[![Make donation](https://www.paypalobjects.com/webstatic/paypalme/images/pp_logo_small.png "PayPal.Me, your link to getting paid")][3]
+[![Make donation](assets/images/pp_logo_small.png "PayPal.Me, your link to getting paid")][3]
 
 ## Features
 

@@ -189,6 +189,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 }
 .site-product .post-thumbnail > a > img {
     display: inline-block;
+    height: auto;
+    max-width: 384px;
 }
 .site-product .post-thumbnail > a > span.no-post-thumbnail {
     background-color: #cdcdcd;

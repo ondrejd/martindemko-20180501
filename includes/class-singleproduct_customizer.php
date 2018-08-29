@@ -24,20 +24,26 @@
  * @since 1.0.0
  */
 
-if( ! defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
 
-if( !class_exists( 'Singleproduct_Customizer' ) ) :
+if ( ! class_exists( 'Singleproduct_Customizer' ) ) :
 
 /**
  * Contains methods for customizing the theme customization screen.
- * @author Ondřej Doně, <ondejd@gmil.com>
+ * 
+ * @author Ondřej Doněk <ondejd@gmil.com>
  * @link http://codex.wordpress.org/Theme_Customization_API
  * @since 1.0.0
  */
 class Singleproduct_Customizer {
+
+    /**
+     * @since 1.0.0
+     * @var string
+     */
     const THEME_PANEL_ID = 'singleproduct_theme_panel';
 
     /**
@@ -91,36 +97,43 @@ class Singleproduct_Customizer {
             'default'    => 0,
             'type'       => 'option',
         ) );
+
         $wp_customize->add_setting( 'show_product_logos' , array(
             'capability' => 'edit_theme_options',
             'default'    => 'yes',
             'type'       => 'option',
         ) );
+
         $wp_customize->add_setting( 'product_logo_img_1' , array(
             'capability' => 'edit_theme_options',
             'default'    => 0,
             'type'       => 'option',
         ) );
+
         $wp_customize->add_setting( 'product_logo_url_1' , array(
             'capability' => 'edit_theme_options',
             'default'    => 0,
             'type'       => 'option',
         ) );
+
         $wp_customize->add_setting( 'product_logo_img_2' , array(
             'capability' => 'edit_theme_options',
             'default'    => 0,
             'type'       => 'option',
         ) );
+
         $wp_customize->add_setting( 'product_logo_url_2' , array(
             'capability' => 'edit_theme_options',
             'default'    => 0,
             'type'       => 'option',
         ) );
+
         $wp_customize->add_setting( 'product_logo_img_3' , array(
             'capability' => 'edit_theme_options',
             'default'    => 0,
             'type'       => 'option',
         ) );
+
         $wp_customize->add_setting( 'product_logo_url_3' , array(
             'capability' => 'edit_theme_options',
             'default'    => 0,
@@ -128,9 +141,9 @@ class Singleproduct_Customizer {
         ) );
 
         // Controls
+        include( dirname( __FILE__ ) . '/class-singleproduct_dropdown_wp_customize_control.php' );
 
-        include( dirname( __FILE__ ) . '/class-md_product_dropdown_wp_customize_control.php' );
-        if( class_exists( 'MD_Product_Dropdown_WP_Customize_Control' ) ) {
+        if ( class_exists( 'MD_Product_Dropdown_WP_Customize_Control' ) ) {
 
             // Our products dropdown control
             $wp_customize->add_control( new MD_Product_Dropdown_WP_Customize_Control( $wp_customize, 
@@ -168,7 +181,8 @@ class Singleproduct_Customizer {
                 )
             )
         ) );
-        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
+
+        $wp_customize->add_control( new WP_Customize_Control( $wp_customize,
             'cnt_product_logo_url_1', array(
 	            'label'           => __( 'Odkaz prvního loga', 'singleproduct' ),
 	            'section'         => 'singleproduct_product_options',
@@ -177,6 +191,7 @@ class Singleproduct_Customizer {
                 'active_callback' => array( 'Singleproduct_Customizer', 'callback_product_logos' ),
             )
         ) );
+
         $wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize,
             'cnt_product_logo_img_1', array(
                 'label'    => __( 'První logo', 'singleproduct' ),
@@ -185,6 +200,7 @@ class Singleproduct_Customizer {
                 'active_callback' => array( 'Singleproduct_Customizer', 'callback_product_logos' ),
             )
         ) );
+
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_product_logo_url_2', array(
 	            'label'       => __( 'Odkaz druhého loga', 'singleproduct' ),
@@ -194,6 +210,7 @@ class Singleproduct_Customizer {
                 'active_callback' => array( 'Singleproduct_Customizer', 'callback_product_logos' ),
             )
         ) );
+
         $wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize,
             'cnt_product_logo_img_2', array(
                 'label'    => __( 'Druhé logo', 'singleproduct' ),
@@ -202,7 +219,8 @@ class Singleproduct_Customizer {
                 'active_callback' => array( 'Singleproduct_Customizer', 'callback_product_logos' ),
             )
         ) );
-        $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
+
+        $wp_customize->add_control( new WP_Customize_Control( $wp_customize,
             'cnt_product_logo_url_3', array(
 	            'label'       => __( 'Odkaz třetího loga', 'singleproduct' ),
 	            'section'     => 'singleproduct_product_options',
@@ -211,6 +229,7 @@ class Singleproduct_Customizer {
                 'active_callback' => array( 'Singleproduct_Customizer', 'callback_product_logos' ),
             )
         ) );
+
         $wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize,
             'cnt_product_logo_img_3', array(
                 'label'    => __( 'Třetí logo', 'singleproduct' ),
@@ -246,31 +265,37 @@ class Singleproduct_Customizer {
             'default'    => 'yes',
             'type'       => 'option',
         ) );
+
         $wp_customize->add_setting( 'ordersteps_foreground_color' , array(
             'capability' => 'edit_theme_options',
             'default'    => '#98a0a6',
             'type'       => 'option',
         ) );
+
         $wp_customize->add_setting( 'ordersteps_background_color_1' , array(
             'capability' => 'edit_theme_options',
             'default'    => '#ecd9d9',
             'type'       => 'option',
         ) );
+
         $wp_customize->add_setting( 'ordersteps_background_color_2' , array(
             'capability' => 'edit_theme_options',
             'default'    => '#ffffff',
             'type'       => 'option',
         ) );
+
         $wp_customize->add_setting( 'ordersteps_text_1' , array(
             'capability' => 'edit_theme_options',
             'default'    => __( 'Klikněte na "Objednat PRODUKT"', 'singleproduct' ),
             'type'       => 'option',
         ) );
+
         $wp_customize->add_setting( 'ordersteps_text_2' , array(
             'capability' => 'edit_theme_options',
             'default'    => __( 'Vyplňte formulář', 'singleproduct' ),
             'type'       => 'option',
         ) );
+
         $wp_customize->add_setting( 'ordersteps_text_3' , array(
             'capability' => 'edit_theme_options',
             'default'    => __( 'Počkejte, až Vám zavoláme', 'singleproduct' ),
@@ -290,13 +315,15 @@ class Singleproduct_Customizer {
                 )
             )
         ) );
-        $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
+
+        $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize,
             'cnt_ordersteps_foreground_color', array(
 	            'label'    => __( 'Barva textu', 'singleproduct' ),
 	            'section'  => 'singleproduct_ordersteps_options',
 	            'settings' => 'ordersteps_foreground_color',
             )
         ) );
+
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
             'cnt_ordersteps_background_color_1', array(
 	            'label'    => __( 'Barva hlavního pozadí', 'singleproduct' ),
@@ -304,13 +331,15 @@ class Singleproduct_Customizer {
 	            'settings' => 'ordersteps_background_color_1',
             )
         ) );
-        $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
+
+        $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize,
             'cnt_ordersteps_background_color_2', array(
 	            'label'    => __( 'Barva pozadí kruhů', 'singleproduct' ),
 	            'section'  => 'singleproduct_ordersteps_options',
 	            'settings' => 'ordersteps_background_color_2',
             )
         ) );
+
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_ordersteps_text_1', array(
 	            'label'       => __( 'První krok', 'singleproduct' ),
@@ -319,6 +348,7 @@ class Singleproduct_Customizer {
 	            'settings'    => 'ordersteps_text_1',
             )
         ) );
+
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_ordersteps_text_2', array(
 	            'label'       => __( 'Druhý krok', 'singleproduct' ),
@@ -327,6 +357,7 @@ class Singleproduct_Customizer {
 	            'settings'    => 'ordersteps_text_2',
             )
         ) );
+
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_ordersteps_text_3', array(
 	            'label'       => __( 'Třetí krok', 'singleproduct' ),
@@ -369,16 +400,19 @@ class Singleproduct_Customizer {
             'type'       => 'option',
             'transport'  => 'postMessage',
         ) );
+
         $wp_customize->add_setting( 'homepage_post_excerpts_show' , array(
             'capability' => 'edit_theme_options',
             'default'    => 'yes',
             'type'       => 'option',
         ) );
+
         $wp_customize->add_setting( 'posts_per_page' , array(
             'capability' => 'edit_theme_options',
             'default'    => 6,
             'type'       => 'option',
         ) );
+
         $wp_customize->add_setting( 'homepage_show_posts_pagination' , array(
             'capability' => 'edit_theme_options',
             'default'    => 'yes',
@@ -395,6 +429,7 @@ class Singleproduct_Customizer {
                 'type'        => 'text',
             )
         ) );
+
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_product_order_btn_link', array(
 	            'label'    => __( 'Odkaz tlačítka objednat', 'singleproduct' ),
@@ -403,6 +438,7 @@ class Singleproduct_Customizer {
                 'type'     => 'url',
             )
         ) );
+
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_homepage_post_excerpts_show', array(
 	            'label'       => __( 'Zobrazit texty příspěvků', 'singleproduct' ),
@@ -416,6 +452,7 @@ class Singleproduct_Customizer {
                 )
             )
         ) );
+
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_posts_per_page', array(
 	            'label'       => __( 'Počet přísěvků', 'singleproduct' ),
@@ -426,6 +463,7 @@ class Singleproduct_Customizer {
                 'input_attrs' => array( 'min' => 2, 'step' => 1 ),
             )
         ) );
+
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_homepage_show_posts_pagination', array(
 	            'label'       => __( 'Zobrazit stránkování', 'singleproduct' ),
@@ -466,16 +504,19 @@ class Singleproduct_Customizer {
             'default'    => '#000000',
             'type'       => 'option',
         ) );
+
         $wp_customize->add_setting( 'header_background_color' , array(
             'capability' => 'edit_theme_options',
             'default'    => '#ecd9d9',
             'type'       => 'option',
         ) );
+
         $wp_customize->add_setting( 'footer_foreground_color' , array(
             'capability' => 'edit_theme_options',
             'default'    => '#ffffff',
             'type'       => 'option',
         ) );
+
         $wp_customize->add_setting( 'footer_background_color' , array(
             'capability' => 'edit_theme_options',
             'default'    => '#2f1b1b',
@@ -491,6 +532,7 @@ class Singleproduct_Customizer {
 	            'settings'    => 'header_foreground_color',
             )
         ) );
+
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
             'cnt_header_background_color', array(
 	            'label'       => __( 'Barva pozadí', 'singleproduct' ),
@@ -499,6 +541,7 @@ class Singleproduct_Customizer {
 	            'settings'    => 'header_background_color',
             )
         ) );
+
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
             'cnt_footer_foreground_color', array(
 	            'label'       => __( 'Barva textu', 'singleproduct' ),
@@ -507,6 +550,7 @@ class Singleproduct_Customizer {
 	            'settings'    => 'footer_foreground_color',
             )
         ) );
+
         $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 
             'cnt_footer_background_color', array(
 	            'label'       => __( 'Barva pozadí', 'singleproduct' ),
@@ -582,6 +626,7 @@ class Singleproduct_Customizer {
                 )
             )
         ) );
+
         $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
             'cnt_bootstrap_typography', array(
                 'label'       => __( 'Typografie', 'singleproduct' ),
@@ -606,44 +651,48 @@ class Singleproduct_Customizer {
 
     /**
      * Hook for `wp_head` action.
+     *
      * @return void
      * @since 1.0.0
      */
     public static function header_output() {
 ?>
 <style type="text/css">
-    .site-title { color: <?php echo get_option( 'header_foreground_color' ) ?>; }
-    #page-header { background-color: <?php echo get_option( 'header_background_color' ) ?>; }
-    .site-product-logos { display: <?php echo get_option( 'show_product_logos' ) == 'yes' ? 'block' : 'none' ?>; }
-    .hp-help-banner {
-        background-color: <?php echo get_option( 'ordersteps_background_color_1' ) ?>;
-    }
-    .hp-help-banner span.help-banner-num {
-        background-color: <?php echo get_option( 'ordersteps_background_color_2' ) ?>;
-        border-color: <?php echo get_option( 'ordersteps_foreground_color' ) ?>;
-        color: <?php echo get_option( 'ordersteps_foreground_color' ) ?>;
-    }
-    .hp-help-banner span.help-banner-lbl { color: <?php echo get_option( 'ordersteps_foreground_color' ) ?>; }
-    .site-footer {
-        background-color: <?php echo get_option( 'footer_background_color' ) ?>;
-        color: <?php echo get_option( 'footer_foreground_color' ) ?>;
-    }
-    .site-footer ul.menu li a { color: <?php echo get_option( 'footer_foreground_color' ) ?>; }
+.site-title { color: <?php echo get_option( 'header_foreground_color' ) ?>; }
+#page-header { background-color: <?php echo get_option( 'header_background_color' ) ?>; }
+.site-product-logos { display: <?php echo get_option( 'show_product_logos' ) == 'yes' ? 'block' : 'none' ?>; }
+.hp-help-banner {
+    background-color: <?php echo get_option( 'ordersteps_background_color_1' ) ?>;
+}
+.hp-help-banner span.help-banner-num {
+    background-color: <?php echo get_option( 'ordersteps_background_color_2' ) ?>;
+    border-color: <?php echo get_option( 'ordersteps_foreground_color' ) ?>;
+    color: <?php echo get_option( 'ordersteps_foreground_color' ) ?>;
+}
+.hp-help-banner span.help-banner-lbl { color: <?php echo get_option( 'ordersteps_foreground_color' ) ?>; }
+.site-footer {
+    background-color: <?php echo get_option( 'footer_background_color' ) ?>;
+    color: <?php echo get_option( 'footer_foreground_color' ) ?>;
+}
+.site-footer ul.menu li a { color: <?php echo get_option( 'footer_foreground_color' ) ?>; }
 
-    /* There are some invisible edit icons in preview mode and nothing other works... */
-    .customize-partial-edit-shortcut-product_logos { left: 50%; }
-    .customize-partial-edit-shortcut-header_site_title { left: 31px; top: 0px; }
-    .customize-partial-edit-shortcut-product { left: 50%; }
-    .customize-partial-edit-shortcut-pagination { left: 45%; }
-    .customize-partial-edit-shortcut-ordersteps { left: 31px; }
+/* There are some invisible edit icons in preview mode and nothing other works... */
+.customize-partial-edit-shortcut-product_logos { left: 50%; }
+.customize-partial-edit-shortcut-header_site_title { left: 31px; top: 0px; }
+.customize-partial-edit-shortcut-product { left: 50%; }
+.customize-partial-edit-shortcut-pagination { left: 45%; }
+.customize-partial-edit-shortcut-ordersteps { left: 31px; }
 </style> 
 <?php
     }
    
     /**
      * Hook for `customize_preview_init` action.
+     *
      * @return void
      * @since 1.0.0
+     * @uses get_template_directory_uri()
+     * @uses wp_enqueue_script()
      */
     public static function live_preview() {
 	    wp_enqueue_script(
@@ -662,7 +711,8 @@ class Singleproduct_Customizer {
      * @since 1.0.0
      */
     public static function register_blogname_partials( \WP_Customize_Manager $wp_customize ) {
-        if( ! isset( $wp_customize->selective_refresh ) ) {
+
+        if ( ! isset( $wp_customize->selective_refresh ) ) {
             return;
         }
 
@@ -686,7 +736,8 @@ class Singleproduct_Customizer {
      * @since 1.0.0
      */
     public static function register_product_partials( \WP_Customize_Manager $wp_customize ) {
-        if( ! isset( $wp_customize->selective_refresh ) ) {
+
+        if ( ! isset( $wp_customize->selective_refresh ) ) {
             return;
         }
 
@@ -709,7 +760,8 @@ class Singleproduct_Customizer {
      * @since 1.0.0
      */
     public static function register_ordersteps_partial( \WP_Customize_Manager $wp_customize ) {
-        if( ! isset( $wp_customize->selective_refresh ) ) {
+
+        if ( ! isset( $wp_customize->selective_refresh ) ) {
             return;
         }
 
@@ -727,7 +779,8 @@ class Singleproduct_Customizer {
      * @since 1.0.0
      */
     public static function register_other_partials( \WP_Customize_Manager $wp_customize ) {
-        if( ! isset( $wp_customize->selective_refresh ) ) {
+
+        if ( ! isset( $wp_customize->selective_refresh ) ) {
             return;
         }
 

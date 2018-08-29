@@ -28,31 +28,31 @@
 ( function( $ ) {
 
 	wp.customize( 'header_foreground_color', function( value ) {
-		value.bind( function( newval ) {
-			$( '.navbar-brand' ).css( 'color', newval + '!important' );
+		value.bind( function( val ) {
+			$( '.navbar-brand' ).css( 'color', val + '!important' );
 		} );
 	} );
 
 	wp.customize( 'header_background_color', function( value ) {
-		value.bind( function( newval ) {
-			$( '.navbar' ).css( 'background-color', newval );
+		value.bind( function( val ) {
+			$( '.navbar' ).css( 'background-color', val );
 		} );
 	} );
 
 	wp.customize( 'footer_foreground_color', function( value ) {
-		value.bind( function( newval ) {
-			$( '.site-footer' ).css( 'color', newval );
-            $( '.site-footer ul.menu li a' ).css( 'color', newval );
+		value.bind( function( val ) {
+			$( '.site-footer' ).css( 'color', val );
+            $( '.site-footer ul.menu li a' ).css( 'color', val );
 		} );
 	} );
 
 	wp.customize( 'footer_background_color', function( value ) {
-		value.bind( function( newval ) {
-			$( '.site-footer' ).css( 'background-color', newval );
+		value.bind( function( val ) {
+			$( '.site-footer' ).css( 'background-color', val );
 		} );
 	} );
 
-	// Some icons for editig partials are hidden...
+	// Some icons for editing partials are hidden...
 	//$( '.customize-partial-edit-shortcut-product_logos' ).css( 'left', '50% !important' ).css( 'float', 'none' );
 	
 } )( jQuery );

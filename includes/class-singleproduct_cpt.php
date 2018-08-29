@@ -33,17 +33,24 @@ if ( ! class_exists( 'Single_Product_Cpt' ) ) :
 
 /**
  * Class that implements all what necessary for our CPT.
- * @author Ondřej Doněk, <ondrejd@gmail.com>
+ *
+ * @author Ondřej Doněk <ondrejd@gmail.com>
  * @since 1.0.0
  */
 class Single_Product_Cpt {
 
+    /**
+     * @since 1.0.0
+     * @var string
+     */
     const SLUG = 'singleproduct';
 
     /**
      * Constructor.
+     *
      * @return void
      * @since 1.0.0
+     * @uses add_action()
      */
     function __construct() {
         add_action( 'init', array( $this, 'init' ) );
@@ -51,17 +58,19 @@ class Single_Product_Cpt {
 
     /**
      * Initialize our CPT.
+     *
      * @return void
      * @since 1.0.0
-     * @todo Add more labels!
+     * @todo Add more labels (see WP Codex)!
+     * @uses register_post_type()
      */
     function init() {
         register_post_type( self::SLUG, array(
             'labels' => array(
-                'name' => __( 'Products', 'singleproduct' ),
-                'singular_name' => __( 'Product', 'singleproduct' )
+                'name' => __( 'Produkty', 'singleproduct' ),
+                'singular_name' => __( 'Produkt', 'singleproduct' )
             ),
-            'description' => __( 'Products custom post type', 'singleproduct' ),
+            'description' => __( 'Vlastní typ příspěvků tohoto tématu vzhledu', 'singleproduct' ),
             'public' => true,
             'has_archive' => true,
             'menu_positions' => 21,
@@ -70,10 +79,9 @@ class Single_Product_Cpt {
             'supports' => array( 'title', 'author', 'thumbnail', 'excerpt', 'custom-fields', 'comments', 'revisions', 'page-attributes' ),
             'delete_with_user' => false,
             'show_in_rest' => false,
-            'slug' => array( __( 'product', 'singleproduct' ) )
+            'slug' => array( __( 'produkt', 'singleproduct' ) )
         ) );
     }
-
 }
 
 endif;

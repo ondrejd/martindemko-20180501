@@ -36,12 +36,15 @@ if( ! class_exists( 'MD_Product_Dropdown_WP_Customize_Control' ) ) :
 
 /**
  * Class to create a custom post control
+ *
+ * @author Ondřej Doněk <ondrejd@gmail.com>
  * @since 1.0.0
  */
 class MD_Product_Dropdown_WP_Customize_Control extends WP_Customize_Control {
 
     /**
      * Render the content on the theme customizer page
+     *
      * @return void
      * @since 1.0.0
      * @uses esc_html()
@@ -54,13 +57,14 @@ class MD_Product_Dropdown_WP_Customize_Control extends WP_Customize_Control {
         <?php echo esc_html( $this->label ); ?>
     </label>
     <?php if( ! empty( $this->description ) ) : ?>
-    <span id="" class="description"><?php echo esc_html( $this->description ); ?></span>
+    <span class="description"><?php echo esc_html( $this->description ); ?></span>
+    <span class="description"><?php echo esc_html( $this->description ); ?></span>
     <?php endif; ?>
     <select id="<?php echo $this->id; ?>" data-customize-setting-link="<?php echo esc_attr( $this->setting->id, 'martindemko' ) ?>">
     <?php
         $posts = get_posts( array(
             'numberposts' => '-1',
-            'post_type'   => MD_Product::SLUG,
+            'post_type'   => Single_Product_Cpt::SLUG,
             'orderby'     => 'title',
             'order'       => 'asc',
         ) );

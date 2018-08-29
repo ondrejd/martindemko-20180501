@@ -30,7 +30,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 // Includes
-include( plugin_dir_path( __FILE__ ) . 'includes/class-singleproduct_cpt.php' );
 include( plugin_dir_path( __FILE__ ) . 'includes/class-singleproduct_navwalker.php' );
 include( plugin_dir_path( __FILE__ ) . 'includes/class-singleproduct_customizer.php' );
 include( plugin_dir_path( __FILE__ ) . 'includes/template-tags.php' );
