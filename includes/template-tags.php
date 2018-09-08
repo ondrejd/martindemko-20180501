@@ -314,11 +314,13 @@ if ( ! function_exists( 'singleproduct_site_product' ) ) :
      * @uses get_the_post_thumbnail()
      */
     function singleproduct_site_product() {
-        $product_ID = get_option( 'site_product_id', null );
-        $product = get_post( $product_ID, OBJECT, 'display' );
+        $product_title = get_option( 'site_product_title', DEFAULT_SITE_PRODUCT_TITLE );
+        $product_description = get_option( 'site_product_description', DEFAULT_SITE_PRODUCT_DESCRIPTION );
+        $product_thumbnail = get_option( 'site_product_thumbnail', DEFAULT_SITE_PRODUCT_THUMBNAIL );
+        $product_thumbnail_url = '#';
 
-        if ( ! ( $product instanceof \WP_Post ) ) {
-            return;
+        if ( empty( $product_thumbnail ) ) {
+            $product_thumbnail = '<span class="no-post-thumbnail"></span>';
         }
 
 ?>
@@ -326,21 +328,15 @@ if ( ! function_exists( 'singleproduct_site_product' ) ) :
         <div class="row justify-content-center">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 site-product-card">
             	<div class="post-thumbnail">
-		            <a href="<?php the_permalink(); ?>">
-                    	<?php if ( '' !== get_the_post_thumbnail( $product_ID ) ) : ?>
-			            <?php echo get_the_post_thumbnail( $product_ID, 'martindemko-default-product' ); ?>
-                        <?php else: ?>
-                        <span class="no-post-thumbnail"></span>
-                    	<?php endif; ?>
-		            </a>
+		            <a href="<?php echo $product_thumbnail_url; ?>"><?php echo $product_thumbnail; ?></a>
 	            </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 site-product-card">
                 <h2 class="entry-title">
-                    <?php echo esc_html( $product->post_title ); ?>
+                    <?php echo esc_html( $product_title ); ?>
                 </h2>
                 <div class="entry-content">
-                    <p><?php echo esc_html( $product->post_excerpt ); ?></p>
+                    <p><?php echo esc_html( $product_description ); ?></p>
                 </div>
                 <div class="entry-footer">
                     <p><?php singleproduct_product_order_button(); ?></p>

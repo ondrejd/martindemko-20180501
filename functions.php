@@ -50,7 +50,13 @@ if ( ! function_exists( 'singleproduct_after_setup_theme' ) ) :
     function singleproduct_after_setup_theme() {
         load_theme_textdomain( 'singleproduct', get_stylesheet_directory() . '/languages' );
 
-        add_option( 'site_product_id', 'yes' );
+        defined( 'DEFAULT_SITE_PRODUCT_TITLE' ) || define( 'DEFAULT_SITE_PRODUCT_TITLE', __( 'Šablona Single Product', 'singleproduct' ) );
+        defined( 'DEFAULT_SITE_PRODUCT_DESCRIPTION' ) || define( 'DEFAULT_SITE_PRODUCT_DESCRIPTION', __( 'Stručný popis Vašeho testovacího produktu. Neměl by být příliš dlouhý, ale žijeme přece v době Twitteru :)', 'singleproduct' ) );
+        // TODO We should define `DEFAULT_SITE_PRODUCT_IMAGE`!!!
+        defined( 'DEFAULT_SITE_PRODUCT_IMAGE' ) || define( 'DEFAULT_SITE_PRODUCT_IMAGE', null );
+
+        add_option( 'site_product_title', DEFAULT_SITE_PRODUCT_TITLE );
+        add_option( 'site_product_description', DEFAULT_SITE_PRODUCT_DESCRIPTION );
         add_option( 'show_product_logos', 'yes' );
         add_option( 'product_logo_img_1', 0 );
         add_option( 'product_logo_url_1', '#' );
@@ -104,20 +110,13 @@ if ( ! function_exists( 'singleproduct_after_setup_theme' ) ) :
 	        //'widgets' => array(),
 	        'attachments' => array(
 	            'starter-product-image' => array(
-	                'post_title' => _x( 'Starter product image', 'Theme starter content', 'singleproduct' ),
+	                'post_title'   => _x( 'Starter product image', 'Theme starter content', 'singleproduct' ),
 	                'post_content' => _x( 'Starter product description', 'Theme starter content', 'singleproduct' ),
 	                'post_excerpt' => _x( 'Starter product caption', 'Theme starter content', 'singleproduct' ),
-	                'file' => 'assets/images/starter-product-image.php'
+	                'file'         => 'assets/images/starter-product-image.php'
 	            )
 	        ),
-	        'posts' => array(
-	            'starter-product' => array(
-	                'post_type' => Single_Product_Cpt::SLUG,
-	                'post_title' => _x( 'Starter product', 'Theme starter content', 'singleproduct' ),
-	                'post_excerpt' => _( 'Short description of the product.', 'Theme starter content', 'singleproduct' ),
-	                'thumbnail' => '{{starter-product-image}}'
-	            )
-	        ),
+	        'posts' => array(),
 	        'options' => array(
 		        'show_on_front'  => 'posts',
 		        'posts_per_page' => 6,
@@ -125,11 +124,11 @@ if ( ! function_exists( 'singleproduct_after_setup_theme' ) ) :
 	        //'theme_mods' => array(),
 	        'nav_menus' => array(
 		        'footer-languages-menu' => array(
-			        'name' => __( 'Jazykové menu', 'singleproduct' ),
+			        'name'  => __( 'Jazykové menu', 'singleproduct' ),
 			        'items' => array(),
 		        ),
 		        'footer-contact-menu' => array(
-			        'name' => __( 'Kontaktní menu', 'singleproduct' ),
+			        'name'  => __( 'Kontaktní menu', 'singleproduct' ),
 			        'items' => array(),
 		        ),
 	        ),
